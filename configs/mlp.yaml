@@ -1,0 +1,31 @@
+phase: train
+
+data_loader:
+  name: MNIST
+
+pre_processing:
+  name: norm
+  processed_path: data/MNIST/processed
+
+modeling:
+  structure:
+    name: mlp 
+    input_size: 784
+    num_layers: 2
+    hidden_size: 64
+    output_size: 10
+  
+  training:
+    name: dnn
+    criterion: cross_entropy_loss
+    learning_rate: 0.001
+    num_epochs: 10
+    es_patience: 5
+    batch_size: 64
+
+  inference:
+    name: dnn_class
+    batch_size: 64
+
+metrics:
+  name: multi_class

@@ -1,0 +1,16 @@
+train_config: mlp
+
+framework: optuna
+algorithm: tpe
+
+n_trials: 5
+objective_metric: f1_weighted
+direction: maximize
+
+search_space:
+  modeling-structure-num_layers: [int, 3, 5]
+  modeling-structure-hidden_size: [int, 16, 128]
+  
+  modeling-training-num_epochs: [int, 5, 20, 5]
+  modeling-training-learning_rate: [categorical, 0.001, 0.0001, 0.00001]
+  modeling-training-batch_size: [categorical, 32, 64, 128]
