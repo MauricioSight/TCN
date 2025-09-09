@@ -1,6 +1,7 @@
 import logging
 
 import numpy as np
+import torch
 
 from logger.base import Logger
 from metrics.factory import MetricsFactory
@@ -8,7 +9,7 @@ from utils.experiment_io import get_run_dir, save_run_artifacts
 from utils.config_handle import load_config
 from utils.seed_all import seed_all
 
-def main(phase='train', run_id: str ='cnn_MNIST_20250829_134355', y_true=None, y_scores=None):
+def main(phase='train', run_id: str ='tcn_pred_TOWIDS_20250909_142043', y_true=None, y_scores=None):
     """
     Get metrics from previous run_id
 
@@ -22,8 +23,7 @@ def main(phase='train', run_id: str ='cnn_MNIST_20250829_134355', y_true=None, y
         metrics
     """
 
-    if config is None:
-        config = load_config(run_id=run_id)
+    config = load_config(run_id=run_id)
 
     if 'run_id' not in config:
         raise ValueError("Missing run id in config")
@@ -49,9 +49,8 @@ def main(phase='train', run_id: str ='cnn_MNIST_20250829_134355', y_true=None, y
     # 1. Load the dataset
     if y_true is None or y_scores is None:
         logger.debug("Loading data...")
-        data = np.load(run_dir / f"{config['phase']}_labels_predictions.npz")
-        y_true = data["y_true"]
-        y_scores = data["y_scores"]
+        cache = torch.load(run_dir / f"{config['phase']}_labels_predictions.pt", weights_only=False)
+        y_true, y_scores = cache['y_true'], cache['y_scores']
         logger.info("Data loaded successfully.")
     else:
         logger.info("Using provided data for training and validation.")

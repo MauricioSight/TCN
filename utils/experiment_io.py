@@ -1,5 +1,6 @@
 import json
-import numpy as np
+import pickle
+import torch
 import yaml
 from datetime import datetime
 from pathlib import Path
@@ -115,7 +116,8 @@ def save_run_artifacts(run_dir, config, y_true = None, y_scores = None, metrics 
 
     # Save y_true and predictions
     if y_true is not None and y_scores is not None:
-        np.savez(run_dir / f"{config['phase']}_labels_predictions.npz", y_true=y_true, y_scores=y_scores)
+        torch.save({'y_true': y_true, 'y_scores': y_scores}, 
+                   run_dir / f"{config['phase']}_labels_predictions.pt", pickle_protocol=pickle.HIGHEST_PROTOCOL)
 
     # Save metrics
     if metrics is not None:

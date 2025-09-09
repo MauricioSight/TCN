@@ -12,6 +12,11 @@ class DataPreProcessingFactory:
             from data_pre_processing.norm_pre_precessing import NormPrePrecessing
 
             return NormPrePrecessing(config, logger)
+        
+        if name == 'sliding-window':
+            from data_pre_processing.sliding_window_pre_processing import SlidingWindowPrePrecessing
+
+            return SlidingWindowPrePrecessing(config, logger)
 
         else:
             raise ValueError(

@@ -12,6 +12,11 @@ class DataLoaderFactory:
             from data_loader.MNIST_loader import MNISTLoader
 
             return MNISTLoader(config, logger)
+        
+        if name == 'TOWIDS':
+            from data_loader.TOWIDS_loader import TOWIDSLoader
+
+            return TOWIDSLoader(config, logger)
 
         else:
             raise ValueError(
