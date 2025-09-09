@@ -80,12 +80,25 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         """
         Get the output path for the processed data.
         """
-        phase = self.config.get('phase')
-        processed_path = self.config.get('pre_processing', {}).get('processed_path')
-        method = self.config.get('pre_processing', {}).get('name')
+        phase           = self.config.get('phase')
+        processed_path  = self.config.get('pre_processing', {}).get('processed_path')
+        method          = self.config.get('pre_processing', {}).get('name')
+        window_size     = self.config.get('pre_processing', {}).get('window_size')
+        window_stride   = self.config.get('pre_processing', {}).get('window_stride')
+        save_subset     = self.config.get('pre_processing', {}).get('save_subset', None)
+
+        file_name = (
+            f"{phase}_"
+            f"{method}_"
+            f"wsize_{window_size}_"
+            f"wstride_{window_stride}_"
+        )
+        
+        if save_subset:
+            file_name += f'_subset_{save_subset}'
 
         os.makedirs(processed_path, exist_ok=True)
-        return f"{processed_path}/{phase}_{method}.pt"
+        return f'{processed_path}/{file_name}.pt'
     
 
     def __labeling_schema_vectorized(self, desc_windows: np.ndarray, labels: pd.DataFrame) -> np.ndarray:
