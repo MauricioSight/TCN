@@ -20,6 +20,11 @@ class ModelingInferenceFactory:
 
             return PredInference(config, logger, device)
 
+        if name == 'ae':
+            from modeling.inference.ae_inference import AEInference
+
+            return AEInference(config, logger, device)
+
         else:
             raise ValueError(
                 f"Unsupported ModelingInferenceFactory name: {name}")

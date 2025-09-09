@@ -19,7 +19,16 @@ class ModelingStructureFactory:
             from modeling.structure.tcn_pred import TCNPred
 
             return TCNPred(config, logger, device)
+        
+        if name == 'cae':
+            from modeling.structure.cae import CAE
 
+            return CAE(config, logger, device)
+        
+        if name == 'lstmae':
+            from modeling.structure.lstmae import LSTMAE
+
+            return LSTMAE(config, logger, device)
 
         else:
             raise ValueError(
