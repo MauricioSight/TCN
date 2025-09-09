@@ -13,6 +13,11 @@ class MetricsFactory:
 
             return MultiClassificationMetrics(config, logger)
 
+        if name == 'anomaly_detector':
+            from metrics.ad_metrics import AnomalyDetectorMetrics
+
+            return AnomalyDetectorMetrics(config, logger)
+
         else:
             raise ValueError(
                 f"Unsupported MetricsFactory name: {name}")

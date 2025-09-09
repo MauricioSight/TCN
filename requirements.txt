@@ -6,3 +6,5 @@ torchvision
 wandb
 optuna
 matplotlib
+
+scapy

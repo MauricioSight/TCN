@@ -3,3 +3,4 @@ runs/
 data/
 wandb/
 __pycache__/
+.DS_Store

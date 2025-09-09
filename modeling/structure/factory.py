@@ -14,6 +14,12 @@ class ModelingStructureFactory:
             from modeling.structure.mlp import MLP
 
             return MLP(config, logger, device)
+        
+        if name == 'tcn_pred':
+            from modeling.structure.tcn_pred import TCNPred
+
+            return TCNPred(config, logger, device)
+
 
         else:
             raise ValueError(

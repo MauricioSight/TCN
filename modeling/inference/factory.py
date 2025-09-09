@@ -15,6 +15,11 @@ class ModelingInferenceFactory:
 
             return DNNClassInference(config, logger, device)
 
+        if name == 'pred':
+            from modeling.inference.pred_inference import PredInference
+
+            return PredInference(config, logger, device)
+
         else:
             raise ValueError(
                 f"Unsupported ModelingInferenceFactory name: {name}")

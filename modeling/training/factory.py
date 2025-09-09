@@ -15,6 +15,11 @@ class ModelingTrainingFactory:
             from modeling.training.dnn_train import DNNTrain
 
             return DNNTrain(config, logger, device, tracker)
+        
+        if name == 'pred':
+            from modeling.training.pred_train import PredTrain
+
+            return PredTrain(config, logger, device, tracker)
 
         else:
             raise ValueError(

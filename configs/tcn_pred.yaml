@@ -1,0 +1,39 @@
+phase: train
+
+data_loader:
+  name: TOWIDS
+  raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap
+  raw_y_path: data/tow-ids-dataset/raw/y_train.csv
+  number_of_bytes: 58
+
+pre_processing:
+  name: sliding-window
+  processed_path: data/tow-ids-dataset/processed
+  window_size: 4
+  window_stride: 1
+  save_subset: 0.1
+
+modeling:
+  structure:
+    name: tcn_pred
+    input_size: 58
+    num_levels: 2
+    hidden_size: 16
+    kernel_size: 2
+    dropout: 0.4
+    T: 2
+  
+  training:
+    name: pred
+    criterion: mean_squared_error
+    learning_rate: 0.001
+    num_epochs: 1
+    es_patience: 5
+    batch_size: 1
+
+  inference:
+    name: pred
+    batch_size: 64
+
+metrics:
+  name: anomaly_detector
