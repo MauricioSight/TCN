@@ -29,6 +29,7 @@ class PredInference(PytorchInference):
         model.eval()
         test_loss = 0
         y_scores = []
+        y_pred = []
         y_true = []
 
         g = torch.Generator()
@@ -39,21 +40,19 @@ class PredInference(PytorchInference):
         data_loader = create_loader(data, None, batch_size, self.device, g)
 
         with torch.no_grad():
-            for i, (data, _, label_idx) in enumerate(data_loader):
-                X = data[:, :-1, :]
-                y = data[:, 1:, :]
+            for i, (data, target, label_idx) in enumerate(data_loader):
+                out = model.forward(data)
+                loss = self.criterion(out, target, reduction='none')
+                test_loss += loss.mean().item()
 
-                out = model.forward(X)
-                loss = self.criterion(out, y, reduction='none')
-                test_loss += loss.item()
-
-                y_scores.extend((out.cpu().numpy(), loss)) # Pred, Loss
-                y_true.extend(y.iloc[label_idx]['label'])
+                y_pred.extend(out.cpu().numpy())
+                y_scores.extend(loss.cpu().numpy())
+                y_true.extend(y.iloc[label_idx].values)
 
                 if i % 10000 == 0 or i * len(data) == len(data_loader.dataset) - 1:
                     self.logger.info('Test loss: {:.6f} \t[{}/{} ({:.0f}%)]'.format(
-                        loss.item(), i * len(data), len(data_loader.dataset), 100. * i / len(data_loader)))
+                        loss.mean().item(), i * len(data), len(data_loader.dataset), 100. * i / len(data_loader)))
 
         test_loss = test_loss / len(data_loader)
 
-        return y_true, y_scores, test_loss
+        return pd.DataFrame(y_true, columns=y.columns), (y_pred, y_scores), test_loss

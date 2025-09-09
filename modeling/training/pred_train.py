@@ -40,9 +40,9 @@ class PredTrain(PytorchTrainingAlgorithm):
             self.optimizer.step()
 
             # metrics logs
-            if i % 1000 == 0 or i * len(data) >= len(train_loader.dataset) - 1:
+            if i % 1000 == 0 or i * len(data) >= len(train_loader) - 1:
                 self.logger.info('Epoch: {} \t[{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
-                    epoch,  i * len(data), len(train_loader.dataset), 
+                    epoch,  i * len(data), len(train_loader), 
                     100. * i / len(train_loader), loss.item()))
         
         train_loss = train_loss / len(train_loader)
@@ -72,9 +72,9 @@ class PredTrain(PytorchTrainingAlgorithm):
                 loss = self.criterion(out, target)
                 val_loss += loss.item()
 
-                if i % 1000 == 0 or i * len(data) >= len(val_loader.dataset) - 1:
+                if i % 1000 == 0 or i * len(data) >= len(val_loader) - 1:
                     self.logger.info('Epoch: {} \t[{}/{} ({:.0f}%)]\tValidation loss: {:.6f}'.format(
-                        epoch, i * len(data), len(val_loader.dataset), 100. * i / len(val_loader), loss.item()))
+                        epoch, i * len(data), len(val_loader), 100. * i / len(val_loader), loss.item()))
 
         val_loss = val_loss / len(val_loader)
 

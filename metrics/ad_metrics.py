@@ -1,4 +1,4 @@
-import torch
+import json
 import numpy as np
 import pandas as pd
 from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
@@ -19,11 +19,9 @@ class AnomalyDetectorMetrics(InferenceMetrics):
             dict of metrics
         """
 
-        # If tensors are on GPU, move them to CPU and convert to NumPy arrays
-        if isinstance(y_scores, torch.Tensor):
-            y_scores = y_scores.cpu().numpy()
+        _, y_scores = y_pred
 
-        y_scores = np.array([i[1] for i in y_pred]).mean(dim=(1, 2)) # Get loss
+        y_scores = np.array(y_scores).mean(axis=(1, 2)) # Get loss
         
         y_true_labels = y_true['label'].values
         y_true_binary = [0 if l == 'Normal' else 1 for l in y_true_labels]
@@ -41,6 +39,8 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         metrics_serializable = {k: float(v) for k, v in overall_metrics.items()}
         metrics_serializable['tpr_per_attack'] = tpr_per_attack
         metrics_serializable['aucroc_per_attack'] = aucroc_per_attack
+
+        self.logger.info(f"Metrics \n{json.dumps(metrics_serializable, indent=4)}")
 
         return metrics_serializable
 
