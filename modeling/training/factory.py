@@ -20,6 +20,11 @@ class ModelingTrainingFactory:
             from modeling.training.pred_train import PredTrain
 
             return PredTrain(config, logger, device, tracker)
+        
+        if name == 'ae':
+            from modeling.training.ae_train import AETrain
+
+            return AETrain(config, logger, device, tracker)
 
         else:
             raise ValueError(
