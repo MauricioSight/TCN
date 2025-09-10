@@ -18,7 +18,7 @@ class TOWIDSLoader(DataLoader):
         raw_y_path      = self.config.get('data_loader', {}).get('raw_y_path')
         number_of_bytes = self.config.get('data_loader', {}).get('number_of_bytes')
 
-        raw_packets = rdpcap(raw_x_path, count=1000000)
+        raw_packets = rdpcap(raw_x_path)
         labels = pd.read_csv(raw_y_path, header=None, names=["index", "class", "label"])
         labels['label'] = labels['label'].map({
             'Normal': 'Normal',
@@ -28,7 +28,6 @@ class TOWIDSLoader(DataLoader):
             'F_I': 'Frame Injection',
             'C_R': 'CAN Replay',
         })
-        labels = labels[:1000000]
         
         n = len(raw_packets)
         
@@ -53,7 +52,7 @@ class TOWIDSLoader(DataLoader):
         labels['timestamp'] = timestamps
         labels['protocol'] = protocols
 
-        self.logger.info(f"Loading raw data finished in {time.time() - start_time}s")
+        self.logger.info(f"Loading raw data finished in {(time.time() - start_time):.2f}s with shape of {values.shape}")
         return values, labels
     
     def __detect_protocol_scapy(self, pkt):

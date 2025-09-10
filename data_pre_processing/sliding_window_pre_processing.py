@@ -18,21 +18,20 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         
         path = self.get_output_path()
 
-        if not os.path.exists(path):
+        if not os.path.exists(path + 'batch_0.pt'):
             data, target = data_loader.load()
 
-            X, y = self.process(data, target)
+            (X_view, starts), y = self.process(data, target)
 
             save_subset = self.config.get('pre_processing', {}).get('save_subset')
             if save_subset is not None:
                 self.logger.warning(f">> Saving a subset of {save_subset}%")
-                indices = np.random.choice(len(X), size=int(save_subset*len(X)), replace=False)
-                X = X[indices]
+                indices = np.random.choice(len(starts), size=int(save_subset*len(starts)), replace=False)
+                starts = starts[indices]
                 y = y.iloc[indices].reset_index(drop=True)
-            
-            self.save(X, y)
 
-            return X, y
+            self.save((X_view, starts), y)
+            del data, target, indices, X_view, starts, y
         
         self.logger.info(f"Initializing finished in {time.time() - start_time}s")
         return self.load(path)
@@ -49,20 +48,41 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
 
 
     def save(self, X: np.ndarray, y: pd.DataFrame):
-        self.logger.info("Saving data in cash file...")
+        self.logger.info("Saving data in cash file in batchs...")
 
+        batch_size = self.config.get('pre_processing', {}).get('save_batch_size', len(X))
         path = self.get_output_path()
 
-        torch.save({'X': X, 'y': y}, path, pickle_protocol=pickle.HIGHEST_PROTOCOL)
+        X_view, starts = X
 
-        self.logger.info(f"Data saved to {path}")
+        # Split the data into manageable batches
+        num_batches = len(starts) // batch_size + 1
+
+        for i in range(num_batches):
+            batch_starts = starts[i*batch_size : (i+1)*batch_size]
+            batch_X = X_view[batch_starts]
+            batch_y = y.iloc[i*batch_size : (i+1)*batch_size]
+
+            # Save each batch with an index to maintain order
+            batch_path = f"{path}/batch_{i}.pt"
+            torch.save({'X': batch_X, 'y': batch_y}, batch_path, pickle_protocol=pickle.HIGHEST_PROTOCOL)
+            self.logger.info(f"Batch {i+1}/{num_batches} saved to {batch_path}")
     
-
+    
     def load(self, path: str) -> tuple[np.ndarray, pd.DataFrame]:
         self.logger.info(f"Loading cached data from: {path}")
-        cache = torch.load(path, weights_only=False)
-        X, y = cache['X'], cache['y']
+        
+        files = [f for f in os.listdir(path)]
+        files.sort()
+        all_X, all_y = [], []
 
+        for file in files:
+            cache = torch.load(f"{path}/{file}", weights_only=False)
+            all_X.append(cache['X'])
+            all_y.append(cache['y'])
+
+        X = np.concatenate(all_X, axis=0)
+        y = pd.concat(all_y, axis=0).reset_index(drop=True)
 
         load_subset = self.config.get('pre_processing', {}).get('load_subset')
         if load_subset is not None:
@@ -71,7 +91,6 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             indices = np.random.choice(len(X), size=int(load_subset*len(X)), replace=False)
             X = X[indices]
             y = y.iloc[indices].reset_index(drop=True)
-
 
         return X, y
     
@@ -97,8 +116,10 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         if save_subset:
             file_name += f'_subset_{save_subset}'
 
-        os.makedirs(processed_path, exist_ok=True)
-        return f'{processed_path}/{file_name}.pt'
+        path = f'{processed_path}/{file_name}'
+
+        os.makedirs(path, exist_ok=True)
+        return path
     
 
     def __labeling_schema_vectorized(self, desc_windows: np.ndarray, labels: pd.DataFrame) -> np.ndarray:
@@ -197,12 +218,12 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         # sliding_window_view returns a view; avoid materializing everything
         X_view = np.lib.stride_tricks.sliding_window_view(data, window_shape=(window_size,) + data.shape[1:])
         X_view = X_view.reshape(n - window_size + 1, window_size, *data.shape[1:])
-        X = X_view[starts]
+        # X = X_view[starts]
 
         self.logger.info("Class distribution:")
         self.logger.info(Counter(seq_y))
 
         y = list(zip(seq_y, start_times.astype(float), desc_windows))
         y = pd.DataFrame(y, columns=['label', 'start_time', 'desc_windows'])
-        return X, y
+        return (X_view, starts), y
     
