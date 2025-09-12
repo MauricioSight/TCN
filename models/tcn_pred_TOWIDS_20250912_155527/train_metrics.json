@@ -1,0 +1,15 @@
+{
+    "AUCROC": 0.9724589453536285,
+    "Accuracy": 0.9719424167040496,
+    "TPR": 0.9438413190759938,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.9711094314268918,
+    "optimal_threshold": 1.0916486417045235e-06,
+    "tpr_per_attack": {
+        "Frame Injection": 0.9438413190759938
+    },
+    "aucroc_per_attack": {
+        "Frame Injection": 0.9724589453536285
+    }
+}

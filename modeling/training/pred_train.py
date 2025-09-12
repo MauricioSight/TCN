@@ -35,6 +35,11 @@ class PredTrain(PytorchTrainingAlgorithm):
             loss = self.criterion(out, target)
             loss.backward()
 
+            # TODO: CHECK IF THIS IS MAKING DIFFERENCE
+            clip = self.config.get('modeling', {}).get('training', {}).get('clip')
+            if clip > 0:
+                torch.nn.utils.clip_grad_norm_(model.parameters(), clip)
+
             train_loss += loss.item()
 
             self.optimizer.step()
@@ -82,7 +87,7 @@ class PredTrain(PytorchTrainingAlgorithm):
 
 
     def __create_loaders(self, X: np.ndarray, y: pd.DataFrame) -> tuple[DataLoader, DataLoader]:
-        y.reset_index(inplace=True)
+        y = y.reset_index()
 
         # Pred is an unsupervised method. So, just benign samples in training phase
         benign_idx = y[y['label'] == 'Normal'].index.to_list()

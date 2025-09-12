@@ -1,0 +1,41 @@
+data_loader:
+  name: TOWIDS
+  number_of_bytes: 50
+  protocol_filter: AVTP
+  raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
+  raw_y_path: data/tow-ids-dataset/raw/y_test.csv
+metrics:
+  name: anomaly_detector
+modeling:
+  inference:
+    batch_size: 64
+    name: pred
+  structure:
+    T: 2
+    dropout: 0.2
+    final_layer: true
+    hidden_size: 120
+    input_size: 50
+    kernel_size: 4
+    name: tcn_pred
+    num_levels: 1
+  training:
+    batch_size: 1
+    clip: 0.2
+    criterion: mean_squared_error
+    es_patience: 5
+    learning_rate: 0.0001
+    name: pred
+    num_epochs: 1
+phase: test
+pre_processing:
+  name: sliding-window
+  processed_path: data/tow-ids-dataset/processed
+  save_batch_size: 10000
+  save_subset: 0.1
+  window_size: 64
+  window_stride: 1
+run_id: tcn_pred_TOWIDS_20250912_155527
+tracker:
+  name: null
+  project: tcn_pred_dev

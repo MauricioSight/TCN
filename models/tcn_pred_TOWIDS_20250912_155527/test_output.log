@@ -1,0 +1,115 @@
+2025-09-12 16:12:27,464 | INFO | Initiating testing...
+2025-09-12 16:12:27,464 | INFO | [ RUN ID: tcn_pred_TOWIDS_20250912_155527 ]
+2025-09-12 16:12:27,785 | INFO | Initializing pre processing...
+2025-09-12 16:12:27,785 | INFO | Loading raw data...
+2025-09-12 16:14:03,168 | INFO | Initiating testing...
+2025-09-12 16:14:03,169 | INFO | [ RUN ID: tcn_pred_TOWIDS_20250912_155527 ]
+2025-09-12 16:14:03,497 | INFO | Initializing pre processing...
+2025-09-12 16:14:03,497 | INFO | Loading raw data...
+2025-09-12 16:15:41,687 | INFO | Loading raw data finished in 98.19s with shape of (197961, 50)
+2025-09-12 16:15:43,017 | INFO | Class distribution:
+2025-09-12 16:15:43,033 | INFO | Counter({'Normal': 168988, 'Frame Injection': 28910})
+2025-09-12 16:15:43,034 | WARNING | >> Saving a subset of 0.1%
+2025-09-12 16:15:43,049 | INFO | Saving data in cash file in batchs...
+2025-09-12 16:15:43,835 | INFO | Batch 1/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_0.pt
+2025-09-12 16:15:44,539 | INFO | Batch 2/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_1.pt
+2025-09-12 16:15:45,150 | INFO | Batch 3/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_2.pt
+2025-09-12 16:15:45,806 | INFO | Batch 4/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_3.pt
+2025-09-12 16:15:46,402 | INFO | Batch 5/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_4.pt
+2025-09-12 16:15:46,459 | INFO | Initializing finished in 102.96258783340454s
+2025-09-12 16:15:46,459 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1
+2025-09-12 16:15:47,535 | INFO | Data loaded successfully.
+2025-09-12 16:15:47,586 | INFO | Using device: mps
+2025-09-12 16:15:51,091 | INFO | Testing labels: 
+label
+Normal    49360
+Name: count, dtype: int64
+2025-09-12 16:15:51,324 | INFO | Test loss: 0.000000 	[0/49360 (0%)]
+2025-09-12 16:16:00,636 | INFO | Testing completed. Testing loss: 1.5822872475929837e-07
+2025-09-12 16:18:55,510 | INFO | Initiating testing...
+2025-09-12 16:18:55,510 | INFO | [ RUN ID: tcn_pred_TOWIDS_20250912_155527 ]
+2025-09-12 16:18:55,828 | INFO | Initializing pre processing...
+2025-09-12 16:18:55,828 | INFO | Loading raw data...
+2025-09-12 16:20:54,319 | INFO | Loading raw data finished in 118.49s with shape of (197961, 50)
+2025-09-12 16:20:55,781 | INFO | Class distribution:
+2025-09-12 16:20:55,793 | INFO | Counter({'Normal': 168988, 'Frame Injection': 28910})
+2025-09-12 16:20:55,793 | WARNING | >> Saving a subset of 0.1%
+2025-09-12 16:20:55,807 | INFO | Saving data in cash file in batchs...
+2025-09-12 16:20:56,607 | INFO | Batch 1/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_0.pt
+2025-09-12 16:20:57,353 | INFO | Batch 2/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_1.pt
+2025-09-12 16:20:58,129 | INFO | Batch 3/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_2.pt
+2025-09-12 16:20:59,000 | INFO | Batch 4/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_3.pt
+2025-09-12 16:21:00,694 | INFO | Batch 5/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_4.pt
+2025-09-12 16:21:01,799 | INFO | Batch 6/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_5.pt
+2025-09-12 16:21:02,594 | INFO | Batch 7/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_6.pt
+2025-09-12 16:21:03,332 | INFO | Batch 8/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_7.pt
+2025-09-12 16:21:04,176 | INFO | Batch 9/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_8.pt
+2025-09-12 16:21:05,049 | INFO | Batch 10/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_9.pt
+2025-09-12 16:21:05,828 | INFO | Batch 11/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_10.pt
+2025-09-12 16:21:06,531 | INFO | Batch 12/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_11.pt
+2025-09-12 16:21:07,534 | INFO | Batch 13/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_12.pt
+2025-09-12 16:21:08,754 | INFO | Batch 14/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_13.pt
+2025-09-12 16:21:09,526 | INFO | Batch 15/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_14.pt
+2025-09-12 16:21:10,290 | INFO | Batch 16/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_15.pt
+2025-09-12 16:21:11,137 | INFO | Batch 17/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_16.pt
+2025-09-12 16:21:11,914 | INFO | Batch 18/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_17.pt
+2025-09-12 16:21:12,661 | INFO | Batch 19/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_18.pt
+2025-09-12 16:21:13,300 | INFO | Batch 20/20 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1/batch_19.pt
+2025-09-12 16:21:13,390 | INFO | Initializing finished in 137.56171703338623s
+2025-09-12 16:21:13,390 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1
+2025-09-12 16:21:20,011 | INFO | Data loaded successfully.
+2025-09-12 16:21:20,133 | INFO | Using device: mps
+2025-09-12 16:21:23,830 | INFO | Testing labels: 
+label
+Normal             168988
+Frame Injection     28910
+Name: count, dtype: int64
+2025-09-12 16:21:24,099 | INFO | Test loss: 0.000000 	[0/197898 (0%)]
+2025-09-12 16:22:31,446 | INFO | Testing completed. Testing loss: 5.2049299944682775e-05
+2025-09-12 16:28:10,488 | INFO | Initiating testing...
+2025-09-12 16:28:10,488 | INFO | [ RUN ID: tcn_pred_TOWIDS_20250912_155527 ]
+2025-09-12 16:28:10,830 | INFO | Initializing pre processing...
+2025-09-12 16:28:10,830 | INFO | Initializing finished in 0.0003063678741455078s
+2025-09-12 16:28:10,830 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1
+2025-09-12 16:28:23,530 | INFO | Data loaded successfully.
+2025-09-12 16:28:23,665 | INFO | Using device: mps
+2025-09-12 16:28:30,732 | INFO | Testing labels: 
+label
+Normal             168988
+Frame Injection     28910
+Name: count, dtype: int64
+2025-09-12 16:28:32,142 | INFO | Test loss: 0.000000 	[0/197898 (0%)]
+2025-09-12 16:30:05,852 | INFO | Initiating testing...
+2025-09-12 16:30:05,852 | INFO | [ RUN ID: tcn_pred_TOWIDS_20250912_155527 ]
+2025-09-12 16:30:06,168 | INFO | Initializing pre processing...
+2025-09-12 16:30:06,168 | INFO | Initializing finished in 3.0040740966796875e-05s
+2025-09-12 16:30:06,168 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_subset_0.1
+2025-09-12 16:30:11,800 | WARNING | Loading data with subset of 0.1%
+2025-09-12 16:30:12,318 | INFO | Data loaded successfully.
+2025-09-12 16:30:12,390 | INFO | Using device: mps
+2025-09-12 16:30:15,015 | INFO | Testing labels: 
+label
+Normal             16920
+Frame Injection     2869
+Name: count, dtype: int64
+2025-09-12 16:30:15,160 | INFO | Test loss: 0.000013 	[0/19789 (0%)]
+2025-09-12 16:30:18,562 | INFO | Testing completed. Testing loss: 5.153971041210987e-05
+2025-09-12 16:30:18,644 | INFO | Metrics 
+{
+    "AUCROC": 0.9716811299890324,
+    "Accuracy": 0.9916115013391278,
+    "TPR": 0.942140118508191,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.970208183776023,
+    "optimal_threshold": 1.2369906698950217e-06,
+    "tpr_per_attack": {
+        "Frame Injection": 0.942140118508191
+    },
+    "aucroc_per_attack": {
+        "Frame Injection": 0.9716811299890324
+    }
+}
+2025-09-12 16:30:18,645 | INFO | Execution completed.
+2025-09-12 16:30:21,313 | INFO | Run artifacts saved.
+2025-09-12 16:30:21,314 | INFO | Testing completed.

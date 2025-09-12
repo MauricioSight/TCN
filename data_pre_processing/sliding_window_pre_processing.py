@@ -18,7 +18,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         
         path = self.get_output_path()
 
-        if not os.path.exists(path + 'batch_0.pt'):
+        if not os.path.exists(path + '/batch_0.pt'):
             data, target = data_loader.load()
 
             (X_view, starts), y = self.process(data, target)
@@ -26,12 +26,11 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             save_subset = self.config.get('pre_processing', {}).get('save_subset')
             if save_subset is not None:
                 self.logger.warning(f">> Saving a subset of {save_subset}%")
-                indices = np.random.choice(len(starts), size=int(save_subset*len(starts)), replace=False)
-                starts = starts[indices]
-                y = y.iloc[indices].reset_index(drop=True)
+                np.random.choice(starts, size=int(save_subset*len(starts)))
+                y = y.iloc[starts].reset_index(drop=True)
 
             self.save((X_view, starts), y)
-            del data, target, indices, X_view, starts, y
+            del data, target, X_view, starts, y
         
         self.logger.info(f"Initializing finished in {time.time() - start_time}s")
         return self.load(path)
@@ -92,6 +91,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             X = X[indices]
             y = y.iloc[indices].reset_index(drop=True)
 
+        X[:, :, 20] = 0 # TODO: ADD THIS ON DATA LOADER
         return X, y
     
     
@@ -104,6 +104,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         method          = self.config.get('pre_processing', {}).get('name')
         window_size     = self.config.get('pre_processing', {}).get('window_size')
         window_stride   = self.config.get('pre_processing', {}).get('window_stride')
+        number_of_bytes = self.config.get('data_loader', {}).get('number_of_bytes') # TODO: THIS SHOULD NOT BE HERE
         save_subset     = self.config.get('pre_processing', {}).get('save_subset', None)
 
         file_name = (
@@ -111,6 +112,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             f"{method}_"
             f"wsize_{window_size}_"
             f"wstride_{window_stride}_"
+            f"n_{number_of_bytes}"
         )
         
         if save_subset:
@@ -201,7 +203,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
 
         # --- lightweight label-side windows (cheap) ---
         desc = target['label'].to_numpy()
-        ts = target['timestamp'].to_numpy()
+        pkt_idx = target['pkt_idx'].to_numpy()
         desc_windows_all = np.lib.stride_tricks.sliding_window_view(desc, window_shape=window_size)
 
         # subsample starts *before* touching big value windows
@@ -211,7 +213,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
 
         # compute labels only for chosen starts
         seq_y = self.__labeling_schema_vectorized(desc_windows_all[starts], target)
-        start_times = ts[starts]
+        start_pkt_idx = pkt_idx[starts]
         desc_windows = desc_windows_all[starts]
 
         # --- now build value windows for the chosen starts only ---
@@ -220,10 +222,29 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         X_view = X_view.reshape(n - window_size + 1, window_size, *data.shape[1:])
         # X = X_view[starts]
 
+        y = list(zip(seq_y, start_pkt_idx.astype(int), desc_windows))
+        y = pd.DataFrame(y, columns=['label', 'start_idx', 'desc_windows'])
+
+        # attack_range = {
+        #     'CAN DoS': [140311, 318977],
+        #     'CAN Replay': [376324, 477909],
+        #     'Switch MAC Flooding': [566332, 681511],
+        #     'Frame Injection': [775561, 921298],
+        #     'PTP Sync': [994521, 1196497],
+        #     'Normal':	[1, 1203737],
+        # }
+        
+        # TODO: REMOVE THIS TO OTHERS PROTOCOL_FILTER BESIDES AVTP
+        if self.config.get('phase') == 'train':
+            valid_starts_idx = y[
+                (y['start_idx'] < 140311) | 
+                ((y['start_idx'] > 728536) & (y['start_idx'] < 957909)) | 
+                (y['start_idx'] > 1196497 + 3620)
+            ].index
+            starts = starts[valid_starts_idx]
+
         self.logger.info("Class distribution:")
         self.logger.info(Counter(seq_y))
-
-        y = list(zip(seq_y, start_times.astype(float), desc_windows))
-        y = pd.DataFrame(y, columns=['label', 'start_time', 'desc_windows'])
+        
         return (X_view, starts), y
     
