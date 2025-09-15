@@ -1,0 +1,50 @@
+2025-09-15 09:47:16,789 | INFO | Initiating testing...
+2025-09-15 09:47:16,789 | INFO | [ RUN ID: tcn_pred_TOWIDS_20250912_182909 ]
+2025-09-15 09:47:17,188 | INFO | Initializing pre processing...
+2025-09-15 09:47:17,189 | INFO | Loading raw data...
+2025-09-15 09:48:37,620 | INFO | Loading raw data finished in 80.43s with shape of (541624, 50)
+2025-09-15 09:48:40,963 | INFO | Class distribution:
+2025-09-15 09:48:40,992 | INFO | Counter({'Normal': 388140, 'CAN Replay': 81215, 'CAN DoS': 72206})
+2025-09-15 09:48:40,994 | WARNING | >> Saving a subset of 0.1%
+2025-09-15 09:48:40,994 | WARNING | >> Original shape: (541561,)
+2025-09-15 09:48:41,002 | WARNING | >> Final shape: (54156,)
+2025-09-15 09:48:41,032 | INFO | Saving data in cash file in batchs...
+2025-09-15 09:48:41,870 | INFO | Batch 1/6 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_UDP_subset_0.1/batch_0.pt
+2025-09-15 09:48:42,666 | INFO | Batch 2/6 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_UDP_subset_0.1/batch_1.pt
+2025-09-15 09:48:43,622 | INFO | Batch 3/6 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_UDP_subset_0.1/batch_2.pt
+2025-09-15 09:48:44,420 | INFO | Batch 4/6 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_UDP_subset_0.1/batch_3.pt
+2025-09-15 09:48:45,285 | INFO | Batch 5/6 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_UDP_subset_0.1/batch_4.pt
+2025-09-15 09:48:45,595 | INFO | Batch 6/6 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_UDP_subset_0.1/batch_5.pt
+2025-09-15 09:48:45,733 | INFO | Initializing finished in 88.54422998428345s
+2025-09-15 09:48:45,733 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_50_UDP_subset_0.1
+2025-09-15 09:48:47,585 | INFO | Data loaded successfully.
+2025-09-15 09:48:47,789 | INFO | Using device: mps
+2025-09-15 09:48:50,950 | INFO | Testing labels: 
+label
+Normal        38904
+CAN Replay     8152
+CAN DoS        7100
+Name: count, dtype: int64
+2025-09-15 09:48:51,200 | INFO | Test loss: 0.020124 	[0/54156 (0%)]
+2025-09-15 09:49:01,865 | INFO | Testing completed. Testing loss: 0.020637095007504453
+2025-09-15 09:49:02,641 | INFO | Metrics 
+{
+    "AUCROC": 0.9971841811423726,
+    "Accuracy": 0.9755890390723096,
+    "TPR": 0.9847888801468659,
+    "FPR": 0.028017684556857908,
+    "Precision": 0.9323401613904407,
+    "F1-score": 0.9578470760793317,
+    "optimal_threshold": 0.021325474604964256,
+    "tpr_per_attack": {
+        "CAN Replay": 1.0,
+        "CAN DoS": 0.9673239436619718
+    },
+    "aucroc_per_attack": {
+        "CAN Replay": 0.9998506237239922,
+        "CAN DoS": 0.9941226543923215
+    }
+}
+2025-09-15 09:49:02,644 | INFO | Execution completed.
+2025-09-15 09:49:16,127 | INFO | Run artifacts saved.
+2025-09-15 09:49:16,132 | INFO | Testing completed.
