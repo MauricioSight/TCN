@@ -26,7 +26,9 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             save_subset = self.config.get('pre_processing', {}).get('save_subset')
             if save_subset is not None:
                 self.logger.warning(f">> Saving a subset of {save_subset}%")
-                np.random.choice(starts, size=int(save_subset*len(starts)))
+                self.logger.warning(f">> Original shape: {starts.shape}")
+                starts = np.random.choice(starts, size=int(save_subset*len(starts)), replace=False)
+                self.logger.warning(f">> Final shape: {starts.shape}")
                 y = y.iloc[starts].reset_index(drop=True)
 
             self.save((X_view, starts), y)
@@ -91,7 +93,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             X = X[indices]
             y = y.iloc[indices].reset_index(drop=True)
 
-        X[:, :, 20] = 0 # TODO: ADD THIS ON DATA LOADER
+        # X[:, :, 20] = 0 # USED ONLY ON AVTP TODO: ADD THIS ON DATA LOADER
         return X, y
     
     
@@ -104,6 +106,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         method          = self.config.get('pre_processing', {}).get('name')
         window_size     = self.config.get('pre_processing', {}).get('window_size')
         window_stride   = self.config.get('pre_processing', {}).get('window_stride')
+        protocol_filter   = self.config.get('data_loader', {}).get('protocol_filter')
         number_of_bytes = self.config.get('data_loader', {}).get('number_of_bytes') # TODO: THIS SHOULD NOT BE HERE
         save_subset     = self.config.get('pre_processing', {}).get('save_subset', None)
 
@@ -112,7 +115,8 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             f"{method}_"
             f"wsize_{window_size}_"
             f"wstride_{window_stride}_"
-            f"n_{number_of_bytes}"
+            f"n_{number_of_bytes}_"
+            f"{protocol_filter}"
         )
         
         if save_subset:
@@ -235,13 +239,16 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         # }
         
         # TODO: REMOVE THIS TO OTHERS PROTOCOL_FILTER BESIDES AVTP
-        if self.config.get('phase') == 'train':
-            valid_starts_idx = y[
-                (y['start_idx'] < 140311) | 
-                ((y['start_idx'] > 728536) & (y['start_idx'] < 957909)) | 
-                (y['start_idx'] > 1196497 + 3620)
-            ].index
-            starts = starts[valid_starts_idx]
+        # if self.config.get('phase') == 'train':
+        #     valid_starts_idx = y[
+        #         # (y['start_idx'] < 140311) |                                 # AVTP, OTHER
+        #         (y['start_idx'] < 522120) |                               # UDP
+        #         ((y['start_idx'] >= 522120) & (y['start_idx'] < 728536)) |   # OTHER
+        #         # ((y['start_idx'] > 728536) & (y['start_idx'] < 957909)) | # AVTP
+        #         (y['start_idx'] > 957909)                                   # OTHER
+        #         # (y['start_idx'] > 1196497 + 3620)                         # AVTP, UDP
+        #     ].index
+        #     starts = starts[valid_starts_idx]
 
         self.logger.info("Class distribution:")
         self.logger.info(Counter(seq_y))
