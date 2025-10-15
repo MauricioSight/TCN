@@ -7,10 +7,8 @@ class EarlyStopping:
         self.logger = logger
         self.model = model
         
-        self.training_config = config.get('training')
-        self.learning_rate = self.training_config.get('learning_rate')
-        self.early_stopping_patience = self.training_config.get('early_stopping_patience')
-        self.early_stopping_delta = self.training_config.get('early_stopping_delta', 0.0001)
+        self.es_patience = self.config.get('modeling', {}).get('training', {}).get('es_patience')
+        self.es_delta    = self.config.get('modeling', {}).get('training', {}).get('es_delta')
 
         self.best_val_loss = float("inf")
 
@@ -27,7 +25,7 @@ class EarlyStopping:
         """
         condition_match = False
         # Early stopping update
-        if val_loss < self.best_val_loss - self.early_stopping_delta:
+        if val_loss < self.best_val_loss - self.es_delta:
             self.model.save_model_state_dict()
             self.best_val_loss = val_loss
             self.epochs_without_improvement = 0
@@ -35,7 +33,7 @@ class EarlyStopping:
             self.epochs_without_improvement = self.epochs_without_improvement + 1
 
         # Early stopping condition
-        if self.epochs_without_improvement >= self.early_stopping_patience:
+        if self.epochs_without_improvement >= self.es_patience:
             condition_match = True
 
         return condition_match
@@ -55,11 +53,11 @@ class EarlyStopping:
         condition_match = self.__check_early_stopping(val_loss)
 
         self.logger.info('Epoch: {} \tEarlyStopping: {} out of {}. Val loss: {:.6f}'.format(
-            epoch, self.epochs_without_improvement, self.early_stopping_patience, val_loss))
+            epoch, self.epochs_without_improvement, self.es_patience, val_loss))
 
         if condition_match:
             self.logger.info(
-                f"Early stopping! Validation loss hasn't improved for {self.early_stopping_patience} epochs")
+                f"Early stopping! Validation loss hasn't improved for {self.es_patience} epochs")
             self.model.load_model_state_dict()
         
         return condition_match

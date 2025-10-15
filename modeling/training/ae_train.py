@@ -82,7 +82,7 @@ class AETrain(PytorchTrainingAlgorithm):
 
 
     def __create_loaders(self, X: np.ndarray, y: pd.DataFrame) -> tuple[DataLoader, DataLoader]:
-        y.reset_index(inplace=True)
+        y = y.reset_index()
 
         # Pred is an unsupervised method. So, just benign samples in training phase
         benign_idx = y[y['label'] == 'Normal'].index.to_list()
@@ -125,7 +125,7 @@ class AETrain(PytorchTrainingAlgorithm):
         reduction       =   self.config.get('modeling', {}).get('training', {}).get('reduction', 'mean')
         learning_rate   =   self.config.get('modeling', {}).get('training', {}).get('learning_rate')
         num_epochs      =   self.config.get('modeling', {}).get('training', {}).get('num_epochs')
-        es_patience     =   self.config.get('modeling', {}).get('training', {}).get('early_stopping_patience')
+        es_patience     =   self.config.get('modeling', {}).get('training', {}).get('es_patience')
 
         self.optimizer = torch.optim.Adam(model.parameters(), lr=float(learning_rate))
         self.criterion = get_criterion(criterion_name, reduction=reduction)

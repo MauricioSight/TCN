@@ -6,12 +6,13 @@ import numpy as np
 from logging import Logger
 
 class InferenceMetrics(ABC):
-    def __init__(self, config: dict, logger: Logger):
+    def __init__(self, config: dict, logger: Logger, context={}):
         self.config = config
         self.logger = logger
+        self.context = context
 
     @abstractmethod
-    def get_overall_metrics(self, y_true: pd.DataFrame, y_scores: np.ndarray) -> dict:
+    def get_overall_metrics(self, y_true: pd.DataFrame, y_scores: np.ndarray, threshold: float = None) -> dict:
         """"
         Get overall metrics
 

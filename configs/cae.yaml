@@ -2,7 +2,7 @@ phase: train
 
 tracker:
   name: 
-  project: tcn_pred_dev
+  project: cae_lstmae_dev
 
 data_loader:
   name: TOWIDS
@@ -13,24 +13,26 @@ data_loader:
 pre_processing:
   name: sliding-window
   processed_path: data/tow-ids-dataset/processed
-  window_size: 4
+  window_size: 64
   window_stride: 1
   save_subset: 0.1
+  save_batch_size: 10000
 
 modeling:
   structure:
     name: cae
-    in_channels: 4
+    in_channels: 64
     input_size: 58
-    num_levels: 1
+    num_levels: 3
     hidden_size: 64
   
   training:
     name: ae
     criterion: mean_squared_error
     learning_rate: 0.0001
-    num_epochs: 1
+    num_epochs: 250
     es_patience: 5
+    es_delta: 0.0001
     batch_size: 16
 
   inference:
@@ -38,4 +40,5 @@ modeling:
     batch_size: 64
 
 metrics:
-  name: anomaly_detector
+  name: natasha_ae
+  alpha: 0.5

@@ -90,9 +90,6 @@ def main(config=None, X=None, y_true=None):
     logger.debug("Initializing inference...")
     model_inference = ModelingInferenceFactory().get(config, logger, device)
 
-    logger.debug("Initializing metrics...")
-    metrics_handler = MetricsFactory().get(config, logger)
-
     # 3.4 Train validation split
     train_val_idx, test_idx = train_test_split(np.arange(X.shape[0]), train_size=0.8, random_state=DEFAULT_SEED, shuffle=True)
 
@@ -108,6 +105,9 @@ def main(config=None, X=None, y_true=None):
 
     # 6. Get metrics
     logger.debug("Getting metrics...")
+    train_data = (X[train_val_idx], y_true.iloc[train_val_idx])
+    context={'model': model, 'model_inference': model_inference, 'train_data': train_data}
+    metrics_handler = MetricsFactory().get(config, logger, context)
     metrics = metrics_handler.get_overall_metrics(y_true_val, y_scores)
     tracker.log_metrics({**metrics, 'test_loss': val_loss})
 
