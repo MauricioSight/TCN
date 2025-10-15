@@ -1,5 +1,7 @@
 import logging
 
+import pandas as pd
+
 from logger.base import Logger
 from tracker.wandb_tracker import WandBTracker
 from utils.experiment_io import get_run_dir, save_run_artifacts
@@ -92,7 +94,8 @@ def main(config=None, X=None, y_true=None):
 
     # 5. Get metrics
     logger.debug("Getting metrics...")
-    metrics = metrics_handler.get_overall_metrics(y_true_val, y_scores)
+    threshold = pd.read_json(f'{run_dir}/train_metrics.json')['optimal_threshold'].values[0]
+    metrics = metrics_handler.get_overall_metrics(y_true_val, y_scores, threshold=threshold)
     tracker.log_metrics({**metrics, 'test_loss': val_loss})
 
     logger.info("Execution completed.")

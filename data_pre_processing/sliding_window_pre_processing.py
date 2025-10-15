@@ -18,21 +18,21 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         
         path = self.get_output_path()
 
-        if not os.path.exists(path):
+        if not os.path.exists(path + '/batch_0.pt'):
             data, target = data_loader.load()
 
-            X, y = self.process(data, target)
+            (X_view, starts), y = self.process(data, target)
 
             save_subset = self.config.get('pre_processing', {}).get('save_subset')
             if save_subset is not None:
                 self.logger.warning(f">> Saving a subset of {save_subset}%")
-                indices = np.random.choice(len(X), size=int(save_subset*len(X)), replace=False)
-                X = X[indices]
-                y = y.iloc[indices].reset_index(drop=True)
-            
-            self.save(X, y)
+                self.logger.warning(f">> Original shape: {starts.shape}")
+                starts = np.random.choice(starts, size=int(save_subset*len(starts)), replace=False)
+                self.logger.warning(f">> Final shape: {starts.shape}")
+                y = y.iloc[starts].reset_index(drop=True)
 
-            return X, y
+            self.save((X_view, starts), y)
+            del data, target, X_view, starts, y
         
         self.logger.info(f"Initializing finished in {time.time() - start_time}s")
         return self.load(path)
@@ -49,20 +49,41 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
 
 
     def save(self, X: np.ndarray, y: pd.DataFrame):
-        self.logger.info("Saving data in cash file...")
+        self.logger.info("Saving data in cash file in batchs...")
 
+        batch_size = self.config.get('pre_processing', {}).get('save_batch_size', len(X))
         path = self.get_output_path()
 
-        torch.save({'X': X, 'y': y}, path, pickle_protocol=pickle.HIGHEST_PROTOCOL)
+        X_view, starts = X
 
-        self.logger.info(f"Data saved to {path}")
+        # Split the data into manageable batches
+        num_batches = len(starts) // batch_size + 1
+
+        for i in range(num_batches):
+            batch_starts = starts[i*batch_size : (i+1)*batch_size]
+            batch_X = X_view[batch_starts]
+            batch_y = y.iloc[i*batch_size : (i+1)*batch_size]
+
+            # Save each batch with an index to maintain order
+            batch_path = f"{path}/batch_{i}.pt"
+            torch.save({'X': batch_X, 'y': batch_y}, batch_path, pickle_protocol=pickle.HIGHEST_PROTOCOL)
+            self.logger.info(f"Batch {i+1}/{num_batches} saved to {batch_path}")
     
-
+    
     def load(self, path: str) -> tuple[np.ndarray, pd.DataFrame]:
         self.logger.info(f"Loading cached data from: {path}")
-        cache = torch.load(path, weights_only=False)
-        X, y = cache['X'], cache['y']
+        
+        files = [f for f in os.listdir(path)]
+        files.sort()
+        all_X, all_y = [], []
 
+        for file in files:
+            cache = torch.load(f"{path}/{file}", weights_only=False)
+            all_X.append(cache['X'])
+            all_y.append(cache['y'])
+
+        X = np.concatenate(all_X, axis=0)
+        y = pd.concat(all_y, axis=0).reset_index(drop=True)
 
         load_subset = self.config.get('pre_processing', {}).get('load_subset')
         if load_subset is not None:
@@ -72,7 +93,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             X = X[indices]
             y = y.iloc[indices].reset_index(drop=True)
 
-
+        # X[:, :, 20] = 0 # USED ONLY ON AVTP TODO: ADD THIS ON DATA LOADER
         return X, y
     
     
@@ -85,6 +106,8 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         method          = self.config.get('pre_processing', {}).get('name')
         window_size     = self.config.get('pre_processing', {}).get('window_size')
         window_stride   = self.config.get('pre_processing', {}).get('window_stride')
+        protocol_filter   = self.config.get('data_loader', {}).get('protocol_filter')
+        number_of_bytes = self.config.get('data_loader', {}).get('number_of_bytes') # TODO: THIS SHOULD NOT BE HERE
         save_subset     = self.config.get('pre_processing', {}).get('save_subset', None)
 
         file_name = (
@@ -92,13 +115,17 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
             f"{method}_"
             f"wsize_{window_size}_"
             f"wstride_{window_stride}_"
+            f"n_{number_of_bytes}_"
+            f"{protocol_filter}"
         )
         
         if save_subset:
             file_name += f'_subset_{save_subset}'
 
-        os.makedirs(processed_path, exist_ok=True)
-        return f'{processed_path}/{file_name}.pt'
+        path = f'{processed_path}/{file_name}'
+
+        os.makedirs(path, exist_ok=True)
+        return path
     
 
     def __labeling_schema_vectorized(self, desc_windows: np.ndarray, labels: pd.DataFrame) -> np.ndarray:
@@ -180,7 +207,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
 
         # --- lightweight label-side windows (cheap) ---
         desc = target['label'].to_numpy()
-        ts = target['timestamp'].to_numpy()
+        pkt_idx = target['pkt_idx'].to_numpy()
         desc_windows_all = np.lib.stride_tricks.sliding_window_view(desc, window_shape=window_size)
 
         # subsample starts *before* touching big value windows
@@ -190,19 +217,41 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
 
         # compute labels only for chosen starts
         seq_y = self.__labeling_schema_vectorized(desc_windows_all[starts], target)
-        start_times = ts[starts]
+        start_pkt_idx = pkt_idx[starts]
         desc_windows = desc_windows_all[starts]
 
         # --- now build value windows for the chosen starts only ---
         # sliding_window_view returns a view; avoid materializing everything
         X_view = np.lib.stride_tricks.sliding_window_view(data, window_shape=(window_size,) + data.shape[1:])
         X_view = X_view.reshape(n - window_size + 1, window_size, *data.shape[1:])
-        X = X_view[starts]
+        # X = X_view[starts]
+
+        y = list(zip(seq_y, start_pkt_idx.astype(int), desc_windows))
+        y = pd.DataFrame(y, columns=['label', 'start_idx', 'desc_windows'])
+
+        # attack_range = {
+        #     'CAN DoS': [140311, 318977],
+        #     'CAN Replay': [376324, 477909],
+        #     'Switch MAC Flooding': [566332, 681511],
+        #     'Frame Injection': [775561, 921298],
+        #     'PTP Sync': [994521, 1196497],
+        #     'Normal':	[1, 1203737],
+        # }
+        
+        # TODO: REMOVE THIS TO OTHERS PROTOCOL_FILTER BESIDES AVTP
+        # if self.config.get('phase') == 'train':
+        #     valid_starts_idx = y[
+        #         # (y['start_idx'] < 140311) |                                 # AVTP, OTHER
+        #         (y['start_idx'] < 522120) |                               # UDP
+        #         ((y['start_idx'] >= 522120) & (y['start_idx'] < 728536)) |   # OTHER
+        #         # ((y['start_idx'] > 728536) & (y['start_idx'] < 957909)) | # AVTP
+        #         (y['start_idx'] > 957909)                                   # OTHER
+        #         # (y['start_idx'] > 1196497 + 3620)                         # AVTP, UDP
+        #     ].index
+        #     starts = starts[valid_starts_idx]
 
         self.logger.info("Class distribution:")
         self.logger.info(Counter(seq_y))
-
-        y = list(zip(seq_y, start_times.astype(float), desc_windows))
-        y = pd.DataFrame(y, columns=['label', 'start_time', 'desc_windows'])
-        return X, y
+        
+        return (X_view, starts), y
     

@@ -25,6 +25,11 @@ class ModelingTrainingFactory:
             from modeling.training.ae_train import AETrain
 
             return AETrain(config, logger, device, tracker)
+        
+        if name == 'aero':
+            from modeling.training.aero_train import AEROTrain
+
+            return AEROTrain(config, logger, device, tracker)
 
         else:
             raise ValueError(

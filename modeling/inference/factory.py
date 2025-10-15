@@ -25,6 +25,11 @@ class ModelingInferenceFactory:
 
             return AEInference(config, logger, device)
 
+        if name == 'aero':
+            from modeling.inference.aero_inference import AEROInference
+
+            return AEROInference(config, logger, device)
+
         else:
             raise ValueError(
                 f"Unsupported ModelingInferenceFactory name: {name}")

@@ -1,13 +1,14 @@
 import json
 import numpy as np
 import pandas as pd
-from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
+from sklearn.metrics import confusion_matrix, roc_auc_score
+import torch
 
 from metrics.base import InferenceMetrics
 from metrics.timming_metrics import get_resource_metrics
 
 
-class AnomalyDetectorMetrics(InferenceMetrics):
+class AEROMetrics(InferenceMetrics):
     def get_overall_metrics(self, y_true: pd.DataFrame, y_pred: np.ndarray, threshold: float = None) -> dict:
         """"
         Get overall metrics
@@ -19,11 +20,8 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         returns:
             dict of metrics
         """
-        quantile = self.config.get('metrics', {}).get('quantile', 0.99)
 
         _, y_scores = y_pred
-
-        y_scores = np.array(y_scores).mean(axis=(1, 2)) # Get loss
 
         y_true['scores'] = y_scores
         y_true_benign = y_true[y_true["label"] == 'Normal']
@@ -37,7 +35,7 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         aucroc_per_attack = self.__roc_auc_score_each_attack(y_true_labels, y_scores)
 
         if not threshold:
-            threshold = y_true_benign["scores"].quantile(quantile)
+            threshold = self.__get_aero_threshold()
 
         result = self.__get_overall_metrics(y_true_binary, y_scores > threshold)
 
@@ -110,10 +108,30 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         """
         pass
 
+    
+    def __get_aero_threshold(self):
+        """
+        Determine anomaly detection threshold τ using validation set.
+        
+        Args:
+            val_loader: DataLoader for validation data.
+            percentile: desired percentile for threshold τ.
+        
+        Returns:
+            threshold τ (float)
+        """
+        percentile = self.config.get('metrics', {}).get('percentile', 95)
 
-    def __get_threshold_youden_index(self, y_true, y_scores):
-        # Calculate Youden index to determine optimal threshold
-        fpr, tpr, thresholds = roc_curve(y_true, y_scores)
-        youden_index = np.argmax(tpr - fpr)
-        optimal_threshold = thresholds[youden_index]
-        return optimal_threshold
+        model_inference = self.context['model_inference']
+        model           = self.context['model']
+        train_data      = self.context['train_data']
+        
+        y = train_data[1].reset_index(drop=True)
+        benign_idx = y[y['label'] == 'Normal'].index
+        _, (_, y_scores), _ = model_inference.inference(model, train_data[0][benign_idx], y.iloc[benign_idx])
+        y_scores = np.array(y_scores)
+
+        # Step 4: Determine threshold τ = P(l, p)
+        threshold = np.percentile(y_scores, percentile)
+
+        return threshold

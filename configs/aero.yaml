@@ -2,46 +2,49 @@ phase: train
 
 tracker:
   name: 
-  project: tcn_pred_dev
+  project: aero_dev
 
 data_loader:
   name: TOWIDS
   raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap
   raw_y_path: data/tow-ids-dataset/raw/y_train.csv
-  number_of_bytes: 50
-  protocol_filter: 'AVTP'
+  number_of_bytes: 58
 
 pre_processing:
-  name: sliding-window
+  name: aero
   processed_path: data/tow-ids-dataset/processed
   window_size: 64
   window_stride: 1
-  save_batch_size: 10000
   save_subset: 0.1
+  save_batch_size: 10000
+
+  jump_payload_bytes: 32
+  number_payload_bytes: 9
 
 modeling:
   structure:
-    name: tcn_pred
-    input_size: 50
-    num_levels: 1
-    hidden_size: 120
-    kernel_size: 4
-    dropout: 0.2
-    final_layer: True
-    T: 2
+    name: aero
+    in_channels: 64
+    hidden_size: 64
+    input_size: 9
+    num_levels: 2
+    kernel_size: 3
   
   training:
-    name: pred
+    name: aero
     criterion: mean_squared_error
     learning_rate: 0.0001
-    num_epochs: 1
+    ae_num_epochs: 20
+    pm_num_epochs: 10
+    ft_num_epochs: 150
     es_patience: 5
-    batch_size: 1
-    clip: 0.2
+    es_delta: 0.0001
+    batch_size: 16
 
   inference:
-    name: pred
+    name: aero
     batch_size: 64
 
 metrics:
-  name: anomaly_detector
+  name: aero
+  percentile: 95

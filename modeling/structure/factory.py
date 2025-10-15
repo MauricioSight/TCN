@@ -29,6 +29,16 @@ class ModelingStructureFactory:
             from modeling.structure.lstmae import LSTMAE
 
             return LSTMAE(config, logger, device)
+        
+        if name == 'aero':
+            from modeling.structure.aero import AERO
+
+            return AERO(config, logger, device)
+        
+        if name == 'seqwatch':
+            from modeling.structure.seqwatch import SeqWatch
+
+            return SeqWatch(config, logger, device)
 
         else:
             raise ValueError(

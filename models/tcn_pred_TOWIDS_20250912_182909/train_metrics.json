@@ -1,0 +1,17 @@
+{
+    "AUCROC": 0.9999502893331387,
+    "Accuracy": 0.9997556207233627,
+    "TPR": 0.9995713673381912,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.99978563772776,
+    "optimal_threshold": 0.01615508273243904,
+    "tpr_per_attack": {
+        "CAN DoS": 0.9996726677577742,
+        "CAN Replay": 0.9993792675356921
+    },
+    "aucroc_per_attack": {
+        "CAN DoS": 1.0,
+        "CAN Replay": 0.9998560211225482
+    }
+}

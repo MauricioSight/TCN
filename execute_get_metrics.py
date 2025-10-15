@@ -1,6 +1,6 @@
 import logging
 
-import numpy as np
+import pandas as pd
 import torch
 
 from logger.base import Logger
@@ -61,7 +61,8 @@ def main(phase='train', run_id: str ='tcn_pred_TOWIDS_20250909_142043', y_true=N
 
     # 6. Get metrics
     logger.debug("Getting metrics...")
-    metrics = metrics_handler.get_overall_metrics(y_true, y_scores)
+    threshold = pd.read_json(f'{run_dir}/train_metrics.json')['optimal_threshold'].values[0]
+    metrics = metrics_handler.get_overall_metrics(y_true, y_scores, threshold=threshold)
 
     logger.info("Execution completed.")
 

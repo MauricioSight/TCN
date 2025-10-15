@@ -7,7 +7,7 @@ from metrics.base import InferenceMetrics
 from metrics.timming_metrics import get_resource_metrics
 
 
-class AnomalyDetectorMetrics(InferenceMetrics):
+class AEMetrics(InferenceMetrics):
     def get_overall_metrics(self, y_true: pd.DataFrame, y_pred: np.ndarray, threshold: float = None) -> dict:
         """"
         Get overall metrics
@@ -19,7 +19,6 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         returns:
             dict of metrics
         """
-        quantile = self.config.get('metrics', {}).get('quantile', 0.99)
 
         _, y_scores = y_pred
 
@@ -37,7 +36,7 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         aucroc_per_attack = self.__roc_auc_score_each_attack(y_true_labels, y_scores)
 
         if not threshold:
-            threshold = y_true_benign["scores"].quantile(quantile)
+            threshold = self.__get_threshold_youden_index(y_true_binary, y_scores)
 
         result = self.__get_overall_metrics(y_true_binary, y_scores > threshold)
 
@@ -45,7 +44,7 @@ class AnomalyDetectorMetrics(InferenceMetrics):
 
         model           = self.context['model']
         train_data      = self.context['train_data']
-        resource_metrics = get_resource_metrics(model, train_data[0][:1])
+        resource_metrics = get_resource_metrics(model, train_data[0])
 
         overall_metrics = {'AUCROC': aucroc, **result, 'optimal_threshold': threshold, 'mean': mean, 'std': std}
         metrics_serializable = {k: float(v) for k, v in overall_metrics.items()}
@@ -110,7 +109,7 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         """
         pass
 
-
+    
     def __get_threshold_youden_index(self, y_true, y_scores):
         # Calculate Youden index to determine optimal threshold
         fpr, tpr, thresholds = roc_curve(y_true, y_scores)

@@ -89,13 +89,11 @@ class TCNPred(PytorchModelStructure):
         num_channels = [hidden_size] * (num_levels)
         self.tcn = TemporalConvNet(num_inputs=input_size, num_channels=num_channels, kernel_size=kernel_size, T=T, dropout=dropout)
         self.linear = nn.Linear(num_channels[-1], input_size)
-        self.sig = nn.Sigmoid()
-
 
     def forward(self, x):
         # (N, seq, n_bytes)
     
         out = self.tcn(x.transpose(1, 2)).transpose(1, 2)
-        out = self.sig(self.linear(out))
+        out = self.linear(out)
 
         return out
