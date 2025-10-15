@@ -28,6 +28,11 @@ class MetricsFactory:
 
             return AEROMetrics(config, logger, context)
 
+        if name == 'ae':
+            from metrics.ae_metrics import AEMetrics
+
+            return AEMetrics(config, logger, context)
+
         else:
             raise ValueError(
                 f"Unsupported MetricsFactory name: {name}")
