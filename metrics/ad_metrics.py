@@ -4,10 +4,11 @@ import pandas as pd
 from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
 
 from metrics.base import InferenceMetrics
+from metrics.timming_metrics import get_resource_metrics
 
 
 class AnomalyDetectorMetrics(InferenceMetrics):
-    def get_overall_metrics(self, y_true: pd.DataFrame, y_pred: np.ndarray) -> dict:
+    def get_overall_metrics(self, y_true: pd.DataFrame, y_pred: np.ndarray, threshold: float = None) -> dict:
         """"
         Get overall metrics
 
@@ -18,10 +19,16 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         returns:
             dict of metrics
         """
+        quantile = self.config.get('metrics', {}).get('quantile', 0.99)
 
         _, y_scores = y_pred
 
         y_scores = np.array(y_scores).mean(axis=(1, 2)) # Get loss
+
+        y_true['scores'] = y_scores
+        y_true_benign = y_true[y_true["label"] == 'Normal']
+        mean = y_true_benign["scores"].mean()
+        std = y_true_benign["scores"].std()
         
         y_true_labels = y_true['label'].values
         y_true_binary = [0 if l == 'Normal' else 1 for l in y_true_labels]
@@ -29,16 +36,22 @@ class AnomalyDetectorMetrics(InferenceMetrics):
         aucroc = roc_auc_score(y_true_binary, y_scores)
         aucroc_per_attack = self.__roc_auc_score_each_attack(y_true_labels, y_scores)
 
-        threshold = self.__get_threshold_youden_index(y_true_binary, y_scores)
+        if not threshold:
+            threshold = y_true_benign["scores"].quantile(quantile)
 
         result = self.__get_overall_metrics(y_true_binary, y_scores > threshold)
 
         tpr_per_attack = self.__get_tpr_per_attack(y_true_labels, y_scores > threshold)
 
-        overall_metrics = {'AUCROC': aucroc, **result, 'optimal_threshold': threshold}
+        model           = self.context['model']
+        train_data      = self.context['train_data']
+        resource_metrics = get_resource_metrics(model, train_data[0][:1])
+
+        overall_metrics = {'AUCROC': aucroc, **result, 'optimal_threshold': threshold, 'mean': mean, 'std': std}
         metrics_serializable = {k: float(v) for k, v in overall_metrics.items()}
         metrics_serializable['tpr_per_attack'] = tpr_per_attack
         metrics_serializable['aucroc_per_attack'] = aucroc_per_attack
+        metrics_serializable['resource_metrics'] = resource_metrics
 
         self.logger.info(f"Metrics \n{json.dumps(metrics_serializable, indent=4)}")
 

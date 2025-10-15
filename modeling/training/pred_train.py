@@ -32,12 +32,13 @@ class PredTrain(PytorchTrainingAlgorithm):
         for i, (data, target, _) in enumerate(train_loader):
             self.optimizer.zero_grad()
             out = model.forward(data)
+            # loss = ((out - target)**2).sum((2, 1)).mean()
             loss = self.criterion(out, target)
             loss.backward()
 
             # TODO: CHECK IF THIS IS MAKING DIFFERENCE
             clip = self.config.get('modeling', {}).get('training', {}).get('clip')
-            if clip > 0:
+            if clip and clip > 0:
                 torch.nn.utils.clip_grad_norm_(model.parameters(), clip)
 
             train_loss += loss.item()
@@ -45,7 +46,7 @@ class PredTrain(PytorchTrainingAlgorithm):
             self.optimizer.step()
 
             # metrics logs
-            if i % 1000 == 0 or i * len(data) >= len(train_loader) - 1:
+            if i % 10000 == 0:
                 self.logger.info('Epoch: {} \t[{}/{} ({:.0f}%)]\tLoss: {:.6f}'.format(
                     epoch,  i * len(data), len(train_loader), 
                     100. * i / len(train_loader), loss.item()))
@@ -87,6 +88,8 @@ class PredTrain(PytorchTrainingAlgorithm):
 
 
     def __create_loaders(self, X: np.ndarray, y: pd.DataFrame) -> tuple[DataLoader, DataLoader]:
+        valid_windows = self.config.get('modeling', {}).get('training', {}).get('valid_windows')
+
         y = y.reset_index()
 
         # Pred is an unsupervised method. So, just benign samples in training phase
@@ -100,7 +103,8 @@ class PredTrain(PytorchTrainingAlgorithm):
         self.logger.info(f"Validation labels: \n{y.iloc[val_idx]['label'].value_counts()}")
 
         # In prediction, the target is the input shifted by 1
-        data = [[X[i][:-1, :], X[i][1:, :], i] for i in range(X.shape[0])]
+        offset = X.shape[1] - valid_windows if valid_windows else 1
+        data = [[X[i][:-offset, :], X[i][offset:, :], i] for i in range(X.shape[0])]
 
         g = torch.Generator()
         g.manual_seed(42)
