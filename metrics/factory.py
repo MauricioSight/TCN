@@ -23,6 +23,11 @@ class MetricsFactory:
 
             return NatashaAEMetrics(config, logger, context)
 
+        if name == 'aero':
+            from metrics.aero_metrics import AEROMetrics
+
+            return AEROMetrics(config, logger, context)
+
         else:
             raise ValueError(
                 f"Unsupported MetricsFactory name: {name}")

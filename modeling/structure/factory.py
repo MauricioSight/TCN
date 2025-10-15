@@ -29,6 +29,11 @@ class ModelingStructureFactory:
             from modeling.structure.lstmae import LSTMAE
 
             return LSTMAE(config, logger, device)
+        
+        if name == 'aero':
+            from modeling.structure.aero import AERO
+
+            return AERO(config, logger, device)
 
         else:
             raise ValueError(

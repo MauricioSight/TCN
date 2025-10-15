@@ -17,6 +17,11 @@ class DataPreProcessingFactory:
             from data_pre_processing.sliding_window_pre_processing import SlidingWindowPrePrecessing
 
             return SlidingWindowPrePrecessing(config, logger)
+        
+        if name == 'aero':
+            from data_pre_processing.aero_pre_processing import AEROPreProcessing
+
+            return AEROPreProcessing(config, logger)
 
         else:
             raise ValueError(
