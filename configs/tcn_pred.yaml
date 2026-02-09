@@ -2,19 +2,19 @@ phase: train
 
 tracker:
   name: 
-  project: tcn_pred_dev
+  project: w_sizes-fixed_params
 
 data_loader:
   name: TOWIDS
   raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap
   raw_y_path: data/tow-ids-dataset/raw/y_train.csv
-  number_of_bytes: 50
-  protocol_filter: 'AVTP'
+  number_of_bytes: 58
+  protocol_filter: 'AVTP' # ['IP_UDP', 'AVTP', 'PTP', 'L2']
 
 pre_processing:
   name: sliding-window
   processed_path: data/tow-ids-dataset/processed
-  window_size: 64
+  window_size: 192
   window_stride: 1
   save_batch_size: 10000
   save_subset: 0.1
@@ -22,7 +22,7 @@ pre_processing:
 modeling:
   structure:
     name: tcn_pred
-    input_size: 50
+    input_size: 58
     num_levels: 1
     hidden_size: 120
     kernel_size: 4
@@ -34,14 +34,16 @@ modeling:
     name: pred
     criterion: mean_squared_error
     learning_rate: 0.0001
-    num_epochs: 1
+    num_epochs: 10
     es_patience: 5
+    es_delta: 0.0001
     batch_size: 1
     clip: 0.2
 
   inference:
     name: pred
     batch_size: 64
+    # target_label: 'Switch MAC Flooding' # PTP Sync, CAN DoS, Switch MAC Flooding, CAN Replay, Frame Injection
 
 metrics:
-  name: anomaly_detector
+  name: ae

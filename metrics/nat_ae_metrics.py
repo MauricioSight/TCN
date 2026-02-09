@@ -1,3 +1,4 @@
+import torch
 import json
 import numpy as np
 import pandas as pd
@@ -42,15 +43,16 @@ class NatashaAEMetrics(InferenceMetrics):
 
         tpr_per_attack = self.__get_tpr_per_attack(y_true_labels, y_scores > threshold)
 
-        model           = self.context['model']
-        train_data      = self.context['train_data']
-        resource_metrics = get_resource_metrics(model, train_data[0][:1])
-
         overall_metrics = {'AUCROC': aucroc, **result, 'optimal_threshold': threshold, 'mean': mean, 'std': std}
         metrics_serializable = {k: float(v) for k, v in overall_metrics.items()}
         metrics_serializable['tpr_per_attack'] = tpr_per_attack
         metrics_serializable['aucroc_per_attack'] = aucroc_per_attack
-        metrics_serializable['resource_metrics'] = resource_metrics
+
+        if 'model' in self.context:
+            model           = self.context['model']
+            train_data      = self.context['train_data']
+            resource_metrics = get_resource_metrics(model, torch.from_numpy(train_data[0][:1]).float())
+            metrics_serializable['resource_metrics'] = resource_metrics
 
         self.logger.info(f"Metrics \n{json.dumps(metrics_serializable, indent=4)}")
 
@@ -68,6 +70,13 @@ class NatashaAEMetrics(InferenceMetrics):
             tp = correct_predictions_per_label[attack_label] if attack_label in correct_predictions_per_label else 0
             tpr = tp/total
             tpr_per_attack[attack_label] = tpr
+        
+        tpr_per_attack['Normal'] = (aux_df[(aux_df['Label'] == 'Normal') & (aux_df['prediction'] == False)].shape[0] / 
+                                    aux_df[(aux_df['Label'] == 'Normal')].shape[0])
+        
+        tpr_per_attack['Attack'] = (aux_df[(aux_df['Label'] != 'Normal') & (aux_df['prediction'] != False)].shape[0] / 
+                                    aux_df[(aux_df['Label'] != 'Normal')].shape[0])
+
         return tpr_per_attack
 
 

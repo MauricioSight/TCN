@@ -17,6 +17,7 @@ PROTOCOLS = {
     'PTP': 1,
     'IP_UDP': 2,
     'L2': 0,
+    '-1': 0
 }
 
 class AEROPreProcessing(DataPrePrecessing):
@@ -39,8 +40,8 @@ class AEROPreProcessing(DataPrePrecessing):
                 self.logger.warning(f">> Final shape: {starts.shape}")
                 y = y.iloc[starts].reset_index(drop=True)
 
-            self.save((X, starts), y)
-            del data, target, X, starts, y
+            self.save(X, y)
+            del data, target, X, y
         
         self.logger.info(f"Initializing finished in {time.time() - start_time}s")
         return self.load(path)
@@ -59,14 +60,11 @@ class AEROPreProcessing(DataPrePrecessing):
         batch_size = self.config.get('pre_processing', {}).get('save_batch_size', len(X))
         path = self.get_output_path()
 
-        X_view, starts = X
-
         # Split the data into manageable batches
-        num_batches = len(starts) // batch_size + 1
+        num_batches = len(X) // batch_size + 1
 
         for i in range(num_batches):
-            batch_starts = starts[i*batch_size : (i+1)*batch_size]
-            batch_X = X_view[batch_starts]
+            batch_X = X[i*batch_size : (i+1)*batch_size]
             batch_y = y.iloc[i*batch_size : (i+1)*batch_size]
 
             # Save each batch with an index to maintain order
@@ -175,9 +173,9 @@ class AEROPreProcessing(DataPrePrecessing):
 
         X, y = list(), list()
 
-        for i in tqdm(range(0, len(values) - window_size + 1, window_size)):
+        for i in tqdm(range(0, len(values) - window_size + 1, window_stride)):
             # Compute a new (sliding window) index
-            start_ix = i*(window_stride)
+            start_ix = i
             end_ix = start_ix + window_size - 1 + 1
 
             # If index is larger than the size of the dataset, we stop
@@ -241,4 +239,5 @@ class AEROPreProcessing(DataPrePrecessing):
             'M_F': 'Switch MAC Flooding',
             'F_I': 'Frame Injection',
             'C_R': 'CAN Replay',
+            'Replay': 'Replay',
         }

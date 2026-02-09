@@ -2,7 +2,7 @@ phase: train
 
 tracker:
   name: 
-  project: cae_lstmae_dev
+  project: w_sizes-fixed_params
 
 data_loader:
   name: TOWIDS
@@ -11,31 +11,38 @@ data_loader:
   test_raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
   test_raw_y_path: data/tow-ids-dataset/raw/y_test.csv
   number_of_bytes: 58
+  protocol_filter: 'AVTP'
 
 pre_processing:
   name: sliding-window
   processed_path: data/tow-ids-dataset/processed
-  window_size: 40
+  window_size: 192
   window_stride: 16
   save_batch_size: 10000
+  jump_bytes: 18
 
 modeling:
   structure:
-    name: lstmae
-    input_size: 58
-    hidden_size: 10
+    name: tcn_pred
+    input_size: 31
+    num_levels: 4
+    hidden_size: 80
+    kernel_size: 3
+    dropout: 0.2
+    T: 2
   
   training:
-    name: ae
+    name: pred
     criterion: mean_squared_error
-    learning_rate: 0.0001
+    learning_rate: 0.001
     num_epochs: 250
-    es_patience: 5
+    es_patience: 15
     es_delta: 0.0001
     batch_size: 16
+    clip: 0.2
 
   inference:
-    name: ae
+    name: pred
     batch_size: 64
 
 metrics:

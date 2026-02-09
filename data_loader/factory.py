@@ -17,7 +17,12 @@ class DataLoaderFactory:
             from data_loader.TOWIDS_loader import TOWIDSLoader
 
             return TOWIDSLoader(config, logger)
+        
+        if name == 'AEID':
+            from data_loader.AEID_loader import AEIDLoader
 
+            return AEIDLoader(config, logger)
+        
         else:
             raise ValueError(
                 f"Unsupported DataLoaderFactory name: {name}")

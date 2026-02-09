@@ -2,6 +2,7 @@ import json
 import numpy as np
 import pandas as pd
 from sklearn.metrics import confusion_matrix, roc_auc_score, roc_curve
+import torch
 
 from metrics.base import InferenceMetrics
 from metrics.timming_metrics import get_resource_metrics
@@ -21,7 +22,7 @@ class AEMetrics(InferenceMetrics):
         """
 
         _, y_scores = y_pred
-
+        
         y_scores = np.array(y_scores).mean(axis=(1, 2)) # Get loss
 
         y_true['scores'] = y_scores
@@ -35,22 +36,33 @@ class AEMetrics(InferenceMetrics):
         aucroc = roc_auc_score(y_true_binary, y_scores)
         aucroc_per_attack = self.__roc_auc_score_each_attack(y_true_labels, y_scores)
 
+        # Get threshold
         if not threshold:
-            threshold = self.__get_threshold_youden_index(y_true_binary, y_scores)
+            target_label = self.config.get('modeling', {}).get('inference', {}).get('target_label', None)
+
+            if target_label:
+                attack_y_true = [1 if l == target_label else 0 for l in y_true_labels if l == target_label or l == 'Normal']
+                attack_y_scores = [y_scores[i] for i in range(len(y_true_labels)) if y_true_labels[i] == target_label or y_true_labels[i] == 'Normal']
+                threshold = self.__get_threshold_youden_index(attack_y_true, attack_y_scores)
+            
+            else:
+                threshold = self.__get_threshold_youden_index(y_true_binary, y_scores)
 
         result = self.__get_overall_metrics(y_true_binary, y_scores > threshold)
 
         tpr_per_attack = self.__get_tpr_per_attack(y_true_labels, y_scores > threshold)
 
-        model           = self.context['model']
-        train_data      = self.context['train_data']
-        resource_metrics = get_resource_metrics(model, train_data[0])
 
         overall_metrics = {'AUCROC': aucroc, **result, 'optimal_threshold': threshold, 'mean': mean, 'std': std}
         metrics_serializable = {k: float(v) for k, v in overall_metrics.items()}
         metrics_serializable['tpr_per_attack'] = tpr_per_attack
         metrics_serializable['aucroc_per_attack'] = aucroc_per_attack
-        metrics_serializable['resource_metrics'] = resource_metrics
+        
+        if 'model' in self.context:
+            model           = self.context['model']
+            train_data      = self.context['train_data']
+            resource_metrics = get_resource_metrics(model, torch.from_numpy(train_data[0][:1]))
+            metrics_serializable['resource_metrics'] = resource_metrics
 
         self.logger.info(f"Metrics \n{json.dumps(metrics_serializable, indent=4)}")
 
@@ -68,6 +80,13 @@ class AEMetrics(InferenceMetrics):
             tp = correct_predictions_per_label[attack_label] if attack_label in correct_predictions_per_label else 0
             tpr = tp/total
             tpr_per_attack[attack_label] = tpr
+        
+        tpr_per_attack['Normal'] = (aux_df[(aux_df['Label'] == 'Normal') & (aux_df['prediction'] == False)].shape[0] / 
+                                    aux_df[(aux_df['Label'] == 'Normal')].shape[0])
+        
+        tpr_per_attack['Attack'] = (aux_df[(aux_df['Label'] != 'Normal') & (aux_df['prediction'] != False)].shape[0] / 
+                                    aux_df[(aux_df['Label'] != 'Normal')].shape[0])
+
         return tpr_per_attack
 
 

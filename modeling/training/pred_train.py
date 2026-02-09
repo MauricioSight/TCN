@@ -32,7 +32,6 @@ class PredTrain(PytorchTrainingAlgorithm):
         for i, (data, target, _) in enumerate(train_loader):
             self.optimizer.zero_grad()
             out = model.forward(data)
-            # loss = ((out - target)**2).sum((2, 1)).mean()
             loss = self.criterion(out, target)
             loss.backward()
 
@@ -95,7 +94,7 @@ class PredTrain(PytorchTrainingAlgorithm):
         # Pred is an unsupervised method. So, just benign samples in training phase
         benign_idx = y[y['label'] == 'Normal'].index.to_list()
 
-        train_idx, val_idx = train_test_split(benign_idx, train_size=0.8, random_state=DEFAULT_SEED, shuffle=True)
+        train_idx, val_idx = train_test_split(benign_idx, train_size=0.8, random_state=DEFAULT_SEED, shuffle=False)
 
         self.logger.info(f"Train size: {len(train_idx)}, Validation size: {len(val_idx)}")
 
@@ -134,7 +133,7 @@ class PredTrain(PytorchTrainingAlgorithm):
         reduction       =   self.config.get('modeling', {}).get('training', {}).get('reduction', 'mean')
         learning_rate   =   self.config.get('modeling', {}).get('training', {}).get('learning_rate')
         num_epochs      =   self.config.get('modeling', {}).get('training', {}).get('num_epochs')
-        es_patience     =   self.config.get('modeling', {}).get('training', {}).get('early_stopping_patience')
+        es_patience     =   self.config.get('modeling', {}).get('training', {}).get('es_patience')
 
         self.optimizer = torch.optim.Adam(model.parameters(), lr=float(learning_rate))
         self.criterion = get_criterion(criterion_name, reduction=reduction)

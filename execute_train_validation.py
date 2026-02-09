@@ -33,7 +33,7 @@ def main(config=None, X=None, y_true=None):
     """
 
     if config is None:
-        config = load_config(default_file_name="cnn")
+        config = load_config(config_name="seqwatch")
 
     if 'run_id' not in config:
         run_id = get_run_id(config, [config['modeling']['structure']['name'], config['data_loader']['name']])
@@ -63,6 +63,7 @@ def main(config=None, X=None, y_true=None):
         dataset_loader = DataLoaderFactory().get(config, logger)
         pre_processing = DataPreProcessingFactory().get(config, logger)
         X, y_true = pre_processing.initialize(dataset_loader)
+        y_true = y_true.reset_index()
         logger.info("Data loaded successfully.")
     else:
         logger.info("Using provided data for training and validation.")
@@ -100,7 +101,17 @@ def main(config=None, X=None, y_true=None):
     
     # 5. Validate
     logger.debug("Starting validating...")
-    y_true_val, y_scores, val_loss = model_inference.inference(model, X[test_idx], y_true.iloc[test_idx])
+
+    # Get 1% of attack data
+    print(y_true['label'].value_counts())
+    X_val, y_val = X[test_idx], y_true.iloc[test_idx].reset_index(drop=True)
+    normal_idx = y_val[y_val['label'] == 'Normal'].index
+    attack_idx = y_val[y_val['label'] != 'Normal'].index
+    sub_attack_idx = np.random.choice(attack_idx, size=int(0.1*len(attack_idx)), replace=False)
+    val_idx = np.concatenate([normal_idx, sub_attack_idx])
+    X_val, y_val = X_val[val_idx], y_val.iloc[val_idx].reset_index(drop=True)
+
+    y_true_val, y_scores, val_loss = model_inference.inference(model, X_val, y_val)
     logger.info(f"Validating completed. Validation loss: {val_loss}")
 
     # 6. Get metrics

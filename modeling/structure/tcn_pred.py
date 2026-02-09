@@ -25,14 +25,14 @@ class TemporalBlock(nn.Module):
                                            stride=stride, padding=padding, dilation=dilation))
         self.chomp1 = Chomp1d(padding)
         self.relu1 = nn.ReLU()
-        self.dropout1 = nn.Dropout(dropout)
+        self.dropout1 = nn.Dropout1d(dropout)
 
         if T == 2:
             self.conv2 = weight_norm(nn.Conv1d(n_outputs, n_outputs, kernel_size,
                                             stride=stride, padding=padding, dilation=dilation))
             self.chomp2 = Chomp1d(padding)
             self.relu2 = nn.ReLU()
-            self.dropout2 = nn.Dropout(dropout)
+            self.dropout2 = nn.Dropout1d(dropout)
 
             self.net = nn.Sequential(self.conv1, self.chomp1, self.relu1, self.dropout1,
                                     self.conv2, self.chomp2, self.relu2, self.dropout2)
@@ -45,11 +45,11 @@ class TemporalBlock(nn.Module):
         self.init_weights()
 
     def init_weights(self):
-        self.conv1.weight.data.normal_(0, 0.01)
+        nn.init.kaiming_normal_(self.conv1.weight)
         if self.T == 2:
-            self.conv2.weight.data.normal_(0, 0.01)
+            nn.init.kaiming_normal_(self.conv2.weight)
         if self.down_sample is not None:
-            self.down_sample.weight.data.normal_(0, 0.01)
+            nn.init.kaiming_normal_(self.down_sample.weight)
 
     def forward(self, x):
         out = self.net(x)
@@ -85,15 +85,30 @@ class TCNPred(PytorchModelStructure):
         kernel_size = config.get('modeling', {}).get('structure', {}).get('kernel_size')
         dropout     = config.get('modeling', {}).get('structure', {}).get('dropout')
         T           = config.get('modeling', {}).get('structure', {}).get('T')
+        mlp         = bool(config.get('modeling', {}).get('structure', {}).get('mlp', False))
+        self.sig    = bool(config.get('modeling', {}).get('structure', {}).get('sig', True))
 
         num_channels = [hidden_size] * (num_levels)
         self.tcn = TemporalConvNet(num_inputs=input_size, num_channels=num_channels, kernel_size=kernel_size, T=T, dropout=dropout)
-        self.linear = nn.Linear(num_channels[-1], input_size)
+
+        if mlp:
+            self.head = nn.Sequential(
+                nn.Linear(num_channels[-1], hidden_size * 4),
+                nn.ReLU(),
+                nn.Dropout(dropout),
+                nn.Linear(hidden_size * 4, input_size),
+            )
+        else:
+            self.head = nn.Linear(num_channels[-1], input_size)
+
+        self.sig = nn.Sigmoid()
 
     def forward(self, x):
         # (N, seq, n_bytes)
     
         out = self.tcn(x.transpose(1, 2)).transpose(1, 2)
-        out = self.linear(out)
+        out = self.head(out)
+        if self.sig:
+            out = self.sig(out)
 
         return out

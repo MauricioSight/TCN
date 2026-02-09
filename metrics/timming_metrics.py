@@ -124,8 +124,7 @@ def pytorch_compute_model_size_mb(model):
     return size_param_buffer_mb
 
 def get_resource_metrics(model, test_data):
-    dummy_input = torch.randn_like(torch.tensor(test_data))
-    cpu_inference_time, gpu_inference_time, mps_inference_time = get_inference_time(model, dummy_input)
+    cpu_inference_time, gpu_inference_time, mps_inference_time = get_inference_time(model, test_data)
     model_size_mb = pytorch_compute_model_size_mb(model)
     resource_metrics = {
         'cpu_inference_time': cpu_inference_time,

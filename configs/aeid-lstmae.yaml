@@ -5,16 +5,15 @@ tracker:
   project: cae_lstmae_dev
 
 data_loader:
-  name: TOWIDS
-  raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap
-  raw_y_path: data/tow-ids-dataset/raw/y_train.csv
-  test_raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
-  test_raw_y_path: data/tow-ids-dataset/raw/y_test.csv
+  name: AEID
+  raw_x_path: data/autoeth-intrusion-dataset/raw/driving_02_injected.pcap
+  test_raw_x_path: data/autoeth-intrusion-dataset/raw/driving_01_injected.pcap
+  injected_path: data/autoeth-intrusion-dataset/raw/single-MPEG-frame.pcap
   number_of_bytes: 58
 
 pre_processing:
   name: sliding-window
-  processed_path: data/tow-ids-dataset/processed
+  processed_path: data/autoeth-intrusion-dataset/processed
   window_size: 40
   window_stride: 16
   save_batch_size: 10000
@@ -39,4 +38,5 @@ modeling:
     batch_size: 64
 
 metrics:
-  name: ae
+  name: natasha_ae
+  alpha: 0.5

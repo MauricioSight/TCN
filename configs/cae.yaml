@@ -13,7 +13,7 @@ data_loader:
 pre_processing:
   name: sliding-window
   processed_path: data/tow-ids-dataset/processed
-  window_size: 64
+  window_size: 128
   window_stride: 1
   save_subset: 0.1
   save_batch_size: 10000
@@ -21,7 +21,7 @@ pre_processing:
 modeling:
   structure:
     name: cae
-    in_channels: 64
+    in_channels: 128
     input_size: 58
     num_levels: 3
     hidden_size: 64

@@ -1,0 +1,24 @@
+train_config: tcn_pred
+
+framework: optuna
+algorithm: tpe
+
+n_trials: 30
+objective_metric: AUCROC
+direction: maximize
+real_time: false
+
+search_space:
+  # pre_processing-window_size: [int, 2, 512]
+  # data_loader-protocol_filter: [categorical, 'IP_UDP', 'AVTP', 'PTP', '']
+
+  modeling-training-learning_rate: [categorical, 0.001, 0.0001, 0.00001, 0.000001]
+  modeling-training-num_epochs: [categorical, 10, 250, 10]
+  modeling-training-es_patience: [categorical, 5, 10, 15, 20]
+  modeling-training-batch_size: [categorical, 16, 32, 64]
+
+  modeling-structure-num_levels: [int, 1, 2]
+  modeling-structure-hidden_size: [int, 8, 240]
+  modeling-structure-kernel_size: [int, 2, 8] # min: 2
+  modeling-structure-dropout: [float, 0.2, 0.6, 0.1]
+  modeling-structure-sig: [categorical, true, false]

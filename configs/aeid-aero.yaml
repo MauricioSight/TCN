@@ -5,17 +5,16 @@ tracker:
   project: aero_dev
 
 data_loader:
-  name: TOWIDS
-  raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_19_50_training.pcap
-  raw_y_path: data/tow-ids-dataset/raw/y_train.csv
+  name: AEID
+  raw_x_path: data/autoeth-intrusion-dataset/raw/driving_02_injected.pcap
+  injected_path: data/autoeth-intrusion-dataset/raw/single-MPEG-frame.pcap
   number_of_bytes: 58
 
 pre_processing:
   name: aero
-  processed_path: data/tow-ids-dataset/processed
+  processed_path: data/autoeth-intrusion-dataset/processed
   window_size: 2048
-  window_stride: 1
-  save_subset: 1
+  window_stride: 1024
   save_batch_size: 10000
 
   jump_payload_bytes: 32

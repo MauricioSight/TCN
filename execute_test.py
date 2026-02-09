@@ -1,5 +1,6 @@
 import logging
 
+import numpy as np
 import pandas as pd
 
 from logger.base import Logger
@@ -31,12 +32,14 @@ def main(config=None, X=None, y_true=None):
     """
 
     if config is None:
-        config = load_config(run_id="cnn_MNIST_20250829_134355")
+        config = load_config(run_id="seqwatch_TOWIDS_20260209_140718")
 
     if 'run_id' not in config:
         raise ValueError("Missing run id in config")
     
     config['phase'] = 'test' # persist testing phase
+    config['data_loader']['raw_x_path'] = config['data_loader']['test_raw_x_path']
+    config['data_loader']['raw_y_path'] = config['data_loader'].get('test_raw_y_path', None)
     run_id = config['run_id']
     run_dir = get_run_dir(run_id)
 

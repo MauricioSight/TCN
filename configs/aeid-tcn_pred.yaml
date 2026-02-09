@@ -1,0 +1,48 @@
+phase: train
+
+tracker:
+  name: 
+  project: anomaly_detector
+
+data_loader:
+  name: AEID
+  raw_x_path: data/autoeth-intrusion-dataset/raw/driving_02_injected.pcap
+  test_raw_x_path: data/autoeth-intrusion-dataset/raw/driving_01_injected.pcap
+  injected_path: data/autoeth-intrusion-dataset/raw/single-MPEG-frame.pcap
+  number_of_bytes: 58
+  protocol_filter: 'AVTP'
+
+pre_processing:
+  name: sliding-window
+  processed_path: data/autoeth-intrusion-dataset/processed
+  window_size: 32
+  window_stride: 15
+  save_batch_size: 10000
+  jump_bytes: 18
+
+modeling:
+  structure:
+    name: tcn_pred
+    input_size: 31
+    num_levels: 4
+    hidden_size: 40
+    kernel_size: 3
+    dropout: 0.2
+    T: 2
+  
+  training:
+    name: pred
+    criterion: mean_squared_error
+    learning_rate: 0.001
+    num_epochs: 250
+    es_patience: 15
+    es_delta: 0.0001
+    batch_size: 16
+    clip: 0.2
+
+  inference:
+    name: pred
+    batch_size: 64
+
+metrics:
+  name: ae

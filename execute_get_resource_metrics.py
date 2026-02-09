@@ -2,14 +2,18 @@ import logging
 
 import pandas as pd
 import torch
+import numpy as np
 
 from logger.base import Logger
 from metrics.factory import MetricsFactory
+from modeling.inference.factory import ModelingInferenceFactory
+from modeling.structure.factory import ModelingStructureFactory
 from utils.experiment_io import get_run_dir, save_run_artifacts
 from utils.config_handle import load_config
+from utils.get_device import get_device
 from utils.seed_all import seed_all
 
-def main(phase='test', run_id: str ='our_PTP', y_true=None, y_scores=None):
+def main(phase='test', run_id: str ='aero_AEID_20260128_110602', y_true=None, y_scores=None):
     """
     Get metrics from previous run_id
 
@@ -55,9 +59,22 @@ def main(phase='test', run_id: str ='our_PTP', y_true=None, y_scores=None):
     else:
         logger.info("Using provided data for training and validation.")
 
+    device = get_device()
+    logger.info(f"Using device: {device}")
+    
+    # 3.1 Model
+    logger.debug("Initializing model...")
+    model = ModelingStructureFactory().get(config, logger, device)
+    model.compile()
+
+    logger.debug("Initializing inference...")
+    model_inference = ModelingInferenceFactory().get(config, logger, device)
+
     # 3.3 Trainer
     logger.debug("Initializing metrics...")
-    metrics_handler = MetricsFactory().get(config, logger)
+    train_data = np.float32(np.random.random((1, 1, 18450))) # .rand((1, 1, 64, 58), dtype=torch.float32)
+    context={'model': model, 'model_inference': model_inference, 'train_data': train_data}
+    metrics_handler = MetricsFactory().get(config, logger, context)
 
     # 6. Get metrics
     logger.debug("Getting metrics...")

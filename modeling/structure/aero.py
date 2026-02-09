@@ -35,12 +35,20 @@ class EncoderP(nn.Module):
     def __init__(self, in_channels, num_levels, kernel_size=3):
         super(EncoderP, self).__init__()
         self.enc_layers = []
-        for i in range(num_levels):
-            in_channels = in_channels // (2 ** i)
-            out_channels = in_channels // 2
-            self.enc_layers.append(nn.Conv1d(in_channels, out_channels, kernel_size, padding=kernel_size//2))
-            if i != num_levels - 1:
-                self.enc_layers.append(nn.ReLU())
+
+        self.enc_layers.append(nn.Conv1d(in_channels, in_channels // 2, kernel_size, padding=kernel_size//2))
+        self.enc_layers.append(nn.ReLU())
+
+        self.enc_layers.append(nn.Conv1d(in_channels // 2, in_channels // 4, kernel_size, padding=kernel_size//2))
+        self.enc_layers.append(nn.ReLU())
+
+        self.enc_layers.append(nn.Conv1d(in_channels // 4, in_channels // 8, kernel_size, padding=kernel_size//2))
+        self.enc_layers.append(nn.ReLU())
+
+        self.enc_layers.append(nn.Conv1d(in_channels // 8, in_channels // 16, kernel_size, padding=kernel_size//2))
+        self.enc_layers.append(nn.ReLU())
+
+        self.enc_layers.append(nn.Conv1d(in_channels // 16, in_channels // 32, kernel_size, padding=kernel_size//2))
 
         self.encoder = nn.Sequential(*self.enc_layers)
 
@@ -51,19 +59,27 @@ class EncoderP(nn.Module):
 class DecoderP(nn.Module):
     def __init__(self, in_channels, hidden_size, input_size, num_levels, kernel_size=3):
         super(DecoderP, self).__init__()
-        self.input_size = input_size
-        self.first_channel = in_channels // (2 ** num_levels)
+        self.input_size = 9
+        self.first_channel = 64
 
-        self.fc = nn.Linear((self.first_channel * input_size) + (hidden_size * 2), self.first_channel * input_size)
+        self.fc = nn.Linear(704, self.input_size*self.first_channel)
 
         self.dec_layers = []
-        for i in range(num_levels, 0, -1):
-            in_ch = in_channels // (2 ** i)
-            out_channels = in_channels // (2 ** (i - 1))
-            self.dec_layers.append(nn.ConvTranspose1d(in_ch, out_channels, kernel_size, 
-                                                      padding=kernel_size//2))
-            if i != 1:
-                self.dec_layers.append(nn.ReLU())
+
+        self.dec_layers.append(nn.ConvTranspose1d(64, 128, kernel_size, padding=kernel_size//2))
+        self.dec_layers.append(nn.ReLU())
+
+        self.dec_layers.append(nn.ConvTranspose1d(128, 248, kernel_size, padding=kernel_size//2))
+        self.dec_layers.append(nn.ReLU())
+
+        self.dec_layers.append(nn.ConvTranspose1d(248, 512, kernel_size, padding=kernel_size//2))
+        self.dec_layers.append(nn.ReLU())
+
+        self.dec_layers.append(nn.ConvTranspose1d(512, 1024, kernel_size, padding=kernel_size//2))
+        self.dec_layers.append(nn.ReLU())
+
+        self.dec_layers.append(nn.ConvTranspose1d(1024, 2048, kernel_size, padding=kernel_size//2))
+
         self.decoder = nn.Sequential(*self.dec_layers)
 
     def forward(self, x):
@@ -92,8 +108,7 @@ class Encoder(nn.Module):
 class Decoder(nn.Module):
     def __init__(self, in_channels, hidden_size, input_size, num_levels, kernel_size=3):
         super(Decoder, self).__init__()
-        self.emb_dim = hidden_size + ((in_channels // (2**num_levels)) * input_size) + hidden_size
-        self.P_emb_dim = (in_channels // (2**num_levels))
+        self.emb_dim = 704 # hidden_size + ((in_channels // (2**num_levels)) * input_size) + hidden_size
 
         self.decoder_s = DecoderST(self.emb_dim, hidden_size)
         self.decoder_p = DecoderP(in_channels, hidden_size, input_size, num_levels, kernel_size)

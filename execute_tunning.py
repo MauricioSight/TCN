@@ -23,7 +23,7 @@ def apply_trial_to_config(config: dict, trial_params: dict) -> dict:
 
     return new_config
 
-def main(tune_run_id: str = None, config_file='tune-mlp'):
+def main(tune_run_id: str = None, config_file='tune-tcn_pred'):
     # Load the configuration
     tune_config = load_config(default_file_name=config_file, run_id=tune_run_id)
     train_config = load_config(config_name=tune_config['train_config'], default_file_name='train_config')
@@ -49,6 +49,7 @@ def main(tune_run_id: str = None, config_file='tune-mlp'):
     tune_logger.info("Initializing optimizer...")
 
     objective_metric = tune_config['objective_metric']
+    real_time        = tune_config.get('real_time', False)
  
     def objective_fn(params):
         tune_logger.info(f"Trial parameters: ")
@@ -64,7 +65,12 @@ def main(tune_run_id: str = None, config_file='tune-mlp'):
         metrics = execute_train_validation_main(config=updated_config)
 
         tune_logger.info(f"Objective metric: {metrics[objective_metric]}")
-        return metrics[objective_metric]
+        target_label = updated_config.get('modeling', {}).get('inference', {}).get('target_label', None)
+
+        obj = metrics['aucroc_per_attack'][target_label] if target_label else metrics[objective_metric]
+        if real_time:
+            return obj, metrics['resource_metrics']['cpu_inference_time']
+        return obj
     
     optimizer_factory = OptimizerFactory(tune_config)
     optimizer = optimizer_factory.get_optimizer()

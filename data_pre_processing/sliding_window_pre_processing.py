@@ -3,6 +3,8 @@ import pickle
 import time
 from typing import Counter, Tuple
 
+from tqdm import tqdm
+
 from data_loader.base import DataLoader
 import torch
 import numpy as np
@@ -21,14 +23,64 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         if not os.path.exists(path + '/batch_0.pt'):
             data, target = data_loader.load()
 
+            protocol_filter = self.config.get('data_loader', {}).get('protocol_filter')
+            jump_bytes              = self.config.get('pre_processing', {}).get('jump_bytes', None)
+            number_payload_bytes    = self.config.get('pre_processing', {}).get('number_payload_bytes', None)
+
+            if jump_bytes is not None:
+
+                if protocol_filter == 'AVTP':
+                    start       = data[:, 18:20]
+                    seq_num     = data[:, 20:21]
+                    t_uncertain = data[:, 21:22]
+                    # stream_id   = (data[:, 22:30].sum(1) / 8).reshape(-1, 1)
+                    stream_id   = data[:, 22:30]
+                    timestamp   = (data[:, 30:34].sum(1) / 4).reshape(-1, 1)
+                    gateway     = (data[:, 34:38].sum(1) / 4).reshape(-1, 1)
+                    length      = (data[:, 38:40].sum(1) / 2).reshape(-1, 1)
+                    middle      = data[:, 40:47]
+                    cip         = (data[:, 47:50].sum(1) / 3).reshape(-1, 1)
+                    payload     = data[:, 50:]
+                    data = np.concat([start, seq_num, t_uncertain, stream_id, timestamp, gateway, length, middle, cip, payload], axis=1)
+
+                if protocol_filter == 'IP_UDP':
+                    final_payload = jump_bytes + number_payload_bytes
+                    data = data[:, jump_bytes:final_payload+1]
+                    src_port    = (data[:, 0:2].sum(1) / 2).reshape(-1, 1)
+                    dst_port    = (data[:, 2:4].sum(1) / 2).reshape(-1, 1)
+                    length      = (data[:, 4:6].sum(1) / 2).reshape(-1, 1)
+                    chk_sum     = (data[:, 6:8].sum(1) / 2).reshape(-1, 1)
+                    payload     = data[:, 8:]
+                    data = np.concat([src_port, dst_port, length, chk_sum, payload], axis=1)
+
+                if protocol_filter == 'PTP':
+                    start               = data[:, :16]
+                    message_length      = data[:, 16:18]
+                    middle              = data[:, 18:22]
+                    correction_ns       = data[:, 22:28]
+                    correction_ns_sub   = data[:, 28:30]
+                    type                = data[:, 30:34]
+                    clock_id            = data[:, 34:42]
+                    source_port_id      = data[:, 42:44]
+                    sequence_id         = data[:, 44:46]
+                    origin_timestamp_s  = data[:, 46:54]
+                    origin_timestamp_n  = data[:, 54:58]
+
+                    data = np.concat([start, message_length, middle, correction_ns, correction_ns_sub, 
+                                      type, clock_id, source_port_id, sequence_id, origin_timestamp_s, 
+                                      origin_timestamp_n], axis=1)
+
+
+
             (X_view, starts), y = self.process(data, target)
 
             save_subset = self.config.get('pre_processing', {}).get('save_subset')
             if save_subset is not None:
-                self.logger.warning(f">> Saving a subset of {save_subset}%")
+                self.logger.warning(f">> Saving a subset of {save_subset*100}%")
                 self.logger.warning(f">> Original shape: {starts.shape}")
                 starts = np.random.choice(starts, size=int(save_subset*len(starts)), replace=False)
                 self.logger.warning(f">> Final shape: {starts.shape}")
+                self.logger.error(f">> NOT SAVING SUBSET!!!")
                 y = y.iloc[starts].reset_index(drop=True)
 
             self.save((X_view, starts), y)
@@ -159,7 +211,7 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
         # Add counts column by column (window_size is small, so this is fast and memory-light)
         n_rows = desc_windows.shape[0]
         row_idx = np.arange(n_rows)
-        for j in range(desc_windows.shape[1]):
+        for j in tqdm(range(desc_windows.shape[1])):
             col = codes[:, j]
             valid = col >= 0
             np.add.at(counts, (row_idx[valid], col[valid]), 1)
@@ -228,27 +280,6 @@ class SlidingWindowPrePrecessing(DataPrePrecessing):
 
         y = list(zip(seq_y, start_pkt_idx.astype(int), desc_windows))
         y = pd.DataFrame(y, columns=['label', 'start_idx', 'desc_windows'])
-
-        # attack_range = {
-        #     'CAN DoS': [140311, 318977],
-        #     'CAN Replay': [376324, 477909],
-        #     'Switch MAC Flooding': [566332, 681511],
-        #     'Frame Injection': [775561, 921298],
-        #     'PTP Sync': [994521, 1196497],
-        #     'Normal':	[1, 1203737],
-        # }
-        
-        # TODO: REMOVE THIS TO OTHERS PROTOCOL_FILTER BESIDES AVTP
-        # if self.config.get('phase') == 'train':
-        #     valid_starts_idx = y[
-        #         # (y['start_idx'] < 140311) |                                 # AVTP, OTHER
-        #         (y['start_idx'] < 522120) |                               # UDP
-        #         ((y['start_idx'] >= 522120) & (y['start_idx'] < 728536)) |   # OTHER
-        #         # ((y['start_idx'] > 728536) & (y['start_idx'] < 957909)) | # AVTP
-        #         (y['start_idx'] > 957909)                                   # OTHER
-        #         # (y['start_idx'] > 1196497 + 3620)                         # AVTP, UDP
-        #     ].index
-        #     starts = starts[valid_starts_idx]
 
         self.logger.info("Class distribution:")
         self.logger.info(Counter(seq_y))
