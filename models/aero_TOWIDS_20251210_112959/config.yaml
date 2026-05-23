@@ -1,0 +1,41 @@
+data_loader:
+  name: TOWIDS
+  number_of_bytes: 58
+  raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
+  raw_y_path: data/tow-ids-dataset/raw/y_test.csv
+metrics:
+  name: aero
+  percentile: 95
+modeling:
+  inference:
+    batch_size: 64
+    name: aero
+  structure:
+    hidden_size: 64
+    in_channels: 2048
+    input_size: 9
+    kernel_size: 3
+    name: aero
+    num_levels: 8
+  training:
+    ae_num_epochs: 20
+    batch_size: 16
+    criterion: mean_squared_error
+    ft_num_epochs: 150
+    learning_rate: 0.0001
+    name: aero
+    pm_num_epochs: 10
+phase: test
+pre_processing:
+  jump_payload_bytes: 32
+  name: aero
+  number_payload_bytes: 9
+  processed_path: data/tow-ids-dataset/processed
+  save_batch_size: 10000
+  save_subset: 1
+  window_size: 2048
+  window_stride: 1
+run_id: aero_TOWIDS_20251210_112959
+tracker:
+  name: null
+  project: aero_dev

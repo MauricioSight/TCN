@@ -16,7 +16,7 @@ data_loader:
 pre_processing:
   name: sliding-window
   processed_path: data/tow-ids-dataset/processed
-  window_size: 64
+  window_size: 32
   window_stride: 1
   save_batch_size: 10000
 

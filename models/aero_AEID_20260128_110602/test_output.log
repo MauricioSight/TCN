@@ -1,0 +1,90 @@
+2026-01-28 12:02:24,570 | INFO | Initiating testing...
+2026-01-28 12:02:24,570 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-01-28 12:02:25,607 | INFO | Initializing pre processing...
+2026-01-28 12:02:25,608 | INFO | Loaded data from cash
+2026-01-28 12:02:26,368 | INFO | Generating features using AERO...
+2026-01-28 12:04:50,044 | INFO | Feature generation complete.
+2026-01-28 12:04:50,080 | INFO | Generated features shape: (60541, 18450)
+2026-01-28 12:04:50,105 | INFO | Generated labels: label
+Replay    57710
+Normal     2831
+Name: count, dtype: int64
+2026-01-28 12:04:50,106 | INFO | Saving data in cash file in batchs...
+2026-01-28 12:04:55,737 | INFO | Batch 1/7 saved to data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None/batch_0.pt
+2026-01-28 12:04:59,452 | INFO | Batch 2/7 saved to data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None/batch_1.pt
+2026-01-28 12:05:03,759 | INFO | Batch 3/7 saved to data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None/batch_2.pt
+2026-01-28 12:05:09,978 | INFO | Batch 4/7 saved to data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None/batch_3.pt
+2026-01-28 12:05:16,862 | INFO | Batch 5/7 saved to data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None/batch_4.pt
+2026-01-28 12:05:21,798 | INFO | Batch 6/7 saved to data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None/batch_5.pt
+2026-01-28 12:05:21,942 | INFO | Batch 7/7 saved to data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None/batch_6.pt
+2026-01-28 12:05:21,944 | INFO | Initializing finished in 176.33616018295288s
+2026-01-28 12:05:21,945 | INFO | Loading cached data from: data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None
+2026-01-28 12:05:29,403 | INFO | Data loaded successfully.
+2026-01-28 12:05:29,648 | INFO | Using device: mps
+2026-01-28 12:05:33,220 | INFO | Testing labels: 
+label
+Replay    57710
+Normal     2831
+Name: count, dtype: int64
+2026-01-28 12:05:33,577 | INFO | Test loss: 0.000020 	[0/60541 (0%)]
+2026-01-28 12:06:20,070 | INFO | Testing completed. Testing loss: 0.00011458215700868269
+2026-01-28 12:06:20,263 | INFO | Metrics 
+{
+    "AUCROC": 0.8792008649197338,
+    "Accuracy": 0.9532052658528931,
+    "TPR": 0.966089066019754,
+    "FPR": 0.30943129636170963,
+    "Precision": 0.9845308940648784,
+    "F1-score": 0.9752228023683958,
+    "optimal_threshold": 9.283591680286918e-06,
+    "mean": 5.716331725125201e-05,
+    "std": 0.00019449088722467422,
+    "tpr_per_attack": {
+        "Replay": 0.966089066019754,
+        "Normal": 0.6905687036382904,
+        "Attack": 0.966089066019754
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.8792008649197338
+    }
+}
+2026-01-28 12:06:20,264 | INFO | Execution completed.
+2026-01-28 12:06:22,462 | INFO | Run artifacts saved.
+2026-01-28 12:06:22,462 | INFO | Testing completed.
+2026-01-28 12:28:02,635 | INFO | Initiating testing...
+2026-01-28 12:28:02,635 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-01-28 12:28:03,668 | INFO | Initializing pre processing...
+2026-01-28 12:28:03,668 | INFO | Initializing finished in 2.8133392333984375e-05s
+2026-01-28 12:28:03,668 | INFO | Loading cached data from: data/autoeth-intrusion-dataset/processed/test_aero_wsize_2048_wstride_16_n_58_None
+2026-01-28 12:28:10,111 | INFO | Data loaded successfully.
+2026-01-28 12:28:10,335 | INFO | Using device: mps
+2026-01-28 12:28:13,800 | INFO | Testing labels: 
+label
+Replay    57710
+Normal     2831
+Name: count, dtype: int64
+2026-01-28 12:28:14,131 | INFO | Test loss: 0.000020 	[0/60541 (0%)]
+2026-01-28 12:28:58,646 | INFO | Testing completed. Testing loss: 0.00011458215700868269
+2026-01-28 12:28:58,906 | INFO | Metrics 
+{
+    "AUCROC": 0.8792008649197338,
+    "Accuracy": 0.9532052658528931,
+    "TPR": 0.966089066019754,
+    "FPR": 0.30943129636170963,
+    "Precision": 0.9845308940648784,
+    "F1-score": 0.9752228023683958,
+    "optimal_threshold": 9.283591680286918e-06,
+    "mean": 5.716331725125201e-05,
+    "std": 0.00019449088722467422,
+    "tpr_per_attack": {
+        "Replay": 0.966089066019754,
+        "Normal": 0.6905687036382904,
+        "Attack": 0.966089066019754
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.8792008649197338
+    }
+}
+2026-01-28 12:28:58,908 | INFO | Execution completed.
+2026-01-28 12:29:01,136 | INFO | Run artifacts saved.
+2026-01-28 12:29:01,136 | INFO | Testing completed.

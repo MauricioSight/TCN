@@ -1,0 +1,93 @@
+2026-02-02 16:54:59,421 | INFO | Initiating get metrics...
+2026-02-02 16:54:59,421 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 16:55:13,334 | INFO | Initiating get metrics...
+2026-02-02 16:55:13,334 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 16:55:13,337 | INFO | Data loaded successfully.
+2026-02-02 16:55:13,349 | INFO | Using device: mps
+2026-02-02 17:01:03,052 | INFO | Initiating get metrics...
+2026-02-02 17:01:03,052 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:01:03,055 | INFO | Data loaded successfully.
+2026-02-02 17:01:03,067 | INFO | Using device: mps
+2026-02-02 17:01:20,022 | INFO | Initiating get metrics...
+2026-02-02 17:01:20,022 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:01:20,024 | INFO | Data loaded successfully.
+2026-02-02 17:01:20,036 | INFO | Using device: mps
+2026-02-02 17:01:37,192 | INFO | Initiating get metrics...
+2026-02-02 17:01:37,192 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:01:37,194 | INFO | Data loaded successfully.
+2026-02-02 17:01:37,207 | INFO | Using device: mps
+2026-02-02 17:02:12,990 | INFO | Initiating get metrics...
+2026-02-02 17:02:12,990 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:02:12,992 | INFO | Data loaded successfully.
+2026-02-02 17:02:13,004 | INFO | Using device: mps
+2026-02-02 17:03:41,942 | INFO | Initiating get metrics...
+2026-02-02 17:03:41,942 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:03:41,944 | INFO | Data loaded successfully.
+2026-02-02 17:03:41,956 | INFO | Using device: mps
+2026-02-02 17:04:29,011 | INFO | Initiating get metrics...
+2026-02-02 17:04:29,011 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:04:29,013 | INFO | Data loaded successfully.
+2026-02-02 17:04:29,025 | INFO | Using device: mps
+2026-02-02 17:05:08,230 | INFO | Initiating get metrics...
+2026-02-02 17:05:08,230 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:05:08,231 | INFO | Data loaded successfully.
+2026-02-02 17:05:08,244 | INFO | Using device: mps
+2026-02-02 17:13:44,006 | INFO | Initiating get metrics...
+2026-02-02 17:13:44,006 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:13:44,009 | INFO | Data loaded successfully.
+2026-02-02 17:13:44,022 | INFO | Using device: mps
+2026-02-02 17:17:20,091 | INFO | Initiating get metrics...
+2026-02-02 17:17:20,091 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:17:20,093 | INFO | Data loaded successfully.
+2026-02-02 17:17:20,106 | INFO | Using device: mps
+2026-02-02 17:19:10,924 | INFO | Initiating get metrics...
+2026-02-02 17:19:10,925 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:19:10,926 | INFO | Data loaded successfully.
+2026-02-02 17:19:10,939 | INFO | Using device: mps
+2026-02-02 17:19:22,280 | INFO | Initiating get metrics...
+2026-02-02 17:19:22,280 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:19:22,282 | INFO | Data loaded successfully.
+2026-02-02 17:19:22,295 | INFO | Using device: mps
+2026-02-02 17:19:29,484 | INFO | Initiating get metrics...
+2026-02-02 17:19:29,485 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:19:29,486 | INFO | Data loaded successfully.
+2026-02-02 17:19:29,498 | INFO | Using device: mps
+2026-02-02 17:26:02,954 | INFO | Initiating get metrics...
+2026-02-02 17:26:02,955 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2026-02-02 17:26:02,958 | INFO | Data loaded successfully.
+2026-02-02 17:26:02,970 | INFO | Using device: mps
+2026-02-02 17:26:04,999 | INFO | Metrics 
+{
+    "AUCROC": 0.9825993555316863,
+    "Accuracy": 0.8704663212435233,
+    "TPR": 0.9894736842105263,
+    "FPR": 0.24489795918367346,
+    "Precision": 0.7966101694915254,
+    "F1-score": 0.8826291079812206,
+    "optimal_threshold": 4.466959217097611e-05,
+    "mean": 5.2285009587649256e-05,
+    "std": 0.00026765515212900937,
+    "tpr_per_attack": {
+        "CAN Replay": 0.9607843137254902,
+        "CAN DoS": 1.0,
+        "PTP Sync": 1.0,
+        "Frame Injection": 1.0,
+        "Switch MAC Flooding": 1.0,
+        "Normal": 0.7551020408163265,
+        "Attack": 0.9894736842105263
+    },
+    "aucroc_per_attack": {
+        "CAN DoS": 0.9941860465116279,
+        "PTP Sync": 0.9901987110633726,
+        "Frame Injection": 0.9944196428571428,
+        "CAN Replay": 0.9551820728291317,
+        "Switch MAC Flooding": 0.9915620094191523
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 2.5905847549438477,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 66.7231216430664
+    }
+}
+2026-02-02 17:26:04,999 | INFO | Execution completed.

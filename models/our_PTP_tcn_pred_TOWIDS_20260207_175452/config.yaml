@@ -1,0 +1,42 @@
+data_loader:
+  name: TOWIDS
+  number_of_bytes: 58
+  protocol_filter: PTP
+  raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
+  raw_y_path: data/tow-ids-dataset/raw/y_test.csv
+  test_raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
+  test_raw_y_path: data/tow-ids-dataset/raw/y_test.csv
+metrics:
+  name: ae
+modeling:
+  inference:
+    batch_size: 64
+    name: pred
+  structure:
+    T: 2
+    dropout: 0.2
+    hidden_size: 40
+    input_size: 58
+    kernel_size: 3
+    name: tcn_pred
+    num_levels: 4
+  training:
+    batch_size: 16
+    clip: 0.2
+    criterion: mean_squared_error
+    es_delta: 0.0001
+    es_patience: 15
+    learning_rate: 0.001
+    name: pred
+    num_epochs: 250
+phase: test
+pre_processing:
+  name: sliding-window
+  processed_path: data/tow-ids-dataset/processed
+  save_batch_size: 10000
+  window_size: 64
+  window_stride: 1
+run_id: our_PTP_tcn_pred_TOWIDS_20260207_175452
+tracker:
+  name: null
+  project: w_sizes-fixed_params

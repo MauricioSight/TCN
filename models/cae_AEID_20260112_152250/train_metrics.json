@@ -1,0 +1,25 @@
+{
+    "AUCROC": 0.9842423038378062,
+    "Accuracy": 0.9651421719767044,
+    "TPR": 0.890587835541964,
+    "FPR": 0.00973319592350853,
+    "Precision": 0.9685883222468589,
+    "F1-score": 0.9279518498849354,
+    "optimal_threshold": 0.010235650464892387,
+    "mean": 0.0023552612401545048,
+    "std": 0.002544398419559002,
+    "tpr_per_attack": {
+        "Replay": 0.890587835541964,
+        "Normal": 0.9902668040764915,
+        "Attack": 0.890587835541964
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.9842423038378062
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 1.0977444648742676,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 9.84560775756836
+    }
+}

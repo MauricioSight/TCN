@@ -11,6 +11,7 @@ class OptunaOptimizer(BaseOptimizer):
         self.search_space = config.get("search_space")
         self.direction = config.get("direction", "maximize")
         self.n_trials = config.get("n_trials", 20)
+        self.real_time = config.get("real_time", False)
 
         optuna_logger = optuna.logging.get_logger("optuna")
         handler = logging.FileHandler(f"{self.run_dir}/optuna.log")
@@ -60,8 +61,12 @@ class OptunaOptimizer(BaseOptimizer):
 
         storage = self.run_dir / "optuna.db"
         storage = "sqlite:///" + str(storage)
-        study = optuna.create_study(study_name=self.run_id, direction=self.direction, sampler=self._get_sampler(), 
-                                    storage=storage, load_if_exists=True)
+        study = optuna.create_study(study_name=self.run_id, sampler=self._get_sampler(), storage=storage, load_if_exists=True, 
+                                    direction=(self.direction if not self.real_time else None), 
+                                    directions=([self.direction, 'minimize'] if self.real_time else None))
 
         study.optimize(wrapped_objective, n_trials=self.n_trials)
-        return study.best_trial
+        try:
+            return study.best_trial
+        except:
+            pass

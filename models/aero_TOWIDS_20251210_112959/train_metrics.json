@@ -1,0 +1,31 @@
+{
+    "AUCROC": 0.9984643734643734,
+    "Accuracy": 0.940677966101695,
+    "TPR": 1.0,
+    "FPR": 0.1590909090909091,
+    "Precision": 0.9135802469135802,
+    "F1-score": 0.9548387096774192,
+    "optimal_threshold": 4.46695921709761e-05,
+    "mean": 3.216566619812511e-05,
+    "std": 3.281564931967296e-05,
+    "tpr_per_attack": {
+        "PTP Sync": 1.0,
+        "Frame Injection": 1.0,
+        "CAN DoS": 1.0,
+        "Switch MAC Flooding": 1.0,
+        "CAN Replay": 1.0
+    },
+    "aucroc_per_attack": {
+        "Frame Injection": 1.0,
+        "CAN Replay": 0.9924242424242424,
+        "PTP Sync": 0.9970355731225297,
+        "Switch MAC Flooding": 1.0,
+        "CAN DoS": 1.0
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 2.7788805961608887,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 66.7231216430664
+    }
+}

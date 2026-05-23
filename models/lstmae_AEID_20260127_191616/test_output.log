@@ -1,0 +1,48 @@
+2026-01-28 10:32:38,543 | INFO | Initiating testing...
+2026-01-28 10:32:38,544 | INFO | [ RUN ID: lstmae_AEID_20260127_191616 ]
+2026-01-28 10:32:39,394 | INFO | Initializing pre processing...
+2026-01-28 10:32:39,397 | INFO | Loaded data from cash
+2026-01-28 10:32:40,792 | INFO | Class distribution:
+2026-01-28 10:32:40,797 | INFO | Counter({'Normal': 43898, 'Replay': 16769})
+2026-01-28 10:32:40,801 | INFO | Saving data in cash file in batchs...
+2026-01-28 10:32:41,327 | INFO | Batch 1/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_40_wstride_16_n_58_None/batch_0.pt
+2026-01-28 10:32:41,770 | INFO | Batch 2/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_40_wstride_16_n_58_None/batch_1.pt
+2026-01-28 10:32:42,184 | INFO | Batch 3/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_40_wstride_16_n_58_None/batch_2.pt
+2026-01-28 10:32:42,958 | INFO | Batch 4/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_40_wstride_16_n_58_None/batch_3.pt
+2026-01-28 10:32:43,371 | INFO | Batch 5/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_40_wstride_16_n_58_None/batch_4.pt
+2026-01-28 10:32:43,784 | INFO | Batch 6/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_40_wstride_16_n_58_None/batch_5.pt
+2026-01-28 10:32:43,825 | INFO | Batch 7/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_40_wstride_16_n_58_None/batch_6.pt
+2026-01-28 10:32:43,850 | INFO | Initializing finished in 4.455067157745361s
+2026-01-28 10:32:43,852 | INFO | Loading cached data from: data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_40_wstride_16_n_58_None
+2026-01-28 10:32:44,688 | INFO | Data loaded successfully.
+2026-01-28 10:32:44,845 | INFO | Using device: mps
+2026-01-28 10:32:48,528 | INFO | Testing labels: 
+label
+Normal    43898
+Replay    16769
+Name: count, dtype: int64
+2026-01-28 10:32:48,721 | INFO | Test loss: 0.003765 	[0/60667 (0%)]
+2026-01-28 10:32:56,182 | INFO | Testing completed. Testing loss: 0.02736109892841633
+2026-01-28 10:32:56,850 | INFO | Metrics 
+{
+    "AUCROC": 0.9887110604100989,
+    "Accuracy": 0.9685331399278025,
+    "TPR": 0.8861589838392272,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.9396439975971419,
+    "optimal_threshold": 0.017736157402396,
+    "mean": 0.004246503580361605,
+    "std": 0.0016144142718985677,
+    "tpr_per_attack": {
+        "Replay": 0.8861589838392272,
+        "Normal": 1.0,
+        "Attack": 0.8861589838392272
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.9887110604100989
+    }
+}
+2026-01-28 10:32:56,851 | INFO | Execution completed.
+2026-01-28 10:36:41,512 | INFO | Run artifacts saved.
+2026-01-28 10:36:41,515 | INFO | Testing completed.

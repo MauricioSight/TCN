@@ -1,0 +1,59 @@
+2026-01-26 15:43:14,667 | INFO | Initiating testing...
+2026-01-26 15:43:14,667 | INFO | [ RUN ID: lstmae_TOWIDS_20251011_092054 ]
+2026-01-26 15:43:15,297 | INFO | Initializing pre processing...
+2026-01-26 15:43:15,298 | INFO | Loading raw data...
+2026-01-26 15:44:36,653 | INFO | Loading raw data finished in 81.36s with shape of (791611, 58)
+2026-01-26 15:44:36,980 | INFO | Class distribution:
+2026-01-26 15:44:36,983 | INFO | Counter({'Normal': 27375, 'CAN Replay': 6445, 'CAN DoS': 5421, 'PTP Sync': 4767, 'Switch MAC Flooding': 3173, 'Frame Injection': 2291})
+2026-01-26 15:44:36,984 | INFO | Saving data in cash file in batchs...
+2026-01-26 15:44:37,620 | INFO | Batch 1/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_None/batch_0.pt
+2026-01-26 15:44:38,234 | INFO | Batch 2/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_None/batch_1.pt
+2026-01-26 15:44:38,949 | INFO | Batch 3/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_None/batch_2.pt
+2026-01-26 15:44:39,491 | INFO | Batch 4/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_None/batch_3.pt
+2026-01-26 15:44:39,981 | INFO | Batch 5/5 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_None/batch_4.pt
+2026-01-26 15:44:39,994 | INFO | Initializing finished in 84.6965479850769s
+2026-01-26 15:44:39,994 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_None
+2026-01-26 15:44:40,994 | INFO | Data loaded successfully.
+2026-01-26 15:44:41,137 | INFO | Using device: mps
+2026-01-26 15:44:45,577 | INFO | Testing labels: 
+label
+Normal                 27375
+CAN Replay              6445
+CAN DoS                 5421
+PTP Sync                4767
+Switch MAC Flooding     3173
+Frame Injection         2291
+Name: count, dtype: int64
+2026-01-26 15:44:45,759 | INFO | Test loss: 0.025383 	[0/49472 (0%)]
+2026-01-26 15:44:53,583 | INFO | Testing completed. Testing loss: 0.04069607174276997
+2026-01-26 15:44:54,438 | INFO | Metrics 
+{
+    "AUCROC": 0.741193273410738,
+    "Accuracy": 0.6559872250970246,
+    "TPR": 0.2316151513780151,
+    "FPR": 0.0014611872146118722,
+    "Precision": 0.9922450562233424,
+    "F1-score": 0.3755641166758393,
+    "optimal_threshold": 0.074515208601951,
+    "mean": 0.031744033098220825,
+    "std": 0.005920935422182083,
+    "tpr_per_attack": {
+        "CAN Replay": 0.0001551590380139643,
+        "CAN DoS": 0.0,
+        "PTP Sync": 0.9729389553178099,
+        "Switch MAC Flooding": 0.11030570438071226,
+        "Frame Injection": 0.056307289393278045,
+        "Normal": 0.9985388127853881,
+        "Attack": 0.2316151513780151
+    },
+    "aucroc_per_attack": {
+        "CAN DoS": 0.37320344777918446,
+        "Switch MAC Flooding": 0.9953870715670318,
+        "CAN Replay": 0.7458887148368174,
+        "PTP Sync": 0.9994570204401837,
+        "Frame Injection": 0.709290401790608
+    }
+}
+2026-01-26 15:44:54,441 | INFO | Execution completed.
+2026-01-26 15:45:14,131 | INFO | Run artifacts saved.
+2026-01-26 15:45:14,137 | INFO | Testing completed.

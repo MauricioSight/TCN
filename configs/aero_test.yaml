@@ -1,0 +1,48 @@
+phase: test
+
+tracker:
+  name: 
+  project: aero_dev
+
+data_loader:
+  name: TOWIDS
+  raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
+  raw_y_path: data/tow-ids-dataset/raw/y_test.csv
+  number_of_bytes: 58
+
+pre_processing:
+  name: aero
+  processed_path: data/tow-ids-dataset/processed
+  window_size: 2048
+  window_stride: 1
+  save_subset: 1
+  save_batch_size: 10000
+
+  jump_payload_bytes: 32
+  number_payload_bytes: 9
+
+modeling:
+  structure:
+    name: aero
+    in_channels: 2048
+    hidden_size: 64
+    input_size: 9
+    num_levels: 8
+    kernel_size: 3
+  
+  training:
+    name: aero
+    criterion: mean_squared_error
+    learning_rate: 0.0001
+    ae_num_epochs: 20
+    pm_num_epochs: 10
+    ft_num_epochs: 150
+    batch_size: 16
+
+  inference:
+    name: aero
+    batch_size: 64
+
+metrics:
+  name: aero
+  percentile: 95

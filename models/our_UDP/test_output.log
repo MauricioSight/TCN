@@ -1,0 +1,51 @@
+2025-12-21 20:07:51,154 | INFO | Initiating testing...
+2025-12-21 20:07:51,155 | INFO | [ RUN ID: tcn_pred_TOWIDS_20251221_200248 ]
+2025-12-21 20:07:52,010 | INFO | Initializing pre processing...
+2025-12-21 20:07:52,010 | INFO | Loaded data from cash
+2025-12-21 20:07:53,133 | INFO | Class distribution:
+2025-12-21 20:07:53,137 | INFO | Counter({'Normal': 22732, 'CAN Replay': 5076, 'CAN DoS': 4513, 'Switch MAC Flooding': 2578})
+2025-12-21 20:07:53,137 | INFO | Saving data in cash file in batchs...
+2025-12-21 20:07:53,615 | INFO | Batch 1/4 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_IP_UDP/batch_0.pt
+2025-12-21 20:07:54,001 | INFO | Batch 2/4 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_IP_UDP/batch_1.pt
+2025-12-21 20:07:54,376 | INFO | Batch 3/4 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_IP_UDP/batch_2.pt
+2025-12-21 20:07:54,564 | INFO | Batch 4/4 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_IP_UDP/batch_3.pt
+2025-12-21 20:07:54,576 | INFO | Initializing finished in 2.566541910171509s
+2025-12-21 20:07:54,577 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_16_n_58_IP_UDP
+2025-12-21 20:07:54,956 | INFO | Data loaded successfully.
+2025-12-21 20:07:55,002 | INFO | Using device: mps
+2025-12-21 20:07:58,834 | INFO | Testing labels: 
+label
+Normal                 22732
+CAN Replay              5076
+CAN DoS                 4513
+Switch MAC Flooding     2578
+Name: count, dtype: int64
+2025-12-21 20:07:59,033 | INFO | Test loss: 0.151400 	[0/34899 (0%)]
+2025-12-21 20:08:04,481 | INFO | Testing completed. Testing loss: 0.15548956699860403
+2025-12-21 20:08:04,675 | INFO | Metrics 
+{
+    "AUCROC": 0.9999035108234268,
+    "Accuracy": 0.9987105647726295,
+    "TPR": 0.999013725651352,
+    "FPR": 0.0014516980468062643,
+    "Precision": 0.9972924187725631,
+    "F1-score": 0.9981523301170191,
+    "optimal_threshold": 0.159604176878929,
+    "mean": 0.12836214900016785,
+    "std": 0.009841526858508587,
+    "tpr_per_attack": {
+        "CAN Replay": 0.9988179669030733,
+        "CAN DoS": 0.9991136716153335,
+        "Switch MAC Flooding": 0.9992242048099301,
+        "Normal": 0.9985483019531938,
+        "Attack": 0.999013725651352
+    },
+    "aucroc_per_attack": {
+        "Switch MAC Flooding": 0.9998305208994418,
+        "CAN Replay": 0.9999045044966345,
+        "CAN DoS": 0.9999440878539674
+    }
+}
+2025-12-21 20:08:04,676 | INFO | Execution completed.
+2025-12-21 20:08:08,527 | INFO | Run artifacts saved.
+2025-12-21 20:08:08,527 | INFO | Testing completed.

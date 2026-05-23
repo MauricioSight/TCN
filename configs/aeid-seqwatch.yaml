@@ -1,0 +1,43 @@
+phase: train
+
+tracker:
+  name: 
+  project: seqwatch_lstmae_dev
+
+data_loader:
+  name: AEID
+  raw_x_path: data/autoeth-intrusion-dataset/raw/driving_02_injected.pcap
+  test_raw_x_path: data/autoeth-intrusion-dataset/raw/driving_01_injected.pcap
+  injected_path: data/autoeth-intrusion-dataset/raw/single-MPEG-frame.pcap
+  number_of_bytes: 58
+
+pre_processing:
+  name: sliding-window
+  processed_path: data/autoeth-intrusion-dataset/processed
+  window_size: 40
+  window_stride: 20
+  save_batch_size: 10000
+
+modeling:
+  structure:
+    name: seqwatch
+    input_size: 58
+    dropout: 0.5
+    num_levels: 2
+    hidden_size: 16
+  
+  training:
+    name: ae
+    criterion: mean_squared_error
+    learning_rate: 0.001
+    num_epochs: 250
+    es_patience: 5
+    es_delta: 0.0001
+    batch_size: 64
+
+  inference:
+    name: ae
+    batch_size: 64
+
+metrics:
+  name: ae

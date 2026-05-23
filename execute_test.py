@@ -32,7 +32,7 @@ def main(config=None, X=None, y_true=None):
     """
 
     if config is None:
-        config = load_config(run_id="seqwatch_TOWIDS_20260209_140718")
+        config = load_config(run_id="tcn_pred_TOWIDS_20260224_152701")
 
     if 'run_id' not in config:
         raise ValueError("Missing run id in config")

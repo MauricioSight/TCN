@@ -1,0 +1,147 @@
+2025-12-10 20:08:41,275 | INFO | Initiating get metrics...
+2025-12-10 20:08:41,276 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2025-12-10 20:08:44,521 | INFO | Data loaded successfully.
+2025-12-10 20:08:44,716 | INFO | Using device: mps
+2025-12-10 20:09:27,506 | INFO | Initiating get metrics...
+2025-12-10 20:09:27,507 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2025-12-10 20:09:30,551 | INFO | Data loaded successfully.
+2025-12-10 20:09:30,651 | INFO | Using device: mps
+2025-12-10 20:09:57,209 | INFO | Initiating get metrics...
+2025-12-10 20:09:57,210 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2025-12-10 20:09:59,715 | INFO | Data loaded successfully.
+2025-12-10 20:10:00,032 | INFO | Using device: mps
+2025-12-10 20:12:48,972 | INFO | Initiating get metrics...
+2025-12-10 20:12:48,973 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2025-12-10 20:12:51,939 | INFO | Data loaded successfully.
+2025-12-10 20:12:52,039 | INFO | Using device: mps
+2025-12-10 20:13:12,402 | INFO | Initiating get metrics...
+2025-12-10 20:13:12,403 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2025-12-10 20:13:14,864 | INFO | Data loaded successfully.
+2025-12-10 20:13:14,908 | INFO | Using device: mps
+2025-12-10 20:15:17,541 | INFO | Initiating get metrics...
+2025-12-10 20:15:17,542 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2025-12-10 20:15:20,551 | INFO | Data loaded successfully.
+2025-12-10 20:15:20,593 | INFO | Using device: mps
+2025-12-10 20:15:29,828 | INFO | Metrics 
+{
+    "AUCROC": 0.8646719305393595,
+    "Accuracy": 0.6778963984547003,
+    "TPR": 0.4308990825688073,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.6022773902338941,
+    "optimal_threshold": 0.030491974204778,
+    "mean": 0.012254172004759312,
+    "std": 0.0015304569387808442,
+    "tpr_per_attack": {
+        "PTP Sync": 0.997366341848828,
+        "CAN DoS": 0.0,
+        "Frame Injection": 0.0,
+        "Switch MAC Flooding": 0.9990412272291467,
+        "CAN Replay": 0.0,
+        "Normal": 1.0,
+        "Attack": 0.4308990825688073
+    },
+    "aucroc_per_attack": {
+        "Switch MAC Flooding": 0.9998505129360912,
+        "Frame Injection": 0.3621230175453132,
+        "PTP Sync": 0.999953870650683,
+        "CAN DoS": 0.8719109918194572,
+        "CAN Replay": 0.9939608425685583
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 11.940900802612305,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 256.22610092163086
+    }
+}
+2025-12-10 20:15:29,829 | INFO | Execution completed.
+2026-02-02 16:48:17,607 | INFO | Initiating get metrics...
+2026-02-02 16:48:17,607 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2026-02-02 16:48:49,439 | INFO | Initiating get metrics...
+2026-02-02 16:48:49,439 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2026-02-02 16:49:04,330 | INFO | Initiating get metrics...
+2026-02-02 16:49:04,330 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2026-02-02 16:49:20,501 | INFO | Data loaded successfully.
+2026-02-02 16:49:20,613 | INFO | Using device: mps
+2026-02-02 16:49:28,345 | INFO | Metrics 
+{
+    "AUCROC": 0.6693723257049431,
+    "Accuracy": 0.6919220506185817,
+    "TPR": 0.34154244977316917,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.5091787439613527,
+    "optimal_threshold": 0.030491974204778,
+    "mean": 0.014031704515218735,
+    "std": 0.0014745271764695644,
+    "tpr_per_attack": {
+        "CAN Replay": 0.0,
+        "CAN DoS": 0.0,
+        "PTP Sync": 0.9974869109947644,
+        "Frame Injection": 0.0,
+        "Switch MAC Flooding": 0.9889833175952156,
+        "Normal": 1.0,
+        "Attack": 0.34154244977316917
+    },
+    "aucroc_per_attack": {
+        "CAN DoS": 0.08869585586083975,
+        "Switch MAC Flooding": 0.9996618005671797,
+        "PTP Sync": 0.9998617656249098,
+        "CAN Replay": 0.9929086057804252,
+        "Frame Injection": 0.19822669191232745
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 10.073668956756592,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 256.22610092163086
+    }
+}
+2026-02-02 16:49:28,345 | INFO | Execution completed.
+2026-02-02 16:59:24,588 | INFO | Initiating get metrics...
+2026-02-02 16:59:24,588 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2026-02-02 16:59:30,500 | INFO | Initiating get metrics...
+2026-02-02 16:59:30,500 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2026-02-02 16:59:49,536 | INFO | Data loaded successfully.
+2026-02-02 16:59:49,579 | INFO | Using device: mps
+2026-02-02 17:00:10,534 | INFO | Initiating get metrics...
+2026-02-02 17:00:10,534 | INFO | [ RUN ID: cae_TOWIDS_20251210_121355 ]
+2026-02-02 17:00:28,591 | INFO | Data loaded successfully.
+2026-02-02 17:00:28,658 | INFO | Using device: mps
+2026-02-02 17:00:35,756 | INFO | Metrics 
+{
+    "AUCROC": 0.6693723257049431,
+    "Accuracy": 0.6919220506185817,
+    "TPR": 0.34154244977316917,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.5091787439613527,
+    "optimal_threshold": 0.030491974204778,
+    "mean": 0.014031704515218735,
+    "std": 0.0014745271764695644,
+    "tpr_per_attack": {
+        "CAN Replay": 0.0,
+        "CAN DoS": 0.0,
+        "PTP Sync": 0.9974869109947644,
+        "Frame Injection": 0.0,
+        "Switch MAC Flooding": 0.9889833175952156,
+        "Normal": 1.0,
+        "Attack": 0.34154244977316917
+    },
+    "aucroc_per_attack": {
+        "Frame Injection": 0.19822669191232745,
+        "CAN Replay": 0.9929086057804252,
+        "Switch MAC Flooding": 0.9996618005671797,
+        "PTP Sync": 0.9998617656249098,
+        "CAN DoS": 0.08869585586083975
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 9.418787002563477,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 256.22610092163086
+    }
+}
+2026-02-02 17:00:35,756 | INFO | Execution completed.

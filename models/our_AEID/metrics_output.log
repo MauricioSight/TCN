@@ -1,0 +1,93 @@
+2026-02-02 16:41:56,228 | INFO | Initiating get metrics...
+2026-02-02 16:41:56,228 | INFO | [ RUN ID: our_AEID ]
+2026-02-02 16:41:56,387 | INFO | Data loaded successfully.
+2026-02-02 16:41:56,427 | INFO | Using device: mps
+2026-02-02 16:41:58,174 | INFO | Metrics 
+{
+    "AUCROC": 0.9994180170365043,
+    "Accuracy": 0.9984887545559605,
+    "TPR": 0.9939587775408671,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.9969702370343968,
+    "optimal_threshold": 0.002718118485063,
+    "mean": 0.0002904575376305729,
+    "std": 0.0002487623714841902,
+    "tpr_per_attack": {
+        "Replay": 0.9939587775408671,
+        "Normal": 1.0,
+        "Attack": 0.9939587775408671
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.9994180170365043
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 0.9995217323303223,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 0.17523956298828125
+    }
+}
+2026-02-02 16:41:58,174 | INFO | Execution completed.
+2026-02-02 16:42:21,628 | INFO | Initiating get metrics...
+2026-02-02 16:42:21,628 | INFO | [ RUN ID: our_AEID ]
+2026-02-02 16:42:21,751 | INFO | Data loaded successfully.
+2026-02-02 16:42:21,764 | INFO | Using device: mps
+2026-02-02 16:42:22,838 | INFO | Metrics 
+{
+    "AUCROC": 0.9994180170365043,
+    "Accuracy": 0.9984887545559605,
+    "TPR": 0.9939587775408671,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.9969702370343968,
+    "optimal_threshold": 0.002718118485063,
+    "mean": 0.0002904575376305729,
+    "std": 0.0002487623714841902,
+    "tpr_per_attack": {
+        "Replay": 0.9939587775408671,
+        "Normal": 1.0,
+        "Attack": 0.9939587775408671
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.9994180170365043
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 0.9492907524108887,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 0.17523956298828125
+    }
+}
+2026-02-02 16:42:22,838 | INFO | Execution completed.
+2026-02-02 16:59:05,453 | INFO | Initiating get metrics...
+2026-02-02 16:59:05,454 | INFO | [ RUN ID: our_AEID ]
+2026-02-02 16:59:05,582 | INFO | Data loaded successfully.
+2026-02-02 16:59:05,595 | INFO | Using device: mps
+2026-02-02 16:59:06,414 | INFO | Metrics 
+{
+    "AUCROC": 0.9994180170365043,
+    "Accuracy": 0.9984887545559605,
+    "TPR": 0.9939587775408671,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.9969702370343968,
+    "optimal_threshold": 0.002718118485063,
+    "mean": 0.0002904575376305729,
+    "std": 0.0002487623714841902,
+    "tpr_per_attack": {
+        "Replay": 0.9939587775408671,
+        "Normal": 1.0,
+        "Attack": 0.9939587775408671
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.9994180170365043
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 0.8266644477844238,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 0.17523956298828125
+    }
+}
+2026-02-02 16:59:06,414 | INFO | Execution completed.

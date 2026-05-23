@@ -33,7 +33,7 @@ def main(config=None, X=None, y_true=None):
     """
 
     if config is None:
-        config = load_config(config_name="seqwatch")
+        config = load_config(config_name="tcn_pred_ptp")
 
     if 'run_id' not in config:
         run_id = get_run_id(config, [config['modeling']['structure']['name'], config['data_loader']['name']])
@@ -96,8 +96,8 @@ def main(config=None, X=None, y_true=None):
 
     # 4. Execute training
     logger.debug("Starting training...")
-    train_loss, train_val_loss = trainer.train(model, X[train_val_idx], y_true.iloc[train_val_idx])
-    logger.info(f"Training completed. Train loss: {train_loss}, Training validation loss: {train_val_loss}")
+    # train_loss, train_val_loss = trainer.train(model, X[train_val_idx], y_true.iloc[train_val_idx])
+    # logger.info(f"Training completed. Train loss: {train_loss}, Training validation loss: {train_val_loss}")
     
     # 5. Validate
     logger.debug("Starting validating...")

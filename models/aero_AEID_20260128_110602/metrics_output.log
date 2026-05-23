@@ -1,0 +1,82 @@
+2026-02-02 16:50:47,271 | INFO | Initiating get metrics...
+2026-02-02 16:50:47,271 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 16:50:47,284 | INFO | Data loaded successfully.
+2026-02-02 16:50:47,297 | INFO | Using device: mps
+2026-02-02 16:51:00,523 | INFO | Initiating get metrics...
+2026-02-02 16:51:00,523 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 16:51:00,536 | INFO | Data loaded successfully.
+2026-02-02 16:51:00,548 | INFO | Using device: mps
+2026-02-02 16:51:18,984 | INFO | Initiating get metrics...
+2026-02-02 16:51:18,984 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 16:51:18,996 | INFO | Data loaded successfully.
+2026-02-02 16:51:19,008 | INFO | Using device: mps
+2026-02-02 16:52:09,011 | INFO | Initiating get metrics...
+2026-02-02 16:52:09,011 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 16:52:09,025 | INFO | Data loaded successfully.
+2026-02-02 16:52:09,037 | INFO | Using device: mps
+2026-02-02 17:26:25,987 | INFO | Initiating get metrics...
+2026-02-02 17:26:25,987 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 17:26:26,094 | INFO | Data loaded successfully.
+2026-02-02 17:26:26,108 | INFO | Using device: mps
+2026-02-02 17:26:33,257 | INFO | Initiating get metrics...
+2026-02-02 17:26:33,257 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 17:26:33,358 | INFO | Data loaded successfully.
+2026-02-02 17:26:33,371 | INFO | Using device: mps
+2026-02-02 17:26:35,391 | INFO | Metrics 
+{
+    "AUCROC": 0.8792008649197338,
+    "Accuracy": 0.9532052658528931,
+    "TPR": 0.966089066019754,
+    "FPR": 0.30943129636170963,
+    "Precision": 0.9845308940648784,
+    "F1-score": 0.9752228023683958,
+    "optimal_threshold": 9.283591680286918e-06,
+    "mean": 5.716331725125201e-05,
+    "std": 0.00019449088722467422,
+    "tpr_per_attack": {
+        "Replay": 0.966089066019754,
+        "Normal": 0.6905687036382904,
+        "Attack": 0.966089066019754
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.8792008649197338
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 2.8530163764953613,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 66.7231216430664
+    }
+}
+2026-02-02 17:26:35,391 | INFO | Execution completed.
+2026-02-06 15:20:15,697 | INFO | Initiating get metrics...
+2026-02-06 15:20:15,697 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-06 15:20:15,806 | INFO | Data loaded successfully.
+2026-02-06 15:20:15,827 | INFO | Using device: mps
+2026-02-06 15:20:18,355 | INFO | Metrics 
+{
+    "AUCROC": 0.8792008649197338,
+    "Accuracy": 0.9532052658528931,
+    "TPR": 0.966089066019754,
+    "FPR": 0.30943129636170963,
+    "Precision": 0.9845308940648784,
+    "F1-score": 0.9752228023683958,
+    "optimal_threshold": 9.283591680286918e-06,
+    "mean": 5.716331725125201e-05,
+    "std": 0.00019449088722467422,
+    "tpr_per_attack": {
+        "Replay": 0.966089066019754,
+        "Normal": 0.6905687036382904,
+        "Attack": 0.966089066019754
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.8792008649197338
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 2.659465789794922,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 66.7231216430664
+    }
+}
+2026-02-06 15:20:18,355 | INFO | Execution completed.

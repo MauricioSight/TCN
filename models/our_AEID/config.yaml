@@ -1,0 +1,42 @@
+data_loader:
+  injected_path: data/autoeth-intrusion-dataset/raw/single-MPEG-frame.pcap
+  name: AEID
+  number_of_bytes: 58
+  raw_x_path: data/autoeth-intrusion-dataset/raw/driving_01_injected.pcap
+  raw_y_path: null
+  test_raw_x_path: data/autoeth-intrusion-dataset/raw/driving_01_injected.pcap
+metrics:
+  name: ae
+modeling:
+  inference:
+    batch_size: 64
+    name: pred
+  structure:
+    T: 2
+    dropout: 0.2
+    hidden_size: 40
+    input_size: 58
+    kernel_size: 3
+    name: tcn_pred
+    num_levels: 4
+  training:
+    batch_size: 16
+    clip: 0.2
+    criterion: mean_squared_error
+    es_delta: 0.0001
+    es_patience: 15
+    learning_rate: 0.001
+    name: pred
+    num_epochs: 10
+phase: test
+pre_processing:
+  jump_bytes: 18
+  name: sliding-window
+  processed_path: data/autoeth-intrusion-dataset/processed
+  save_batch_size: 10000
+  window_size: 32
+  window_stride: 16
+run_id: our_AEID
+tracker:
+  name: null
+  project: anomaly_detector

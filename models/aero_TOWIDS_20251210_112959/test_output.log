@@ -1,0 +1,114 @@
+2025-12-10 11:36:50,131 | INFO | Initiating testing...
+2025-12-10 11:36:50,132 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2025-12-10 11:36:51,407 | INFO | Initializing pre processing...
+2025-12-10 11:36:51,407 | INFO | Loading raw data...
+2025-12-10 11:38:10,541 | INFO | Loading raw data finished in 79.13s with shape of (791611, 58)
+2025-12-10 11:38:10,543 | INFO | Generating features using AERO...
+2025-12-10 11:38:11,434 | INFO | Feature generation complete.
+2025-12-10 11:38:11,434 | INFO | Generated features shape: (386, 18450)
+2025-12-10 11:38:11,436 | INFO | Generated labels: label
+Normal                 196
+CAN Replay              51
+CAN DoS                 43
+PTP Sync                38
+Frame Injection         32
+Switch MAC Flooding     26
+Name: count, dtype: int64
+2025-12-10 11:38:11,436 | WARNING | >> Saving a subset of 1%
+2025-12-10 11:38:11,436 | WARNING | >> Original shape: (386, 18450)
+2025-12-10 11:38:11,437 | WARNING | >> Final shape: (386,)
+2025-12-10 11:38:11,437 | INFO | Saving data in cash file in batchs...
+2025-12-10 11:38:11,502 | INFO | Batch 1/1 saved to data/tow-ids-dataset/processed/test_aero_wsize_2048_wstride_1_n_58_None_subset_1/batch_0.pt
+2025-12-10 11:38:11,525 | INFO | Initializing finished in 80.11828899383545s
+2025-12-10 11:38:11,525 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_aero_wsize_2048_wstride_1_n_58_None_subset_1
+2025-12-10 11:38:11,539 | INFO | Data loaded successfully.
+2025-12-10 11:38:11,581 | INFO | Using device: mps
+2025-12-10 11:38:14,858 | INFO | Testing labels: 
+label
+Normal                 196
+CAN Replay              51
+CAN DoS                 43
+PTP Sync                38
+Frame Injection         32
+Switch MAC Flooding     26
+Name: count, dtype: int64
+2025-12-10 11:38:15,166 | INFO | Test loss: 0.000376 	[0/386 (0%)]
+2025-12-10 11:38:15,880 | INFO | Testing completed. Testing loss: 0.00042370243603987286
+2025-12-10 11:38:15,926 | INFO | Metrics 
+{
+    "AUCROC": 0.9825993555316863,
+    "Accuracy": 0.8704663212435233,
+    "TPR": 0.9894736842105263,
+    "FPR": 0.24489795918367346,
+    "Precision": 0.7966101694915254,
+    "F1-score": 0.8826291079812206,
+    "optimal_threshold": 4.466959217097611e-05,
+    "mean": 5.2285009587649256e-05,
+    "std": 0.00026765515212900937,
+    "tpr_per_attack": {
+        "CAN Replay": 0.9607843137254902,
+        "CAN DoS": 1.0,
+        "PTP Sync": 1.0,
+        "Frame Injection": 1.0,
+        "Switch MAC Flooding": 1.0
+    },
+    "aucroc_per_attack": {
+        "Frame Injection": 0.9944196428571428,
+        "Switch MAC Flooding": 0.9915620094191523,
+        "CAN Replay": 0.9551820728291317,
+        "PTP Sync": 0.9901987110633726,
+        "CAN DoS": 0.9941860465116279
+    }
+}
+2025-12-10 11:38:15,927 | INFO | Execution completed.
+2025-12-10 11:38:17,450 | INFO | Run artifacts saved.
+2025-12-10 11:38:17,450 | INFO | Testing completed.
+2025-12-10 11:38:47,301 | INFO | Initiating testing...
+2025-12-10 11:38:47,301 | INFO | [ RUN ID: aero_TOWIDS_20251210_112959 ]
+2025-12-10 11:38:48,531 | INFO | Initializing pre processing...
+2025-12-10 11:38:48,532 | INFO | Initializing finished in 0.00010919570922851562s
+2025-12-10 11:38:48,532 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_aero_wsize_2048_wstride_1_n_58_None_subset_1
+2025-12-10 11:38:48,557 | INFO | Data loaded successfully.
+2025-12-10 11:38:48,574 | INFO | Using device: mps
+2025-12-10 11:38:51,132 | INFO | Testing labels: 
+label
+Normal                 196
+CAN Replay              51
+CAN DoS                 43
+PTP Sync                38
+Frame Injection         32
+Switch MAC Flooding     26
+Name: count, dtype: int64
+2025-12-10 11:38:51,412 | INFO | Test loss: 0.000376 	[0/386 (0%)]
+2025-12-10 11:38:51,707 | INFO | Testing completed. Testing loss: 0.00042370243603987286
+2025-12-10 11:38:51,747 | INFO | Metrics 
+{
+    "AUCROC": 0.9825993555316863,
+    "Accuracy": 0.8704663212435233,
+    "TPR": 0.9894736842105263,
+    "FPR": 0.24489795918367346,
+    "Precision": 0.7966101694915254,
+    "F1-score": 0.8826291079812206,
+    "optimal_threshold": 4.466959217097611e-05,
+    "mean": 5.2285009587649256e-05,
+    "std": 0.00026765515212900937,
+    "tpr_per_attack": {
+        "CAN Replay": 0.9607843137254902,
+        "CAN DoS": 1.0,
+        "PTP Sync": 1.0,
+        "Frame Injection": 1.0,
+        "Switch MAC Flooding": 1.0,
+        "Normal": 0.7551020408163265,
+        "Attack": 0.9894736842105263
+    },
+    "aucroc_per_attack": {
+        "PTP Sync": 0.9901987110633726,
+        "CAN Replay": 0.9551820728291317,
+        "CAN DoS": 0.9941860465116279,
+        "Frame Injection": 0.9944196428571428,
+        "Switch MAC Flooding": 0.9915620094191523
+    }
+}
+2025-12-10 11:38:51,749 | INFO | Execution completed.
+2025-12-10 11:38:53,677 | INFO | Run artifacts saved.
+2025-12-10 11:38:53,678 | INFO | Testing completed.

@@ -1,0 +1,37 @@
+data_loader:
+  name: TOWIDS
+  number_of_bytes: 58
+  raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
+  raw_y_path: data/tow-ids-dataset/raw/y_test.csv
+  test_raw_x_path: data/tow-ids-dataset/raw/Automotive_Ethernet_with_Attack_original_10_17_20_04_test.pcap
+  test_raw_y_path: data/tow-ids-dataset/raw/y_test.csv
+metrics:
+  alpha: 0.5
+  name: natasha_ae
+modeling:
+  inference:
+    batch_size: 64
+    name: ae
+  structure:
+    hidden_size: 10
+    input_size: 58
+    name: lstmae
+  training:
+    batch_size: 16
+    criterion: mean_squared_error
+    es_delta: 0.0001
+    es_patience: 5
+    learning_rate: 0.0001
+    name: ae
+    num_epochs: 250
+phase: train
+pre_processing:
+  name: sliding-window
+  processed_path: data/tow-ids-dataset/processed
+  save_batch_size: 10000
+  window_size: 64
+  window_stride: 16
+run_id: lstmae_TOWIDS_20251011_092054
+tracker:
+  name: null
+  project: cae_lstmae_dev

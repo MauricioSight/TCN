@@ -1,0 +1,45 @@
+2026-02-07 18:09:58,509 | INFO | Initiating testing...
+2026-02-07 18:09:58,509 | INFO | [ RUN ID: our_PTP_tcn_pred_TOWIDS_20260207_175452 ]
+2026-02-07 18:10:05,357 | INFO | Initializing pre processing...
+2026-02-07 18:10:05,361 | INFO | Loaded data from cash
+2026-02-07 18:10:05,646 | INFO | Class distribution:
+2026-02-07 18:10:05,648 | INFO | Counter({'PTP Sync': 26570, 'Normal': 6117})
+2026-02-07 18:10:05,648 | INFO | Saving data in cash file in batchs...
+2026-02-07 18:10:06,260 | INFO | Batch 1/4 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_58_PTP/batch_0.pt
+2026-02-07 18:10:06,800 | INFO | Batch 2/4 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_58_PTP/batch_1.pt
+2026-02-07 18:10:07,384 | INFO | Batch 3/4 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_58_PTP/batch_2.pt
+2026-02-07 18:10:07,530 | INFO | Batch 4/4 saved to data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_58_PTP/batch_3.pt
+2026-02-07 18:10:07,537 | INFO | Initializing finished in 2.178025960922241s
+2026-02-07 18:10:07,537 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_64_wstride_1_n_58_PTP
+2026-02-07 18:10:08,199 | INFO | Data loaded successfully.
+2026-02-07 18:10:24,472 | INFO | Using device: mps
+2026-02-07 18:10:28,532 | INFO | Testing labels: 
+label
+PTP Sync    26570
+Normal       6117
+Name: count, dtype: int64
+2026-02-07 18:10:28,769 | INFO | Test loss: 0.000849 	[0/32687 (0%)]
+2026-02-07 18:10:34,449 | INFO | Testing completed. Testing loss: 0.008950013465953375
+2026-02-07 18:10:34,958 | INFO | Metrics 
+{
+    "AUCROC": 0.99999912015534,
+    "Accuracy": 0.999418729158381,
+    "TPR": 0.9992849077907414,
+    "FPR": 0.0,
+    "Precision": 1.0,
+    "F1-score": 0.9996423260104289,
+    "optimal_threshold": 0.003952648956328,
+    "mean": 0.0007736088591627777,
+    "std": 0.00014898020890541375,
+    "tpr_per_attack": {
+        "PTP Sync": 0.9992849077907414,
+        "Normal": 1.0,
+        "Attack": 0.9992849077907414
+    },
+    "aucroc_per_attack": {
+        "PTP Sync": 0.99999912015534
+    }
+}
+2026-02-07 18:10:34,959 | INFO | Execution completed.
+2026-02-07 18:10:40,841 | INFO | Run artifacts saved.
+2026-02-07 18:10:40,842 | INFO | Testing completed.

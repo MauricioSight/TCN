@@ -1,0 +1,145 @@
+2026-01-26 14:10:33,682 | INFO | Initiating get metrics...
+2026-01-26 14:10:33,682 | INFO | [ RUN ID: our_UDP ]
+2026-01-26 14:10:34,461 | INFO | Data loaded successfully.
+2026-01-26 14:10:35,514 | INFO | Metrics 
+{
+    "AUCROC": 0.9998829589789344,
+    "Accuracy": 0.9995440036479708,
+    "TPR": 0.9989896948878562,
+    "FPR": 3.808508207335187e-05,
+    "Precision": 0.9999494362137837,
+    "F1-score": 0.9994693351527557,
+    "optimal_threshold": 0.15960417687892914,
+    "mean": 0.11577087640762329,
+    "std": 0.012629655189812183,
+    "tpr_per_attack": {
+        "CAN DoS": 0.9997877083112197,
+        "Switch MAC Flooding": 0.9986866791744841,
+        "CAN Replay": 0.9978196233894946,
+        "Normal": 0.9999619149179266,
+        "Attack": 0.9989896948878562
+    },
+    "aucroc_per_attack": {
+        "CAN Replay": 0.999944257632105,
+        "Switch MAC Flooding": 0.9996416358121529,
+        "CAN DoS": 0.9999866635510286
+    }
+}
+2026-01-26 14:10:35,514 | INFO | Execution completed.
+2026-02-02 16:46:08,552 | INFO | Initiating get metrics...
+2026-02-02 16:46:08,552 | INFO | [ RUN ID: our_UDP ]
+2026-02-02 16:46:09,136 | INFO | Data loaded successfully.
+2026-02-02 16:46:09,151 | INFO | Using device: mps
+2026-02-02 16:46:23,066 | INFO | Initiating get metrics...
+2026-02-02 16:46:23,066 | INFO | [ RUN ID: our_UDP ]
+2026-02-02 16:46:23,472 | INFO | Data loaded successfully.
+2026-02-02 16:46:23,485 | INFO | Using device: mps
+2026-02-02 16:46:24,600 | INFO | Metrics 
+{
+    "AUCROC": 0.9998829589789344,
+    "Accuracy": 0.9995657177599722,
+    "TPR": 0.9990402101434633,
+    "FPR": 3.808508207335187e-05,
+    "Precision": 0.9999494387703509,
+    "F1-score": 0.9994946176782737,
+    "optimal_threshold": 0.159604176878929,
+    "mean": 0.11577087640762329,
+    "std": 0.012629655189812183,
+    "tpr_per_attack": {
+        "CAN DoS": 0.9998938541556098,
+        "Switch MAC Flooding": 0.9986866791744841,
+        "CAN Replay": 0.9978196233894946,
+        "Normal": 0.9999619149179266,
+        "Attack": 0.9990402101434633
+    },
+    "aucroc_per_attack": {
+        "CAN DoS": 0.9999866635510286,
+        "Switch MAC Flooding": 0.9996416358121529,
+        "CAN Replay": 0.999944257632105
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 0.9284701347351074,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 0.14073562622070312
+    }
+}
+2026-02-02 16:46:24,600 | INFO | Execution completed.
+2026-02-02 16:55:38,064 | INFO | Initiating get metrics...
+2026-02-02 16:55:38,065 | INFO | [ RUN ID: our_UDP ]
+2026-02-02 16:55:38,408 | INFO | Data loaded successfully.
+2026-02-02 16:55:38,421 | INFO | Using device: mps
+2026-02-02 16:55:58,517 | INFO | Initiating get metrics...
+2026-02-02 16:55:58,518 | INFO | [ RUN ID: our_UDP ]
+2026-02-02 16:55:58,810 | INFO | Data loaded successfully.
+2026-02-02 16:55:58,821 | INFO | Using device: mps
+2026-02-02 16:56:16,486 | INFO | Initiating get metrics...
+2026-02-02 16:56:16,486 | INFO | [ RUN ID: our_UDP ]
+2026-02-02 16:56:16,792 | INFO | Data loaded successfully.
+2026-02-02 16:56:16,804 | INFO | Using device: mps
+2026-02-02 16:56:17,664 | INFO | Metrics 
+{
+    "AUCROC": 0.9999035108234268,
+    "Accuracy": 0.9987105647726295,
+    "TPR": 0.999013725651352,
+    "FPR": 0.0014516980468062643,
+    "Precision": 0.9972924187725631,
+    "F1-score": 0.9981523301170191,
+    "optimal_threshold": 0.159604176878929,
+    "mean": 0.12836214900016785,
+    "std": 0.009841526858508587,
+    "tpr_per_attack": {
+        "CAN Replay": 0.9988179669030733,
+        "CAN DoS": 0.9991136716153335,
+        "Switch MAC Flooding": 0.9992242048099301,
+        "Normal": 0.9985483019531938,
+        "Attack": 0.999013725651352
+    },
+    "aucroc_per_attack": {
+        "CAN Replay": 0.9999045044966345,
+        "Switch MAC Flooding": 0.9998305208994418,
+        "CAN DoS": 0.9999440878539674
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 0.8393497467041016,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 0.14073562622070312
+    }
+}
+2026-02-02 16:56:17,665 | INFO | Execution completed.
+2026-02-02 16:56:25,654 | INFO | Initiating get metrics...
+2026-02-02 16:56:25,654 | INFO | [ RUN ID: our_UDP ]
+2026-02-02 16:56:26,088 | INFO | Data loaded successfully.
+2026-02-02 16:56:26,101 | INFO | Using device: mps
+2026-02-02 16:56:27,013 | INFO | Metrics 
+{
+    "AUCROC": 0.9998829589789344,
+    "Accuracy": 0.9995657177599722,
+    "TPR": 0.9990402101434633,
+    "FPR": 3.808508207335187e-05,
+    "Precision": 0.9999494387703509,
+    "F1-score": 0.9994946176782737,
+    "optimal_threshold": 0.159604176878929,
+    "mean": 0.11577087640762329,
+    "std": 0.012629655189812183,
+    "tpr_per_attack": {
+        "CAN DoS": 0.9998938541556098,
+        "Switch MAC Flooding": 0.9986866791744841,
+        "CAN Replay": 0.9978196233894946,
+        "Normal": 0.9999619149179266,
+        "Attack": 0.9990402101434633
+    },
+    "aucroc_per_attack": {
+        "CAN Replay": 0.999944257632105,
+        "Switch MAC Flooding": 0.9996416358121529,
+        "CAN DoS": 0.9999866635510286
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 0.8691959381103516,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 0.14073562622070312
+    }
+}
+2026-02-02 16:56:27,013 | INFO | Execution completed.

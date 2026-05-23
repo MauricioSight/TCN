@@ -1,0 +1,37 @@
+2026-02-06 19:28:54,149 | INFO | Initiating testing...
+2026-02-06 19:28:54,149 | INFO | [ RUN ID: tcn_pred_TOWIDS_20260206_192317 ]
+2026-02-06 19:28:54,654 | INFO | Initializing pre processing...
+2026-02-06 19:28:54,654 | INFO | Initializing finished in 0.00010657310485839844s
+2026-02-06 19:28:54,654 | INFO | Loading cached data from: data/tow-ids-dataset/processed/test_sliding-window_wsize_192_wstride_16_n_58_AVTP
+2026-02-06 19:28:55,072 | INFO | Data loaded successfully.
+2026-02-06 19:28:55,108 | INFO | Using device: mps
+2026-02-06 19:28:57,906 | INFO | Testing labels: 
+label
+Normal             10488
+Frame Injection     1873
+Name: count, dtype: int64
+2026-02-06 19:28:58,069 | INFO | Test loss: 0.000413 	[0/12361 (0%)]
+2026-02-06 19:29:00,823 | INFO | Testing completed. Testing loss: 0.0008658422883263952
+2026-02-06 19:29:01,119 | INFO | Metrics 
+{
+    "AUCROC": 0.9997563635637994,
+    "Accuracy": 0.995712321009627,
+    "TPR": 0.993059263214095,
+    "FPR": 0.0038138825324180014,
+    "Precision": 0.9789473684210527,
+    "F1-score": 0.9859528226875166,
+    "optimal_threshold": 0.0007665659650220001,
+    "mean": 0.000392483634641394,
+    "std": 0.00011718815221684054,
+    "tpr_per_attack": {
+        "Frame Injection": 0.993059263214095,
+        "Normal": 0.996186117467582,
+        "Attack": 0.993059263214095
+    },
+    "aucroc_per_attack": {
+        "Frame Injection": 0.9997563635637994
+    }
+}
+2026-02-06 19:29:01,120 | INFO | Execution completed.
+2026-02-06 19:29:05,246 | INFO | Run artifacts saved.
+2026-02-06 19:29:05,246 | INFO | Testing completed.

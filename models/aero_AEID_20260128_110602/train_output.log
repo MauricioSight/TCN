@@ -1,0 +1,347 @@
+2026-01-28 11:06:02,579 | INFO | Initiating training and validation...
+2026-01-28 11:06:02,580 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-01-28 11:06:03,323 | INFO | Initializing pre processing...
+2026-01-28 11:06:03,323 | INFO | Loaded data from cash
+2026-01-28 11:06:04,106 | INFO | Generating features using AERO...
+2026-01-28 11:08:43,160 | INFO | Feature generation complete.
+2026-01-28 11:08:43,166 | INFO | Generated features shape: (56115, 18450)
+2026-01-28 11:08:43,213 | INFO | Generated labels: label
+Replay    52361
+Normal     3754
+Name: count, dtype: int64
+2026-01-28 11:08:43,214 | INFO | Saving data in cash file in batchs...
+2026-01-28 11:08:51,503 | INFO | Batch 1/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_0.pt
+2026-01-28 11:08:55,897 | INFO | Batch 2/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_1.pt
+2026-01-28 11:09:01,129 | INFO | Batch 3/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_2.pt
+2026-01-28 11:09:05,268 | INFO | Batch 4/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_3.pt
+2026-01-28 11:09:09,942 | INFO | Batch 5/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_4.pt
+2026-01-28 11:09:12,580 | INFO | Batch 6/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_5.pt
+2026-01-28 11:09:12,598 | INFO | Initializing finished in 189.27092790603638s
+2026-01-28 11:09:12,598 | INFO | Loading cached data from: data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None
+2026-01-28 11:09:22,482 | INFO | Data loaded successfully.
+2026-01-28 11:09:22,852 | INFO | Using device: mps
+2026-01-28 11:09:34,197 | INFO | Train size: 2390, Validation size: 598
+2026-01-28 11:09:34,211 | INFO | Train labels: 
+label
+Normal    2390
+Name: count, dtype: int64
+2026-01-28 11:09:34,213 | INFO | Validation labels: 
+label
+Normal    598
+Name: count, dtype: int64
+2026-01-28 11:09:34,525 | INFO | Running for 20 epochs
+2026-01-28 11:09:34,525 | INFO | -------------------- Training AE started -------------------
+2026-01-28 11:09:37,259 | INFO | Epoch: 0 	[0/2390 (0%)]	AE Loss: 33.639877
+2026-01-28 11:09:46,856 | INFO | Epoch: 0 	[1600/2390 (67%)]	AE Loss: 0.130225
+2026-01-28 11:09:52,682 | INFO | Epoch: 0 	[2384/2390 (99%)]	AE Loss: 0.167447
+2026-01-28 11:09:53,030 | INFO | Epoch: 1 	[0/2390 (0%)]	AE Loss: 0.105509
+2026-01-28 11:10:04,543 | INFO | Epoch: 1 	[1600/2390 (67%)]	AE Loss: 0.092921
+2026-01-28 11:10:09,889 | INFO | Epoch: 1 	[2384/2390 (99%)]	AE Loss: 0.108939
+2026-01-28 11:10:10,337 | INFO | Epoch: 2 	[0/2390 (0%)]	AE Loss: 0.081185
+2026-01-28 11:10:20,843 | INFO | Epoch: 2 	[1600/2390 (67%)]	AE Loss: 0.087775
+2026-01-28 11:10:25,997 | INFO | Epoch: 2 	[2384/2390 (99%)]	AE Loss: 0.076535
+2026-01-28 11:10:26,278 | INFO | Epoch: 3 	[0/2390 (0%)]	AE Loss: 0.061142
+2026-01-28 11:10:38,531 | INFO | Epoch: 3 	[1600/2390 (67%)]	AE Loss: 0.058833
+2026-01-28 11:10:50,500 | INFO | Epoch: 3 	[2384/2390 (99%)]	AE Loss: 0.060037
+2026-01-28 11:10:50,905 | INFO | Epoch: 4 	[0/2390 (0%)]	AE Loss: 0.056099
+2026-01-28 11:11:08,886 | INFO | Epoch: 4 	[1600/2390 (67%)]	AE Loss: 0.054378
+2026-01-28 11:11:14,472 | INFO | Epoch: 4 	[2384/2390 (99%)]	AE Loss: 0.054167
+2026-01-28 11:11:15,126 | INFO | Epoch: 5 	[0/2390 (0%)]	AE Loss: 0.049217
+2026-01-28 11:11:27,672 | INFO | Epoch: 5 	[1600/2390 (67%)]	AE Loss: 0.051440
+2026-01-28 11:11:35,831 | INFO | Epoch: 5 	[2384/2390 (99%)]	AE Loss: 0.051024
+2026-01-28 11:11:36,516 | INFO | Epoch: 6 	[0/2390 (0%)]	AE Loss: 0.046198
+2026-01-28 11:11:49,546 | INFO | Epoch: 6 	[1600/2390 (67%)]	AE Loss: 0.051332
+2026-01-28 11:11:56,135 | INFO | Epoch: 6 	[2384/2390 (99%)]	AE Loss: 0.048909
+2026-01-28 11:11:56,421 | INFO | Epoch: 7 	[0/2390 (0%)]	AE Loss: 0.044524
+2026-01-28 11:12:11,901 | INFO | Epoch: 7 	[1600/2390 (67%)]	AE Loss: 0.049013
+2026-01-28 11:12:18,290 | INFO | Epoch: 7 	[2384/2390 (99%)]	AE Loss: 0.047362
+2026-01-28 11:12:18,880 | INFO | Epoch: 8 	[0/2390 (0%)]	AE Loss: 0.043441
+2026-01-28 11:12:33,427 | INFO | Epoch: 8 	[1600/2390 (67%)]	AE Loss: 0.048689
+2026-01-28 11:12:40,013 | INFO | Epoch: 8 	[2384/2390 (99%)]	AE Loss: 0.047284
+2026-01-28 11:12:41,065 | INFO | Epoch: 9 	[0/2390 (0%)]	AE Loss: 0.043880
+2026-01-28 11:12:53,506 | INFO | Epoch: 9 	[1600/2390 (67%)]	AE Loss: 0.047049
+2026-01-28 11:13:00,014 | INFO | Epoch: 9 	[2384/2390 (99%)]	AE Loss: 0.044799
+2026-01-28 11:13:00,471 | INFO | Epoch: 10 	[0/2390 (0%)]	AE Loss: 0.045493
+2026-01-28 11:13:13,225 | INFO | Epoch: 10 	[1600/2390 (67%)]	AE Loss: 0.046513
+2026-01-28 11:13:19,350 | INFO | Epoch: 10 	[2384/2390 (99%)]	AE Loss: 0.044533
+2026-01-28 11:13:19,698 | INFO | Epoch: 11 	[0/2390 (0%)]	AE Loss: 0.042827
+2026-01-28 11:13:32,614 | INFO | Epoch: 11 	[1600/2390 (67%)]	AE Loss: 0.047827
+2026-01-28 11:13:38,972 | INFO | Epoch: 11 	[2384/2390 (99%)]	AE Loss: 0.043614
+2026-01-28 11:13:39,259 | INFO | Epoch: 12 	[0/2390 (0%)]	AE Loss: 0.041655
+2026-01-28 11:13:53,951 | INFO | Epoch: 12 	[1600/2390 (67%)]	AE Loss: 0.046487
+2026-01-28 11:13:59,869 | INFO | Epoch: 12 	[2384/2390 (99%)]	AE Loss: 0.043021
+2026-01-28 11:14:00,414 | INFO | Epoch: 13 	[0/2390 (0%)]	AE Loss: 0.042418
+2026-01-28 11:14:14,709 | INFO | Epoch: 13 	[1600/2390 (67%)]	AE Loss: 0.047822
+2026-01-28 11:14:21,478 | INFO | Epoch: 13 	[2384/2390 (99%)]	AE Loss: 0.042770
+2026-01-28 11:14:21,790 | INFO | Epoch: 14 	[0/2390 (0%)]	AE Loss: 0.040342
+2026-01-28 11:14:34,517 | INFO | Epoch: 14 	[1600/2390 (67%)]	AE Loss: 0.047815
+2026-01-28 11:14:40,406 | INFO | Epoch: 14 	[2384/2390 (99%)]	AE Loss: 0.042542
+2026-01-28 11:14:40,703 | INFO | Epoch: 15 	[0/2390 (0%)]	AE Loss: 0.039350
+2026-01-28 11:14:53,390 | INFO | Epoch: 15 	[1600/2390 (67%)]	AE Loss: 0.048615
+2026-01-28 11:14:59,308 | INFO | Epoch: 15 	[2384/2390 (99%)]	AE Loss: 0.043066
+2026-01-28 11:14:59,566 | INFO | Epoch: 16 	[0/2390 (0%)]	AE Loss: 0.039139
+2026-01-28 11:15:12,152 | INFO | Epoch: 16 	[1600/2390 (67%)]	AE Loss: 0.048489
+2026-01-28 11:15:20,315 | INFO | Epoch: 16 	[2384/2390 (99%)]	AE Loss: 0.043731
+2026-01-28 11:15:20,661 | INFO | Epoch: 17 	[0/2390 (0%)]	AE Loss: 0.038974
+2026-01-28 11:15:34,931 | INFO | Epoch: 17 	[1600/2390 (67%)]	AE Loss: 0.048526
+2026-01-28 11:15:43,535 | INFO | Epoch: 17 	[2384/2390 (99%)]	AE Loss: 0.044441
+2026-01-28 11:15:44,155 | INFO | Epoch: 18 	[0/2390 (0%)]	AE Loss: 0.038606
+2026-01-28 11:15:59,360 | INFO | Epoch: 18 	[1600/2390 (67%)]	AE Loss: 0.049387
+2026-01-28 11:16:05,584 | INFO | Epoch: 18 	[2384/2390 (99%)]	AE Loss: 0.044818
+2026-01-28 11:16:05,905 | INFO | Epoch: 19 	[0/2390 (0%)]	AE Loss: 0.037942
+2026-01-28 11:16:18,955 | INFO | Epoch: 19 	[1600/2390 (67%)]	AE Loss: 0.050963
+2026-01-28 11:16:25,515 | INFO | Epoch: 19 	[2384/2390 (99%)]	AE Loss: 0.043713
+2026-01-28 11:16:25,665 | INFO | -------------------- Training Point Mapper started -------------------
+2026-01-28 11:16:26,098 | INFO | Epoch: 0 	[0/44892 (0%)]	PM Loss: 0.115206
+2026-01-28 11:16:33,809 | INFO | Epoch: 1 	[0/44892 (0%)]	PM Loss: 0.001038
+2026-01-28 11:16:40,526 | INFO | Epoch: 2 	[0/44892 (0%)]	PM Loss: 0.000500
+2026-01-28 11:16:46,759 | INFO | Epoch: 3 	[0/44892 (0%)]	PM Loss: 0.000365
+2026-01-28 11:16:52,997 | INFO | Epoch: 4 	[0/44892 (0%)]	PM Loss: 0.000272
+2026-01-28 11:17:05,033 | INFO | Epoch: 5 	[0/44892 (0%)]	PM Loss: 0.000227
+2026-01-28 11:17:12,282 | INFO | Epoch: 6 	[0/44892 (0%)]	PM Loss: 0.000171
+2026-01-28 11:17:19,762 | INFO | Epoch: 7 	[0/44892 (0%)]	PM Loss: 0.000155
+2026-01-28 11:17:30,304 | INFO | Epoch: 8 	[0/44892 (0%)]	PM Loss: 0.000123
+2026-01-28 11:17:42,253 | INFO | Epoch: 9 	[0/44892 (0%)]	PM Loss: 0.000103
+2026-01-28 11:18:00,974 | INFO | -------------------- Fine tunning Point Mapper started -------------------
+2026-01-28 11:18:01,374 | INFO | Epoch: 0 	[0/44892 (0%)]	Fine-tune Loss: 0.000085
+2026-01-28 11:18:13,832 | INFO | Epoch: 1 	[0/44892 (0%)]	Fine-tune Loss: 0.000156
+2026-01-28 11:18:31,896 | INFO | Epoch: 2 	[0/44892 (0%)]	Fine-tune Loss: 0.000117
+2026-01-28 11:18:41,814 | INFO | Epoch: 3 	[0/44892 (0%)]	Fine-tune Loss: 0.000096
+2026-01-28 11:18:50,223 | INFO | Epoch: 4 	[0/44892 (0%)]	Fine-tune Loss: 0.000109
+2026-01-28 11:18:59,022 | INFO | Epoch: 5 	[0/44892 (0%)]	Fine-tune Loss: 0.000114
+2026-01-28 11:19:07,663 | INFO | Epoch: 6 	[0/44892 (0%)]	Fine-tune Loss: 0.000105
+2026-01-28 11:19:14,817 | INFO | Epoch: 7 	[0/44892 (0%)]	Fine-tune Loss: 0.000101
+2026-01-28 11:19:22,415 | INFO | Epoch: 8 	[0/44892 (0%)]	Fine-tune Loss: 0.000120
+2026-01-28 11:19:29,465 | INFO | Epoch: 9 	[0/44892 (0%)]	Fine-tune Loss: 0.000146
+2026-01-28 11:19:40,387 | INFO | Epoch: 10 	[0/44892 (0%)]	Fine-tune Loss: 0.000180
+2026-01-28 11:19:51,644 | INFO | Epoch: 11 	[0/44892 (0%)]	Fine-tune Loss: 0.000202
+2026-01-28 11:20:04,498 | INFO | Epoch: 12 	[0/44892 (0%)]	Fine-tune Loss: 0.000200
+2026-01-28 11:20:18,377 | INFO | Epoch: 13 	[0/44892 (0%)]	Fine-tune Loss: 0.000181
+2026-01-28 11:20:29,260 | INFO | Epoch: 14 	[0/44892 (0%)]	Fine-tune Loss: 0.000131
+2026-01-28 11:20:44,444 | INFO | Epoch: 15 	[0/44892 (0%)]	Fine-tune Loss: 0.000118
+2026-01-28 11:21:05,884 | INFO | Epoch: 16 	[0/44892 (0%)]	Fine-tune Loss: 0.000093
+2026-01-28 11:21:16,844 | INFO | Epoch: 17 	[0/44892 (0%)]	Fine-tune Loss: 0.000113
+2026-01-28 11:21:30,170 | INFO | Epoch: 18 	[0/44892 (0%)]	Fine-tune Loss: 0.000159
+2026-01-28 11:21:42,602 | INFO | Epoch: 19 	[0/44892 (0%)]	Fine-tune Loss: 0.000159
+2026-01-28 11:21:56,369 | INFO | Epoch: 20 	[0/44892 (0%)]	Fine-tune Loss: 0.000143
+2026-01-28 11:22:08,286 | INFO | Epoch: 21 	[0/44892 (0%)]	Fine-tune Loss: 0.000134
+2026-01-28 11:22:22,039 | INFO | Epoch: 22 	[0/44892 (0%)]	Fine-tune Loss: 0.000171
+2026-01-28 11:22:35,770 | INFO | Epoch: 23 	[0/44892 (0%)]	Fine-tune Loss: 0.000220
+2026-01-28 11:22:49,697 | INFO | Epoch: 24 	[0/44892 (0%)]	Fine-tune Loss: 0.000242
+2026-01-28 11:23:03,204 | INFO | Epoch: 25 	[0/44892 (0%)]	Fine-tune Loss: 0.000239
+2026-01-28 11:23:16,239 | INFO | Epoch: 26 	[0/44892 (0%)]	Fine-tune Loss: 0.000231
+2026-01-28 11:23:29,322 | INFO | Epoch: 27 	[0/44892 (0%)]	Fine-tune Loss: 0.000219
+2026-01-28 11:23:43,535 | INFO | Epoch: 28 	[0/44892 (0%)]	Fine-tune Loss: 0.000210
+2026-01-28 11:23:54,511 | INFO | Epoch: 29 	[0/44892 (0%)]	Fine-tune Loss: 0.000193
+2026-01-28 11:24:13,566 | INFO | Epoch: 30 	[0/44892 (0%)]	Fine-tune Loss: 0.000182
+2026-01-28 11:24:27,450 | INFO | Epoch: 31 	[0/44892 (0%)]	Fine-tune Loss: 0.000177
+2026-01-28 11:24:43,861 | INFO | Epoch: 32 	[0/44892 (0%)]	Fine-tune Loss: 0.000173
+2026-01-28 11:25:02,889 | INFO | Epoch: 33 	[0/44892 (0%)]	Fine-tune Loss: 0.000169
+2026-01-28 11:25:22,166 | INFO | Epoch: 34 	[0/44892 (0%)]	Fine-tune Loss: 0.000169
+2026-01-28 11:25:38,695 | INFO | Epoch: 35 	[0/44892 (0%)]	Fine-tune Loss: 0.000168
+2026-01-28 11:25:52,282 | INFO | Epoch: 36 	[0/44892 (0%)]	Fine-tune Loss: 0.000173
+2026-01-28 11:26:06,928 | INFO | Epoch: 37 	[0/44892 (0%)]	Fine-tune Loss: 0.000183
+2026-01-28 11:26:23,230 | INFO | Epoch: 38 	[0/44892 (0%)]	Fine-tune Loss: 0.000193
+2026-01-28 11:26:36,047 | INFO | Epoch: 39 	[0/44892 (0%)]	Fine-tune Loss: 0.000197
+2026-01-28 11:26:49,550 | INFO | Epoch: 40 	[0/44892 (0%)]	Fine-tune Loss: 0.000207
+2026-01-28 11:27:02,686 | INFO | Epoch: 41 	[0/44892 (0%)]	Fine-tune Loss: 0.000212
+2026-01-28 11:27:16,110 | INFO | Epoch: 42 	[0/44892 (0%)]	Fine-tune Loss: 0.000216
+2026-01-28 11:27:29,624 | INFO | Epoch: 43 	[0/44892 (0%)]	Fine-tune Loss: 0.000210
+2026-01-28 11:27:42,137 | INFO | Epoch: 44 	[0/44892 (0%)]	Fine-tune Loss: 0.000204
+2026-01-28 11:27:54,722 | INFO | Epoch: 45 	[0/44892 (0%)]	Fine-tune Loss: 0.000198
+2026-01-28 11:28:06,849 | INFO | Epoch: 46 	[0/44892 (0%)]	Fine-tune Loss: 0.000192
+2026-01-28 11:28:19,233 | INFO | Epoch: 47 	[0/44892 (0%)]	Fine-tune Loss: 0.000166
+2026-01-28 11:28:32,017 | INFO | Epoch: 48 	[0/44892 (0%)]	Fine-tune Loss: 0.000178
+2026-01-28 11:28:44,328 | INFO | Epoch: 49 	[0/44892 (0%)]	Fine-tune Loss: 0.000171
+2026-01-28 11:28:57,073 | INFO | Epoch: 50 	[0/44892 (0%)]	Fine-tune Loss: 0.000164
+2026-01-28 11:29:22,108 | INFO | Epoch: 51 	[0/44892 (0%)]	Fine-tune Loss: 0.000160
+2026-01-28 11:29:35,363 | INFO | Epoch: 52 	[0/44892 (0%)]	Fine-tune Loss: 0.000153
+2026-01-28 11:29:48,792 | INFO | Epoch: 53 	[0/44892 (0%)]	Fine-tune Loss: 0.000152
+2026-01-28 11:30:02,772 | INFO | Epoch: 54 	[0/44892 (0%)]	Fine-tune Loss: 0.000156
+2026-01-28 11:30:16,037 | INFO | Epoch: 55 	[0/44892 (0%)]	Fine-tune Loss: 0.000150
+2026-01-28 11:30:34,977 | INFO | Epoch: 56 	[0/44892 (0%)]	Fine-tune Loss: 0.000147
+2026-01-28 11:30:48,100 | INFO | Epoch: 57 	[0/44892 (0%)]	Fine-tune Loss: 0.000144
+2026-01-28 11:31:01,703 | INFO | Epoch: 58 	[0/44892 (0%)]	Fine-tune Loss: 0.000140
+2026-01-28 11:31:14,565 | INFO | Epoch: 59 	[0/44892 (0%)]	Fine-tune Loss: 0.000143
+2026-01-28 11:31:30,483 | INFO | Epoch: 60 	[0/44892 (0%)]	Fine-tune Loss: 0.000144
+2026-01-28 11:31:46,940 | INFO | Epoch: 61 	[0/44892 (0%)]	Fine-tune Loss: 0.000140
+2026-01-28 11:32:00,969 | INFO | Epoch: 62 	[0/44892 (0%)]	Fine-tune Loss: 0.000142
+2026-01-28 11:32:20,323 | INFO | Epoch: 63 	[0/44892 (0%)]	Fine-tune Loss: 0.000141
+2026-01-28 11:32:34,680 | INFO | Epoch: 64 	[0/44892 (0%)]	Fine-tune Loss: 0.000142
+2026-01-28 11:32:49,262 | INFO | Epoch: 65 	[0/44892 (0%)]	Fine-tune Loss: 0.000139
+2026-01-28 11:33:03,173 | INFO | Epoch: 66 	[0/44892 (0%)]	Fine-tune Loss: 0.000139
+2026-01-28 11:33:17,729 | INFO | Epoch: 67 	[0/44892 (0%)]	Fine-tune Loss: 0.000140
+2026-01-28 11:33:32,091 | INFO | Epoch: 68 	[0/44892 (0%)]	Fine-tune Loss: 0.000141
+2026-01-28 11:33:47,629 | INFO | Epoch: 69 	[0/44892 (0%)]	Fine-tune Loss: 0.000131
+2026-01-28 11:34:02,553 | INFO | Epoch: 70 	[0/44892 (0%)]	Fine-tune Loss: 0.000145
+2026-01-28 11:34:19,886 | INFO | Epoch: 71 	[0/44892 (0%)]	Fine-tune Loss: 0.000125
+2026-01-28 11:34:33,558 | INFO | Epoch: 72 	[0/44892 (0%)]	Fine-tune Loss: 0.000135
+2026-01-28 11:34:49,115 | INFO | Epoch: 73 	[0/44892 (0%)]	Fine-tune Loss: 0.000123
+2026-01-28 11:35:02,494 | INFO | Epoch: 74 	[0/44892 (0%)]	Fine-tune Loss: 0.000126
+2026-01-28 11:35:15,586 | INFO | Epoch: 75 	[0/44892 (0%)]	Fine-tune Loss: 0.000117
+2026-01-28 11:35:30,593 | INFO | Epoch: 76 	[0/44892 (0%)]	Fine-tune Loss: 0.000121
+2026-01-28 11:35:49,895 | INFO | Epoch: 77 	[0/44892 (0%)]	Fine-tune Loss: 0.000110
+2026-01-28 11:36:04,589 | INFO | Epoch: 78 	[0/44892 (0%)]	Fine-tune Loss: 0.000127
+2026-01-28 11:36:17,228 | INFO | Epoch: 79 	[0/44892 (0%)]	Fine-tune Loss: 0.000113
+2026-01-28 11:36:30,485 | INFO | Epoch: 80 	[0/44892 (0%)]	Fine-tune Loss: 0.000112
+2026-01-28 11:36:42,959 | INFO | Epoch: 81 	[0/44892 (0%)]	Fine-tune Loss: 0.000116
+2026-01-28 11:36:57,655 | INFO | Epoch: 82 	[0/44892 (0%)]	Fine-tune Loss: 0.000113
+2026-01-28 11:37:09,393 | INFO | Epoch: 83 	[0/44892 (0%)]	Fine-tune Loss: 0.000114
+2026-01-28 11:37:22,138 | INFO | Epoch: 84 	[0/44892 (0%)]	Fine-tune Loss: 0.000112
+2026-01-28 11:37:32,751 | INFO | Epoch: 85 	[0/44892 (0%)]	Fine-tune Loss: 0.000111
+2026-01-28 11:37:46,192 | INFO | Epoch: 86 	[0/44892 (0%)]	Fine-tune Loss: 0.000124
+2026-01-28 11:37:57,242 | INFO | Epoch: 87 	[0/44892 (0%)]	Fine-tune Loss: 0.000100
+2026-01-28 11:38:09,422 | INFO | Epoch: 88 	[0/44892 (0%)]	Fine-tune Loss: 0.000120
+2026-01-28 11:38:18,489 | INFO | Epoch: 89 	[0/44892 (0%)]	Fine-tune Loss: 0.000105
+2026-01-28 11:38:31,747 | INFO | Epoch: 90 	[0/44892 (0%)]	Fine-tune Loss: 0.000109
+2026-01-28 11:38:40,633 | INFO | Epoch: 91 	[0/44892 (0%)]	Fine-tune Loss: 0.000105
+2026-01-28 11:38:49,915 | INFO | Epoch: 92 	[0/44892 (0%)]	Fine-tune Loss: 0.000108
+2026-01-28 11:39:02,226 | INFO | Epoch: 93 	[0/44892 (0%)]	Fine-tune Loss: 0.000104
+2026-01-28 11:39:12,602 | INFO | Epoch: 94 	[0/44892 (0%)]	Fine-tune Loss: 0.000106
+2026-01-28 11:39:21,890 | INFO | Epoch: 95 	[0/44892 (0%)]	Fine-tune Loss: 0.000103
+2026-01-28 11:39:34,569 | INFO | Epoch: 96 	[0/44892 (0%)]	Fine-tune Loss: 0.000105
+2026-01-28 11:39:45,998 | INFO | Epoch: 97 	[0/44892 (0%)]	Fine-tune Loss: 0.000103
+2026-01-28 11:39:55,478 | INFO | Epoch: 98 	[0/44892 (0%)]	Fine-tune Loss: 0.000103
+2026-01-28 11:40:04,496 | INFO | Epoch: 99 	[0/44892 (0%)]	Fine-tune Loss: 0.000116
+2026-01-28 11:40:13,392 | INFO | Epoch: 100 	[0/44892 (0%)]	Fine-tune Loss: 0.000093
+2026-01-28 11:40:21,670 | INFO | Epoch: 101 	[0/44892 (0%)]	Fine-tune Loss: 0.000106
+2026-01-28 11:40:30,693 | INFO | Epoch: 102 	[0/44892 (0%)]	Fine-tune Loss: 0.000102
+2026-01-28 11:40:39,872 | INFO | Epoch: 103 	[0/44892 (0%)]	Fine-tune Loss: 0.000101
+2026-01-28 11:40:48,003 | INFO | Epoch: 104 	[0/44892 (0%)]	Fine-tune Loss: 0.000108
+2026-01-28 11:40:56,135 | INFO | Epoch: 105 	[0/44892 (0%)]	Fine-tune Loss: 0.000095
+2026-01-28 11:41:05,733 | INFO | Epoch: 106 	[0/44892 (0%)]	Fine-tune Loss: 0.000105
+2026-01-28 11:41:15,820 | INFO | Epoch: 107 	[0/44892 (0%)]	Fine-tune Loss: 0.000099
+2026-01-28 11:41:23,771 | INFO | Epoch: 108 	[0/44892 (0%)]	Fine-tune Loss: 0.000103
+2026-01-28 11:41:32,563 | INFO | Epoch: 109 	[0/44892 (0%)]	Fine-tune Loss: 0.000096
+2026-01-28 11:41:40,845 | INFO | Epoch: 110 	[0/44892 (0%)]	Fine-tune Loss: 0.000103
+2026-01-28 11:41:49,213 | INFO | Epoch: 111 	[0/44892 (0%)]	Fine-tune Loss: 0.000112
+2026-01-28 11:41:57,335 | INFO | Epoch: 112 	[0/44892 (0%)]	Fine-tune Loss: 0.000094
+2026-01-28 11:42:06,869 | INFO | Epoch: 113 	[0/44892 (0%)]	Fine-tune Loss: 0.000110
+2026-01-28 11:42:17,618 | INFO | Epoch: 114 	[0/44892 (0%)]	Fine-tune Loss: 0.000095
+2026-01-28 11:42:37,557 | INFO | Epoch: 115 	[0/44892 (0%)]	Fine-tune Loss: 0.000102
+2026-01-28 11:42:54,199 | INFO | Epoch: 116 	[0/44892 (0%)]	Fine-tune Loss: 0.000099
+2026-01-28 11:43:09,989 | INFO | Epoch: 117 	[0/44892 (0%)]	Fine-tune Loss: 0.000099
+2026-01-28 11:43:29,745 | INFO | Epoch: 118 	[0/44892 (0%)]	Fine-tune Loss: 0.000098
+2026-01-28 11:43:42,655 | INFO | Epoch: 119 	[0/44892 (0%)]	Fine-tune Loss: 0.000094
+2026-01-28 11:43:53,431 | INFO | Epoch: 120 	[0/44892 (0%)]	Fine-tune Loss: 0.000095
+2026-01-28 11:44:03,095 | INFO | Epoch: 121 	[0/44892 (0%)]	Fine-tune Loss: 0.000093
+2026-01-28 11:44:12,021 | INFO | Epoch: 122 	[0/44892 (0%)]	Fine-tune Loss: 0.000092
+2026-01-28 11:44:21,081 | INFO | Epoch: 123 	[0/44892 (0%)]	Fine-tune Loss: 0.000089
+2026-01-28 11:44:31,973 | INFO | Epoch: 124 	[0/44892 (0%)]	Fine-tune Loss: 0.000109
+2026-01-28 11:44:42,344 | INFO | Epoch: 125 	[0/44892 (0%)]	Fine-tune Loss: 0.000069
+2026-01-28 11:44:53,022 | INFO | Epoch: 126 	[0/44892 (0%)]	Fine-tune Loss: 0.000090
+2026-01-28 11:45:02,849 | INFO | Epoch: 127 	[0/44892 (0%)]	Fine-tune Loss: 0.000083
+2026-01-28 11:45:12,642 | INFO | Epoch: 128 	[0/44892 (0%)]	Fine-tune Loss: 0.000080
+2026-01-28 11:45:22,145 | INFO | Epoch: 129 	[0/44892 (0%)]	Fine-tune Loss: 0.000079
+2026-01-28 11:45:31,357 | INFO | Epoch: 130 	[0/44892 (0%)]	Fine-tune Loss: 0.000078
+2026-01-28 11:45:41,252 | INFO | Epoch: 131 	[0/44892 (0%)]	Fine-tune Loss: 0.000083
+2026-01-28 11:45:50,685 | INFO | Epoch: 132 	[0/44892 (0%)]	Fine-tune Loss: 0.000086
+2026-01-28 11:46:01,238 | INFO | Epoch: 133 	[0/44892 (0%)]	Fine-tune Loss: 0.000085
+2026-01-28 11:46:12,341 | INFO | Epoch: 134 	[0/44892 (0%)]	Fine-tune Loss: 0.000072
+2026-01-28 11:46:21,896 | INFO | Epoch: 135 	[0/44892 (0%)]	Fine-tune Loss: 0.000089
+2026-01-28 11:46:30,852 | INFO | Epoch: 136 	[0/44892 (0%)]	Fine-tune Loss: 0.000080
+2026-01-28 11:46:39,876 | INFO | Epoch: 137 	[0/44892 (0%)]	Fine-tune Loss: 0.000096
+2026-01-28 11:46:49,867 | INFO | Epoch: 138 	[0/44892 (0%)]	Fine-tune Loss: 0.000089
+2026-01-28 11:46:58,558 | INFO | Epoch: 139 	[0/44892 (0%)]	Fine-tune Loss: 0.000101
+2026-01-28 11:47:04,106 | INFO | Epoch: 140 	[0/44892 (0%)]	Fine-tune Loss: 0.000084
+2026-01-28 11:47:09,629 | INFO | Epoch: 141 	[0/44892 (0%)]	Fine-tune Loss: 0.000101
+2026-01-28 11:47:16,761 | INFO | Epoch: 142 	[0/44892 (0%)]	Fine-tune Loss: 0.000081
+2026-01-28 11:47:22,219 | INFO | Epoch: 143 	[0/44892 (0%)]	Fine-tune Loss: 0.000096
+2026-01-28 11:47:32,357 | INFO | Epoch: 144 	[0/44892 (0%)]	Fine-tune Loss: 0.000081
+2026-01-28 11:47:40,143 | INFO | Epoch: 145 	[0/44892 (0%)]	Fine-tune Loss: 0.000095
+2026-01-28 11:47:46,364 | INFO | Epoch: 146 	[0/44892 (0%)]	Fine-tune Loss: 0.000081
+2026-01-28 11:47:52,109 | INFO | Epoch: 147 	[0/44892 (0%)]	Fine-tune Loss: 0.000093
+2026-01-28 11:47:57,807 | INFO | Epoch: 148 	[0/44892 (0%)]	Fine-tune Loss: 0.000091
+2026-01-28 11:48:03,759 | INFO | Epoch: 149 	[0/44892 (0%)]	Fine-tune Loss: 0.000091
+2026-01-28 11:48:08,879 | INFO | Training completed. Train loss: 4.5637425040088903e-05, Training validation loss: -1
+2026-01-28 11:48:14,134 | INFO | Testing labels: 
+label
+Replay    10457
+Normal      766
+Name: count, dtype: int64
+2026-01-28 11:48:14,641 | INFO | Test loss: 0.000006 	[0/11223 (0%)]
+2026-01-28 11:48:26,431 | INFO | Validating completed. Validation loss: 9.422568311895867e-05
+2026-01-28 11:48:35,920 | INFO | Testing labels: 
+label
+Normal    2988
+Name: count, dtype: int64
+2026-01-28 11:48:37,353 | INFO | Test loss: 0.000006 	[0/2988 (0%)]
+2026-01-28 11:48:41,742 | INFO | Metrics 
+{
+    "AUCROC": 0.9915330243386381,
+    "Accuracy": 0.9604383854584335,
+    "TPR": 0.9610787032609736,
+    "FPR": 0.048302872062663184,
+    "Precision": 0.9963319123624467,
+    "F1-score": 0.9783878504672898,
+    "optimal_threshold": 9.283591680286918e-06,
+    "mean": 5.942004463577177e-06,
+    "std": 1.6957950492724194e-06,
+    "tpr_per_attack": {
+        "Replay": 0.9610787032609736,
+        "Normal": 0.9516971279373369,
+        "Attack": 0.9610787032609736
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.9915330243386381
+    },
+    "resource_metrics": {
+        "cpu_inference_time": 4.209010601043701,
+        "gpu_inference_time": null,
+        "mps_inference_time": null,
+        "model_size_mb": 66.7231216430664
+    }
+}
+2026-01-28 11:48:41,746 | INFO | Execution completed.
+2026-01-28 11:48:44,016 | INFO | Run artifacts saved.
+2026-01-28 11:48:44,016 | INFO | Train and validation completed.
+2026-02-02 17:12:12,435 | INFO | Initiating training and validation...
+2026-02-02 17:12:12,435 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 17:12:12,784 | INFO | Initializing pre processing...
+2026-02-02 17:12:12,784 | INFO | Loaded data from cash
+2026-02-02 17:12:13,363 | INFO | Generating features using AERO...
+2026-02-02 17:13:35,380 | INFO | Initiating training and validation...
+2026-02-02 17:13:35,380 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 17:13:35,727 | INFO | Initializing pre processing...
+2026-02-02 17:13:35,728 | INFO | Loaded data from cash
+2026-02-02 17:13:36,226 | INFO | Generating features using AERO...
+2026-02-02 17:19:51,498 | INFO | Initiating training and validation...
+2026-02-02 17:19:51,498 | INFO | [ RUN ID: aero_AEID_20260128_110602 ]
+2026-02-02 17:19:51,935 | INFO | Initializing pre processing...
+2026-02-02 17:19:51,935 | INFO | Loaded data from cash
+2026-02-02 17:19:52,471 | INFO | Generating features using AERO...
+2026-02-02 17:23:07,453 | INFO | Feature generation complete.
+2026-02-02 17:23:17,065 | INFO | Generated features shape: (56115, 18450)
+2026-02-02 17:23:17,096 | INFO | Generated labels: label
+Replay    52361
+Normal     3754
+Name: count, dtype: int64
+2026-02-02 17:23:17,097 | INFO | Saving data in cash file in batchs...
+2026-02-02 17:23:20,480 | INFO | Batch 1/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_0.pt
+2026-02-02 17:23:22,934 | INFO | Batch 2/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_1.pt
+2026-02-02 17:23:25,586 | INFO | Batch 3/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_2.pt
+2026-02-02 17:23:28,948 | INFO | Batch 4/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_3.pt
+2026-02-02 17:23:31,957 | INFO | Batch 5/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_4.pt
+2026-02-02 17:23:34,223 | INFO | Batch 6/6 saved to data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None/batch_5.pt
+2026-02-02 17:23:34,224 | INFO | Initializing finished in 222.28946900367737s
+2026-02-02 17:23:34,226 | INFO | Loading cached data from: data/autoeth-intrusion-dataset/processed/train_aero_wsize_2048_wstride_16_n_58_None
+2026-02-02 17:23:42,348 | INFO | Data loaded successfully.
+2026-02-02 17:23:42,453 | INFO | Using device: mps
+2026-02-02 17:23:49,382 | INFO | Train size: 2390, Validation size: 598
+2026-02-02 17:23:49,385 | INFO | Train labels: 
+label
+Normal    2390
+Name: count, dtype: int64
+2026-02-02 17:23:49,386 | INFO | Validation labels: 
+label
+Normal    598
+Name: count, dtype: int64
+2026-02-02 17:23:49,402 | INFO | Running for 20 epochs
+2026-02-02 17:23:49,403 | INFO | -------------------- Training AE started -------------------
+2026-02-02 17:23:50,192 | INFO | Epoch: 0 	[0/2390 (0%)]	AE Loss: 0.037566
+2026-02-02 17:23:58,206 | INFO | Epoch: 0 	[1600/2390 (67%)]	AE Loss: 0.042043
+2026-02-02 17:24:02,371 | INFO | Epoch: 0 	[2384/2390 (99%)]	AE Loss: 0.041526
+2026-02-02 17:24:02,582 | INFO | Epoch: 1 	[0/2390 (0%)]	AE Loss: 0.037306
+2026-02-02 17:24:10,582 | INFO | Epoch: 1 	[1600/2390 (67%)]	AE Loss: 0.045158
+2026-02-02 17:24:14,543 | INFO | Epoch: 1 	[2384/2390 (99%)]	AE Loss: 0.041826
+2026-02-02 17:24:14,732 | INFO | Epoch: 2 	[0/2390 (0%)]	AE Loss: 0.037441

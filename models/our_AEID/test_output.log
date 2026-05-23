@@ -1,0 +1,65 @@
+2026-01-27 15:25:24,223 | INFO | Initiating testing...
+2026-01-27 15:25:24,223 | INFO | [ RUN ID: tcn_pred_AEID_20260127_151645 ]
+2026-01-27 15:25:24,818 | INFO | Initializing pre processing...
+2026-01-27 15:25:24,819 | INFO | Loaded data from cash
+2026-01-27 15:25:25,993 | INFO | Class distribution:
+2026-01-27 15:25:25,996 | INFO | Counter({'Normal': 44767, 'Replay': 15900})
+2026-01-27 15:25:25,997 | INFO | Saving data in cash file in batchs...
+2026-01-27 15:25:26,268 | INFO | Batch 1/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_0.pt
+2026-01-27 15:25:26,532 | INFO | Batch 2/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_1.pt
+2026-01-27 15:25:26,822 | INFO | Batch 3/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_2.pt
+2026-01-27 15:25:27,316 | INFO | Batch 4/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_3.pt
+2026-01-27 15:25:27,566 | INFO | Batch 5/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_4.pt
+2026-01-27 15:25:27,809 | INFO | Batch 6/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_5.pt
+2026-01-27 15:25:27,828 | INFO | Batch 7/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_6.pt
+2026-01-27 15:25:27,837 | INFO | Initializing finished in 3.0189030170440674s
+2026-01-27 15:25:27,837 | INFO | Loading cached data from: data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None
+2026-01-27 15:25:28,323 | INFO | Data loaded successfully.
+2026-01-27 15:25:28,397 | INFO | Using device: mps
+2026-01-27 15:25:31,878 | INFO | Testing labels: 
+label
+Normal    44767
+Replay    15900
+Name: count, dtype: int64
+2026-01-27 15:25:32,127 | INFO | Test loss: 0.000336 	[0/60667 (0%)]
+2026-01-27 15:25:40,208 | INFO | Testing completed. Testing loss: 0.015727008213720115
+2026-01-27 15:25:40,764 | INFO | Metrics 
+{
+    "AUCROC": 0.9991364244748454,
+    "Accuracy": 0.9979725386124252,
+    "TPR": 0.9924528301886792,
+    "FPR": 6.701364844640024e-05,
+    "Precision": 0.9998099220680479,
+    "F1-score": 0.9961177918757693,
+    "optimal_threshold": 0.002718118485063,
+    "mean": 0.00046563323121517897,
+    "std": 0.0003180325438734144,
+    "tpr_per_attack": {
+        "Replay": 0.9924528301886792,
+        "Normal": 0.9999329863515536,
+        "Attack": 0.9924528301886792
+    },
+    "aucroc_per_attack": {
+        "Replay": 0.9991364244748454
+    }
+}
+2026-01-27 15:25:40,765 | INFO | Execution completed.
+2026-01-27 15:25:47,090 | INFO | Run artifacts saved.
+2026-01-27 15:25:47,091 | INFO | Testing completed.
+2026-02-06 14:38:50,790 | INFO | Initiating testing...
+2026-02-06 14:38:50,791 | INFO | [ RUN ID: our_AEID ]
+2026-02-06 14:38:51,295 | INFO | Initializing pre processing...
+2026-02-06 14:38:51,296 | INFO | Loaded data from cash
+2026-02-06 14:38:52,375 | INFO | Class distribution:
+2026-02-06 14:38:52,378 | INFO | Counter({'Normal': 44767, 'Replay': 15900})
+2026-02-06 14:38:52,379 | INFO | Saving data in cash file in batchs...
+2026-02-06 14:38:52,843 | INFO | Batch 1/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_0.pt
+2026-02-06 14:38:53,168 | INFO | Batch 2/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_1.pt
+2026-02-06 14:38:53,485 | INFO | Batch 3/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_2.pt
+2026-02-06 14:38:54,023 | INFO | Batch 4/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_3.pt
+2026-02-06 14:38:54,323 | INFO | Batch 5/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_4.pt
+2026-02-06 14:38:54,613 | INFO | Batch 6/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_5.pt
+2026-02-06 14:38:54,634 | INFO | Batch 7/7 saved to data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None/batch_6.pt
+2026-02-06 14:38:54,649 | INFO | Initializing finished in 3.354311943054199s
+2026-02-06 14:38:54,650 | INFO | Loading cached data from: data/autoeth-intrusion-dataset/processed/test_sliding-window_wsize_32_wstride_16_n_58_None
+2026-02-06 14:38:55,178 | INFO | Data loaded successfully.
